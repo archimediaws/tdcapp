@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle icon-only color="Rouge">
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      {{'CONTACT' | translate}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-row center>
+    <img src="assets/img/profile-img.jpg" class="header-img">
+  </ion-row>
+  <ion-row>
+    <ion-col col-3 class="profile-img-col">
+      <div class="profile-frame">
+        <img src="assets/img/logo-reseau.png" class="profile-img">
+      </div>
+    </ion-col>
+    <ion-col col-1 center>
+      <button class="profile-btn" ion-button icon-only clear (click)="callNumberFixe()">
+        <ion-icon name="call" color="Rouge"></ion-icon>
+      </button>
+    </ion-col>
+
+    <ion-col col-2 offset-1 center>
+      <button class="profile-btn" ion-button icon-only clear (click)="callNumberMobile()">
+        <ion-icon name="phone-portrait" color="Rouge"></ion-icon>
+      </button>
+    </ion-col>
+
+    <ion-col col-2>
+      <button class="profile-btn" ion-button color="Rouge" (click)="goToGmaps()">
+        <ion-icon start name="locate">Plan </ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row padding-left class="name-row">
+    La Table de Cana à Perpignan
+  </ion-row>
+  <ion-row padding-left class="twitter-name">
+    @TableCana
+
+  </ion-row>
+
+  <ion-list>
+    <br>
+    <ion-row class="rowcolor" ></ion-row>
+
+    <ion-item>
+      <ion-icon name="time" item-left></ion-icon>
+     Lundi au Vendredi de 9h à 17h
+    </ion-item>
+
+    <ion-item (click)="callNumberFixe()">
+      <ion-icon name="call" item-left></ion-icon>
+      +33(0)4 68 73 40 85
+    </ion-item>
+
+    <ion-item (click)="callNumberMobile()">
+      <ion-icon name="phone-portrait" item-left></ion-icon>
+      +33(0)7 67 09 55 22
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="mail" item-left></ion-icon>
+      contact@latabledecana-perpignan.com
+    </ion-item>
+
+  </ion-list>
+
+  <form (submit)="sendEmail()">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>Sujet</ion-label>
+        <ion-input type="text" [(ngModel)]="email.subject" name="subject"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Message</ion-label>
+        <ion-textarea rows="3" [(ngModel)]="email.body" name="body"></ion-textarea>
+      </ion-item>
+
+      <div padding>
+        <button ion-button color="Rouge" block>Envoyer </button>
+      </div>
+
+    </ion-list>
+  </form>
+
+</ion-content>

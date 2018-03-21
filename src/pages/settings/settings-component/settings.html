@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle color="Rouge">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{'SETTINGS' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="grid-basic-page">
+
+  <ion-list>
+    <ion-list-header>
+      {{'NOTIFICATION-SETTING' | translate}}
+    </ion-list-header>
+    <ion-item>
+      <ion-label>{{'NOTIFICATION' | translate}}</ion-label>
+      <ion-toggle color="Rouge" *ngIf="toggle==false" [(ngModel)]="track.isChecked" (ngModelChange)="setPush(track)"  ></ion-toggle>
+      <ion-toggle color="Rouge" *ngIf="toggle==true"  (ionChange)="setPush(track)" checked="true" ></ion-toggle>
+    </ion-item>
+  </ion-list>
+
+<hr>
+  <ion-list>
+    <ion-list-header>
+    {{'LANGUAGE-SETTING' | translate}}
+    </ion-list-header>
+    <ion-item>
+    <ion-label>{{'LANGUAGE' | translate}}</ion-label>
+    <ion-select [(ngModel)]="language" (ionChange)=selectLanguage()>
+      <ion-option value="en">{{'ENGLISH' | translate}}</ion-option>
+      <ion-option value="fr">{{'FRENCH' | translate}}</ion-option>
+    </ion-select>
+    </ion-item>
+  </ion-list>
+
+
+
+  <!--<button ion-button full (click)="subscribeToNotification()">notification</button>-->
+
+</ion-content>

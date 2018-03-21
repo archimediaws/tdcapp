@@ -1,0 +1,86 @@
+<ion-header>
+
+	<ion-navbar color="dark">
+
+			<button ion-button menuToggle icon-only>
+				<ion-icon name="menu" color="Rouge"></ion-icon>
+			</button>
+
+
+		<ion-title>{{'ADDSUGGESTION' | translate}}</ion-title>
+
+
+
+	</ion-navbar>
+
+
+
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    {{masuggestion}}
+  </ion-item>
+
+  <form (submit)="addMenudujour()">
+    <ion-list>
+
+      <ion-item>
+        <ion-label fixed>title</ion-label>
+        <ion-input type="text" [(ngModel)]="title" name="title"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>content</ion-label>
+        <ion-input type="text" [(ngModel)]="content" name="content"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>prix</ion-label>
+        <ion-input type="text" [(ngModel)]="price" name="prix"></ion-input>
+      </ion-item>
+
+      <div padding>
+        <button ion-button color="Rouge" block>{{ 'ADDSUGGESTION' | translate }}</button>
+      </div>
+
+    </ion-list>
+  </form>
+
+	<!--<ion-card *ngFor="let post of posts">-->
+        <!--<ion-item text-wrap (click)="loadPost(post)">-->
+            <!--<h1 class="titre"[innerHTML]="post.title.rendered"></h1>-->
+            <!--<h4 class="date">{{post.date | date: 'dd/MM/yyyy'}}</h4>-->
+        <!--</ion-item>-->
+
+		<!--<wordpress-feature-media *ngIf="post.featured_media" [id]="post.featured_media" (click)="loadPost(post)"></wordpress-feature-media>-->
+
+    <!--<ion-item color="dark" *ngIf="post['_embedded'] && post['_embedded'].author && post['_embedded'].author[0] && post['_embedded'].author[0].avatar_urls">-->
+		    <!--<ion-avatar item-left>-->
+		        <!--<img [src]="post['_embedded'].author[0].avatar_urls[96]">-->
+		    <!--</ion-avatar>-->
+		    <!--<h2 (click)="getAuthorPosts(post.author)">{{post['_embedded'].author[0].name}}</h2>-->
+		<!--</ion-item>-->
+
+		<!--<ion-card-content>-->
+			<!--<p>{{post.content.rendered | trimHTML | truncate: 100 }}</p>-->
+		<!--</ion-card-content>-->
+		<!--<ion-row no-padding>-->
+			<!--<ion-col text-left>-->
+				<!--<button ion-button icon-left clear  color="Rouge" (click)="favoritePost(post)">-->
+					<!--<ion-icon name='heart' color="Rouge"></ion-icon>-->
+					<!--Favoris-->
+				<!--</button>-->
+			<!--</ion-col>-->
+			<!--<ion-col text-right>-->
+				<!--<button ion-button clear color="Rouge"(click)="loadPost(post)">-->
+					<!--Lire plus-->
+				<!--</button>-->
+			<!--</ion-col>-->
+		<!--</ion-row>-->
+	<!--</ion-card>-->
+	<!--<ion-infinite-scroll (ionInfinite)="loadMore($event)">-->
+	   <!--<ion-infinite-scroll-content></ion-infinite-scroll-content>-->
+	 <!--</ion-infinite-scroll>-->
+</ion-content>

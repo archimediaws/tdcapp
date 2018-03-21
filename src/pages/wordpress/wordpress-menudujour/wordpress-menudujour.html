@@ -1,0 +1,91 @@
+
+<ion-header>
+
+  <ion-navbar color="dark">
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="menudujour"> Suggestion du {{menudujour.date | date: 'dd/MM/yyyy' }}</ion-title>
+    <ion-buttons end>
+      <button (tap)="sharePost()" ion-button icon-only>
+        <ion-icon name="share"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+    <ion-card *ngIf="menudujour">
+
+      <ion-item >
+
+        <ion-row>
+
+          <ion-col no-padding>
+            <h3 class="date"> <ion-icon name="calendar" start ></ion-icon> {{menudujour.date | date: 'dd/MM/yyyy'}}</h3>
+            <p float-end *ngIf="(menudujour.date | date: 'dd/MM/yyyy') === (now | date: 'dd/MM/yyyy');"> Je réserve</p>
+            <p float-end *ngIf="(menudujour.date | date: 'dd/MM/yyyy') != (now | date: 'dd/MM/yyyy');">  INDISPONIBLE</p>
+            <h2>{{menudujour.title.rendered | truncate: 25}}</h2>
+
+          </ion-col>
+
+          <ion-col no-padding col-2>
+            <!-- Floating Action Button = FAB // Display FAB condition suggestion.date === date of the day -->
+            <!-- Date Pipe reformat Date Object -->
+            <!-- Btn Event: CallNumber() -> inAppBrowser / CallNumber -->
+
+            <ion-fab *ngIf="(menudujour.date | date: 'dd/MM/yyyy') === (now | date: 'dd/MM/yyyy');">
+
+              <button ion-fab mini color="Rouge"><ion-icon  name="contact"></ion-icon></button>
+
+              <ion-fab-list  side="left">
+                <button ion-fab (click)="callNumberFixe()" ><ion-icon name="call" ></ion-icon></button>
+                <button ion-fab (click)="callNumberMobile()"><ion-icon name="phone-portrait"></ion-icon></button>
+                <button ion-fab (click)="goToContact()"><ion-icon name="mail"></ion-icon></button>
+              </ion-fab-list>
+
+            </ion-fab>
+
+
+          </ion-col>
+
+        </ion-row>
+
+      </ion-item>
+
+      <wordpress-feature-media *ngIf="menudujour.featured_media" [id]="menudujour.featured_media"></wordpress-feature-media>
+
+      <ion-item color="dark" *ngIf="authorData && authorData.avatar_urls">
+        <ion-avatar item-left>
+          <img [src]="authorData.avatar_urls[96]">
+        </ion-avatar>
+        {{'SUGGESTION' | translate}}
+      </ion-item>
+
+      <ion-card-content text-wrap *ngIf="menudujour.content.rendered">
+
+        <ion-grid>
+          <ion-row no-padding>
+            <ion-col col-8 text-left>
+              <h2 class="titre" [innerHTML]="menudujour.title.rendered" text-uppercase></h2>
+            </ion-col>
+
+            <ion-col col-4 text-right>
+              <h4 class="prix">{{ menudujour.acf.prix }} € <br> <p class="small-prix" >{{'PRIX' | translate}}</p> </h4>
+            </ion-col>
+          </ion-row>
+          <ion-row no-padding>
+            <ion-col text-left>
+              <p>{{menudujour.content.rendered | trimHTML }}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+</ion-content>

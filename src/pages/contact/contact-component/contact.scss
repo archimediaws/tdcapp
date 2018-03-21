@@ -1,0 +1,38 @@
+page-contact{
+
+  .header-img {
+    height: 180px;
+    width: 100%;
+
+  }
+  .profile-img-col {
+    margin-top: -40px;
+  }
+  .profile-frame {
+    background: #fff;
+    padding: 4px;
+    border-radius: 5px;
+  }
+  .profile-img {
+    border-radius: 5px;
+  }
+  .profile-btn{
+    border-radius: 5px;
+
+  }
+  .name-row {
+    font-size: 1.9rem;
+  }
+  .twitter-name {
+    color: #8a9fa8;
+  }
+
+  .rowcolor {
+    border-top: 1px solid color($colors, Rouge);
+    margin: auto;
+    width: 99%;
+  }
+
+
+
+}

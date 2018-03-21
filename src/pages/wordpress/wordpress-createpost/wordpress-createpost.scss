@@ -1,0 +1,36 @@
+WordpressCreatePost{
+
+
+  ion-card img{
+
+    max-height: 400px;
+  }
+
+  .card {
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background-color: color($colors, light);
+    box-shadow: 0px 0px 10px 2px rgba(34,34,34,1);
+
+
+    h2{
+      color: color($colors, light);
+    }
+
+    p {
+      color: color( $colors, dark);
+      margin-top: 10px;
+      margin-right: 5px;
+    }
+
+
+  }
+
+  .titre{
+    color: color($colors, Rouge)
+  }
+
+
+
+}

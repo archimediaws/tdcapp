@@ -1,0 +1,70 @@
+page-home {
+
+  .card{
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+
+  .card-background-page {
+
+    ion-card {
+      position: relative;
+      text-align: center;
+      width: calc(100% - 2px);
+
+
+      img {
+        border: double 12px;
+        //border-image-source: url(assets/img/ardoise.jpg);
+        //border-image-slice: 30%;
+      }
+    }
+
+
+
+    .card-icon{
+
+      ion-icon{
+        background-color: color($colors, dark);
+        border-radius: 10px;
+        border: 5px solid color($colors, dark);
+      }
+
+    }
+    .card-title {
+      position: absolute;
+      top: 36%;
+      left: 10%;
+      font-size: 2.0em;
+      width: 80%;
+      border-radius: 10px;
+      font-weight: bold;
+      color: color($colors, dark);
+
+      //background-color: color($colors, dark);
+      background-color: rgba(254,248,251,0.8);
+
+    }
+
+    .card-subtitle {
+      font-size: 2.0em;
+      position: absolute;
+      top: 52%;
+      width: 100%;
+
+
+
+      p {
+        color: color($colors, light);
+        background-color: #8a1f25;
+        max-width:70%;
+        margin:auto;
+        border-radius: 10px;
+      }
+
+
+    }
+
+  }
+}

@@ -1,0 +1,21 @@
+<ion-header>
+	<ion-navbar color="dark">
+		<button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title *ngIf="page">{{page.title.rendered}}</ion-title>
+		<ion-buttons end>
+	      <button (tap)="sharePage()" ion-button icon-only>
+	        <ion-icon name="share"></ion-icon>
+	      </button>
+	    </ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!--<wordpress-feature-media *ngIf="page.featured_media" [id]="page.featured_media"></wordpress-feature-media>-->
+    <section *ngIf="page" padding [innerHTML]="page.content.rendered"></section>
+
+
+    <button ion-button full color="Rouge" (click)=previewPage()>{{"PREVIEW" | translate}}</button>
+</ion-content>

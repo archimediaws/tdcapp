@@ -1,0 +1,114 @@
+
+<ion-header>
+
+  <ion-navbar color="dark">
+
+      <button ion-button menuToggle icon-only >
+        <ion-icon name="menu" color="Rouge"></ion-icon>
+      </button>
+
+    <ion-title *ngIf="!category">{{'SUGGESTIONS' | translate}}</ion-title>
+    <ion-title *ngIf="category">{{category.name}} <span *ngIf="category.count">({{category.count}})</span></ion-title>
+      <ion-buttons *ngIf="addbutton===true" end>
+        <button ion-button icon-only (click)="goToCreateSuggestion()">
+        <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <!--[ngStyle]="{'max-height.px':'300'}"-->
+  <!--{{myId}}-->
+  <ion-card  *ngFor="let menudujour of menusdujour;" >
+
+    <ion-item >
+      <ion-row>
+        <ion-col no-padding  (click)="loadPost(menudujour)">
+          <h2 class="date" ><ion-icon name="calendar" start ></ion-icon> {{menudujour.date | date: 'dd/MM/yyyy' }} </h2>
+          <p float-end *ngIf="(menudujour.date | date: 'dd/MM/yyyy') === (now | date: 'dd/MM/yyyy');"> Je réserve</p>
+          <p float-end *ngIf="(menudujour.date | date: 'dd/MM/yyyy') != (now | date: 'dd/MM/yyyy');">  INDISPONIBLE</p>
+          <h3>La Table de Cana à Perpignan</h3>
+        </ion-col>
+
+        <ion-col no-padding col-2>
+          <!-- Floating Action Button = FAB // Display FAB condition suggestion.date === date of the day -->
+          <!-- Date Pipe reformat Date Object -->
+          <!-- Btn Event: CallNumber() -> inAppBrowser / CallNumber -->
+
+          <ion-fab *ngIf="(menudujour.date | date: 'dd/MM/yyyy') === (now | date: 'dd/MM/yyyy');">
+
+          <button ion-fab mini color="Rouge"><ion-icon  name="contact"></ion-icon></button>
+
+          <ion-fab-list  side="left">
+          <button ion-fab (click)="callNumberFixe()" ><ion-icon name="call" ></ion-icon></button>
+          <button ion-fab (click)="callNumberMobile()"><ion-icon name="phone-portrait"></ion-icon></button>
+          <button ion-fab (click)="goToContact()"><ion-icon name="mail"></ion-icon></button>
+          </ion-fab-list>
+
+          </ion-fab>
+
+
+        </ion-col>
+
+      </ion-row>
+
+    </ion-item>
+
+    <!-- wp featuremedia component Img select if feature_media id / loadpost() -->
+    <wordpress-feature-media *ngIf="menudujour.featured_media" [id]="menudujour.featured_media" (click)="loadPost(menudujour)"></wordpress-feature-media>
+
+    <!-- Gravatar + titre -->
+    <ion-item color="dark" >
+      <ion-avatar item-left>
+        <!--<img [src]="menudujour['_embedded'].author[0].avatar_urls[96]">-->
+      </ion-avatar>
+      {{'SUGGESTION' | translate}}
+    </ion-item>
+
+    <!-- display content / card affichage en grille : titre, description, prix -->
+    <ion-card-content>
+      <ion-grid>
+        <ion-row no-padding>
+          <ion-col text-left>
+            <h2 class="titre" [innerHTML]="menudujour.title.rendered" text-uppercase (click)="loadPost(menudujour)"></h2>
+          </ion-col>
+        </ion-row>
+        <ion-row no-padding>
+          <ion-col text-left>
+            <p>{{menudujour.content.rendered | trimHTML | truncate: 60 }}</p>
+          </ion-col>
+          <ion-col col-4 text-right>
+            <!--<h4 class="prix">{{ menudujour.acf.prix }} € <br> <p class="small-prix" >{{'PRIX' | translate}}</p> </h4>-->
+            <h4 class="prix">{{ menudujour.prix }} € <br> <p class="small-prix" >{{'PRIX' | translate}}</p> </h4>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+
+    <ion-row no-padding class="rowcolor">
+      <ion-col text-left>
+        <button ion-button icon-left clear color="Rouge"(click)="favoritePost(menudujour)">
+          <ion-icon name='heart' color="Rouge"></ion-icon>
+          favoris
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button ion-button clear color="Rouge" (click)="loadPost(menudujour)">
+          {{'MORE' | translate}}
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+
+</ion-content>

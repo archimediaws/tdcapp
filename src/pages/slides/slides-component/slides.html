@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title text-center >Table de Cana</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="tutorial-page" [ngStyle]="{'background-image': 'url(' + bgimg + ')'}" >
+
+  <ion-slides pager>
+    <ion-slide *ngFor="let slide of slides">
+      <ion-toolbar>
+        <ion-buttons center>
+          <button ion-button text-lowercase (click)=openPage() color="light">Passer la présentation</button>
+        </ion-buttons>
+      </ion-toolbar>
+      <img [src]="slide.image" class="slide-image"/>
+      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+      <p [innerHTML]="slide.description"></p>
+    </ion-slide>
+    <ion-slide>
+      <ion-toolbar>
+      </ion-toolbar>
+      <img src="assets/img/slide5.png" class="slide-image"/>
+      <h2 class="slide-title"> bon appétit ... </h2>
+      <button ion-button large clear icon-right color="light" (click)=openPage()>
+        Continuer !
+        <ion-icon name="arrow-forward" color="light"></ion-icon>
+      </button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

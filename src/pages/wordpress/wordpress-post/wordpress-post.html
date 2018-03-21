@@ -1,0 +1,45 @@
+<ion-header>
+	<ion-navbar color='dark'>
+		<button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title *ngIf="post">{{post.title.rendered}}</ion-title>
+		<ion-buttons end>
+	      <button (tap)="sharePost()" ion-button icon-only>
+	        <ion-icon name="share"></ion-icon>
+	      </button>
+	    </ion-buttons>
+	</ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+    <ion-card *ngIf="post">
+
+        <ion-item text-wrap>
+            <h1 class="titre"[innerHTML]="post.title.rendered"></h1>
+          <h4 class="date">{{post.date | date: 'dd/MM/yyyy'}}</h4>
+        </ion-item>
+
+      <wordpress-feature-media *ngIf="post.featured_media" [id]="post.featured_media"></wordpress-feature-media>
+
+      <ion-item color="dark" *ngIf="authorData && authorData.avatar_urls">
+		    <ion-avatar item-left>
+		        <img [src]="authorData.avatar_urls[96]">
+		    </ion-avatar>
+		    <h2>{{authorData.name}}</h2>
+		</ion-item>
+
+      <ion-card-content text-wrap *ngIf="post.content.rendered">
+        <p padding [innerHtml]="post.content.rendered"></p>
+      </ion-card-content>
+
+    </ion-card>
+
+
+	<button ion-button full color="Rouge" (click)=previewPost()>{{'PREVIEW' | translate}}</button>
+
+
+
+</ion-content>
