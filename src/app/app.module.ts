@@ -1,30 +1,55 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { CallNumber } from '@ionic-native/call-number';
+
+import { SharedModule } from './shared/shared.module'
+import { HomeModule } from '../pages/home/home.module';
+import { TabsModule } from '../pages/tabs/tabs.module';
+import { GoogleMapsModule } from '../pages/google-maps/google-maps.module';
+import { WordpressModule } from '../pages/wordpress/wordpress.module';
+import { SlidesModule } from '../pages/slides/slides.module';
+import { SettingsModule } from '../pages/settings/settings.module';
+import { AboutModule } from '../pages/about/about.module';
+import { ContactModule } from '../pages/contact/contact.module';
+
+import { OneSignal} from "@ionic-native/onesignal";
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import {RestaurantModule} from "../pages/restaurant/restaurant.module";
+import {DirectivesModule} from "../directives/directives.module";
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage
+    MyApp
+
   ],
   imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    SharedModule,
+    HomeModule,
+    TabsModule,
+    GoogleMapsModule,
+    WordpressModule,
+    SlidesModule,
+    SettingsModule,
+    AboutModule,
+    ContactModule,
+    RestaurantModule,
+    DirectivesModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage
+    MyApp
+
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    CallNumber,
+    {
+    provide: ErrorHandler,
+    useClass: IonicErrorHandler,
+  },
+  OneSignal
   ]
 })
 export class AppModule {}

@@ -1,4 +1,4 @@
-// http://ionicframework.com/docs/theming/
+// http://ionicframework.com/docs/v2/theming/
 
 
 // App Global Sass
@@ -14,3 +14,41 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+// @import url('https://fonts.googleapis.com/css?family=Lato');
+
+// * {
+// 	font-family: Lato;
+// }
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+video, audio {
+	width:100%;
+	max-width:100%;
+	box-sizing: border-box;
+	display: inline-block;
+}
+
+.content{
+  background-color: color($colors, bg);
+  //background-image: url("../assets/img/ardoise.jpg");
+}
+
+.tabs {
+
+  .tab-button-icon {
+    color: color($colors, light);
+  }
+
+  .tab-button-text {
+    color: color($colors, light);
+  }
+  .tab-button[aria-selected="true"] .tab-button-text{
+    color: color($colors, Rouge);
+  }
+
+}
+
