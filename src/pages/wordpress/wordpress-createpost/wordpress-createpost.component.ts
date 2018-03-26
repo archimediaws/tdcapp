@@ -12,7 +12,6 @@ import { WordpressService } from '../shared/services/wordpress.service';
 })
 export class WordpressCreatepost implements OnInit {
 
-	 masuggestion: any = "ma suggestion create";
 	 content;
 	 title;
 	 price;
@@ -29,7 +28,7 @@ export class WordpressCreatepost implements OnInit {
 
 
 	ngOnInit() {
-        this.masuggestion = "creation";
+
         this.token = this.storage.get('wordpress.user');
 
 	}

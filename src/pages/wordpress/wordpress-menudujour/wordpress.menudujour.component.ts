@@ -17,7 +17,7 @@ export class WordpressMenudujour {
 
   now: any;
   menudujour: any;
-  authorData: any;
+
 
 
   constructor(
@@ -30,7 +30,7 @@ export class WordpressMenudujour {
   ) {
     if (navParams.get('menudujour')) {
       this.menudujour = navParams.get('menudujour');
-      this.authorData = this.menudujour["_embedded"].author[0];
+
     }
     if (navParams.get('id')) {
       this.getMenuduJour(navParams.get('id'));
@@ -44,10 +44,10 @@ export class WordpressMenudujour {
     });
 
     loader.present();
-    this.wordpressService.getMenuduJour(id)
+    this.wordpressService.getNewsMenuduJourbyId(id)
       .subscribe(result => {
           this.menudujour = result;
-          this.authorData = this.menudujour["_embedded"].author[0];
+
         },
         error => console.log(error),
         () => loader.dismiss());

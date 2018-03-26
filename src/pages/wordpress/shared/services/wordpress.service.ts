@@ -52,15 +52,17 @@ export class WordpressService {
 
 	// START custom get post menu_du_jour
 
-  public getMenusduJour(query) {
-    query = this.transformRequest(query);
-    let url = this.config.wordpressApiUrl + `/wp/v2/menu_du_jour/?${query}&_embed`;
-    return this.http.get(url)
-      .map(result => {
-        return result.json();
-      });
+  // public getMenusduJour(query) {
+  //   query = this.transformRequest(query);
+  //   let url = this.config.wordpressApiUrl + `/wp/v2/menu_du_jour/?${query}&_embed`;
+  //   return this.http.get(url)
+  //     .map(result => {
+  //       return result.json();
+  //     });
+  //
+  // }
 
-  }
+  // get all mdj pods
 
   public getNewsMenusduJour(){
     let url = this.config.wordpressApiUrl + `/wp/v2/menu_du_jour`;
@@ -70,12 +72,38 @@ export class WordpressService {
       });
   }
 
-  public getMenuduJour(id) {
-    return this.http.get(this.config.wordpressApiUrl + `/wp/v2/menu_du_jour/${id}?_embed`)
+  // get all mdj pods with query ( page, author )
+
+  public getMoreNewsMenusduJour(query){
+    query = this.transformRequest(query);
+console.log(query);
+    let url = this.config.wordpressApiUrl + `/wp/v2/menu_du_jour?${query}`;
+    return this.http.get(url)
       .map(result => {
         return result.json();
       });
   }
+  // get mdj media avec pods
+
+  // public getmdjMedia(id) {
+  //   return this.http.get(this.config.wordpressApiUrl + `/wp/v2/menu_du_jour?media/${id}`)
+  //     .map(result => {
+  //       return result.json();
+  //
+  //     });
+  // }
+
+  // end get mdj media avec pods
+
+  public getNewsMenuduJourbyId(id) {
+    return this.http.get(this.config.wordpressApiUrl + `/wp/v2/menu_du_jour?${id}`)
+      .map(result => {
+        return result.json();
+      });
+
+  }
+
+  // post avec pods
 
   public postMenuduJour(title, content, price, token){
 
@@ -85,7 +113,7 @@ export class WordpressService {
     status: 'publish',
     prix: price
   };
- console.log(data);
+      console.log(data);
   let The_token = token.__zone_symbol__value.token;
      console.log(The_token);
 
@@ -134,5 +162,7 @@ export class WordpressService {
 		}
 		return str.join('&');
 	}
+
+
 
 }

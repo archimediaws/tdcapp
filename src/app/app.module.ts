@@ -2,6 +2,11 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { CallNumber } from '@ionic-native/call-number';
 
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { Camera } from '@ionic-native/camera';
+
 import { SharedModule } from './shared/shared.module'
 import { HomeModule } from '../pages/home/home.module';
 import { TabsModule } from '../pages/tabs/tabs.module';
@@ -45,6 +50,10 @@ import {DirectivesModule} from "../directives/directives.module";
   ],
   providers: [
     CallNumber,
+    File,
+    Transfer,
+    Camera,
+    FilePath,
     {
     provide: ErrorHandler,
     useClass: IonicErrorHandler,

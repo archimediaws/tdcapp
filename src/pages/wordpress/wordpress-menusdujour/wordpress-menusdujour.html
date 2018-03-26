@@ -20,8 +20,7 @@
 </ion-header>
 
 <ion-content>
-  <!--[ngStyle]="{'max-height.px':'300'}"-->
-  <!--{{myId}}-->
+
   <ion-card  *ngFor="let menudujour of menusdujour;" >
 
     <ion-item >
@@ -57,13 +56,11 @@
 
     </ion-item>
 
-    <!-- wp featuremedia component Img select if feature_media id / loadpost() -->
-    <wordpress-feature-media *ngIf="menudujour.featured_media" [id]="menudujour.featured_media" (click)="loadPost(menudujour)"></wordpress-feature-media>
+    <img *ngIf="menudujour.photomdj" [src]="menudujour.photomdj.guid">
 
-    <!-- Gravatar + titre -->
     <ion-item color="dark" >
       <ion-avatar item-left>
-        <!--<img [src]="menudujour['_embedded'].author[0].avatar_urls[96]">-->
+        <img src="assets/img/appicon.png">
       </ion-avatar>
       {{'SUGGESTION' | translate}}
     </ion-item>
@@ -89,12 +86,7 @@
     </ion-card-content>
 
     <ion-row no-padding class="rowcolor">
-      <ion-col text-left>
-        <button ion-button icon-left clear color="Rouge"(click)="favoritePost(menudujour)">
-          <ion-icon name='heart' color="Rouge"></ion-icon>
-          favoris
-        </button>
-      </ion-col>
+
       <ion-col text-right>
         <button ion-button clear color="Rouge" (click)="loadPost(menudujour)">
           {{'MORE' | translate}}
@@ -108,7 +100,6 @@
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-
 
 
 </ion-content>

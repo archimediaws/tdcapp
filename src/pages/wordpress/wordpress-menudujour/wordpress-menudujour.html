@@ -55,11 +55,11 @@
 
       </ion-item>
 
-      <wordpress-feature-media *ngIf="menudujour.featured_media" [id]="menudujour.featured_media"></wordpress-feature-media>
-
-      <ion-item color="dark" *ngIf="authorData && authorData.avatar_urls">
+      <!--<wordpress-feature-media *ngIf="menudujour.featured_media" [id]="menudujour.featured_media"></wordpress-feature-media>-->
+      <img *ngIf="menudujour.photomdj" [src]="menudujour.photomdj.guid">
+      <ion-item color="dark" >
         <ion-avatar item-left>
-          <img [src]="authorData.avatar_urls[96]">
+          <img src="assets/img/appicon.png">
         </ion-avatar>
         {{'SUGGESTION' | translate}}
       </ion-item>
@@ -73,7 +73,7 @@
             </ion-col>
 
             <ion-col col-4 text-right>
-              <h4 class="prix">{{ menudujour.acf.prix }} € <br> <p class="small-prix" >{{'PRIX' | translate}}</p> </h4>
+              <h4 class="prix">{{ menudujour.prix }} € <br> <p class="small-prix" >{{'PRIX' | translate}}</p> </h4>
             </ion-col>
           </ion-row>
           <ion-row no-padding>
