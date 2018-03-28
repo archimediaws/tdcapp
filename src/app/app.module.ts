@@ -22,6 +22,7 @@ import { OneSignal} from "@ionic-native/onesignal";
 import { MyApp } from './app.component';
 import {RestaurantModule} from "../pages/restaurant/restaurant.module";
 import {DirectivesModule} from "../directives/directives.module";
+import {ImgcaptureModule} from "../pages/imgcapture/imgcapture.module";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {DirectivesModule} from "../directives/directives.module";
     AboutModule,
     ContactModule,
     RestaurantModule,
-    DirectivesModule
+    DirectivesModule,
+    ImgcaptureModule,
 
   ],
   bootstrap: [IonicApp],

@@ -20,6 +20,7 @@ import {WordpressFavorites} from "../pages/wordpress/wordpress-favorites/wordpre
 import {RestaurantComponent} from "../pages/restaurant/restaurant-component/restaurant.component";
 import {OneSignal} from "@ionic-native/onesignal";
 import {WordpressMenusdujour} from "../pages/wordpress/wordpress-menusdujour/wordpress-menusdujour.component";
+import {ImgcaptureComponent} from "../pages/imgcapture/imgcapture-component/imgcapture.component";
 
 
 
@@ -71,12 +72,12 @@ export class MyApp {
 
 		this.pages = [
 		  { title: 'HOME', component: TabsComponent, icon: 'home' },
-      { title: 'RESTAURANT', component: RestaurantComponent, icon: 'information-circle'},
+      { title: 'PRESENTATION', component: RestaurantComponent, icon: 'information-circle'},
       { title: 'FAVORITES', component: WordpressFavorites, icon: 'heart' },
       { title: 'SETTINGS', component: SettingsComponent, icon: 'settings'},
       { title: 'ABOUT', component: AboutComponent, icon: 'information-circle'},
       { title: 'LOGIN', component: WordpressHome, icon: 'finger-print' },
-
+      { title: 'LOGIN', component: ImgcaptureComponent, icon: 'finger-print' },
 		];
 		this.wordpressMenusNavigation = config.wordpressMenusNavigation;
 
