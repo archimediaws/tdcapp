@@ -29,6 +29,25 @@
 <ion-content padding>
   <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
   <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
+
+  <button ion-button full (click)="takePhoto()" >
+    <ion-icon name="camera"></ion-icon>Take Photo
+  </button>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 *ngFor="let photo of photos; let id = index">
+        <ion-card class="block">
+          <ion-icon  name="trash" class="deleteIcon" (click)="deletePhoto(id)" ></ion-icon>
+          <img [src]="photo" *ngIf="photo" />
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
 </ion-content>
 
 <ion-footer>

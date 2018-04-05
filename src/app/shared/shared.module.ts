@@ -12,6 +12,11 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { EmailComposer } from '@ionic-native/email-composer';
 
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { Camera } from '@ionic-native/camera';
+
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 
@@ -58,6 +63,10 @@ export function createTranslateLoader(httpClient: HttpClient) {
     InAppBrowser,
     SocialSharing,
     EmailComposer,
+    File,
+    Transfer,
+    Camera,
+    FilePath,
     Config
   ]
 })

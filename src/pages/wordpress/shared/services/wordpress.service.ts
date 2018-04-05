@@ -111,11 +111,12 @@ console.log(query);
     title: title,
     content: content,
     status: 'publish',
-    prix: price
+    prix: price,
+    // photomdj: photo
   };
-      console.log(data);
+     // console.log(data);
   let The_token = token.__zone_symbol__value.token;
-     console.log(The_token);
+     // console.log(The_token);
 
   let headers =  {headers: new  Headers({ 'Authorization': `Bearer ${The_token}`, 'Content-Type': 'application/json'})};
 
@@ -123,7 +124,7 @@ console.log(query);
 
   }
 
-
+//'content-disposition':"attachment; filename=\'stephane.jpeg\'",
   // END custom post type menu_du_jour
 
 	public getPages() {

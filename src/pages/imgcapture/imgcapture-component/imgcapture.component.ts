@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import {
-  ActionSheetController, Loading, LoadingController, NavController, Platform,
+  ActionSheetController, AlertController, Loading, LoadingController, NavController, Platform,
   ToastController
 } from 'ionic-angular';
 
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
-import { Camera } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 
 declare var cordova: any;
@@ -18,6 +18,9 @@ declare var cordova: any;
 })
 export class ImgcaptureComponent {
 
+
+  photos : any;
+  base64Image : string;
   lastImage: string = null;
   loading: Loading;
 
@@ -30,7 +33,70 @@ export class ImgcaptureComponent {
     public actionSheetCtrl: ActionSheetController,
     public toastCtrl: ToastController,
     public platform: Platform,
-    public loadingCtrl: LoadingController) { }
+    public loadingCtrl: LoadingController,
+    public alertCtrl : AlertController) { }
+
+
+  ngOnInit() {
+    this.photos = [];
+  }
+
+  deletePhoto(index) {
+    let confirm = this.alertCtrl.create({
+      title: 'Sure you want to delete this photo? There is NO undo!',
+      message: '',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+            console.log('Agree clicked');
+            this.photos.splice(index, 1);
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  takePhoto() {
+    const options : CameraOptions = {
+      quality: 100, // picture quality
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      targetWidth: 600,
+      targetHeight: 600,
+      saveToPhotoAlbum: false
+    }
+    this.camera.getPicture(options) .then((imageData) => {
+      this.base64Image = "data:image/jpeg;base64," + imageData;
+      this.photos.push(this.base64Image);
+      this.photos.reverse();
+      // this.sendData(imageData);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  // sendData(imageData) {
+  //   this.userData.imageB64 = imageData;
+  //   this.userData.user_id = "1";
+  //   this.userData.token = "222";
+  //   console.log(this.userData);
+  //   this.authService.postData(this.userData, "userImage").then(
+  //     result => {
+  //       this.responseData = result;
+  //     },
+  //     err => {
+  //       // Error log
+  //     }
+  //   );
+  // }
 
   public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({

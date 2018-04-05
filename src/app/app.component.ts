@@ -38,7 +38,7 @@ export class MyApp {
 	menuPage = WordpressMenus;
 	pages: Array<{title: string, component: any, icon: string}>;
 	wordpressMenusNavigation: boolean = false;
-	// myId = '';
+
 
 	constructor(
 		private platform: Platform,
@@ -72,16 +72,16 @@ export class MyApp {
 
 		this.pages = [
 		  { title: 'HOME', component: TabsComponent, icon: 'home' },
-      { title: 'PRESENTATION', component: RestaurantComponent, icon: 'information-circle'},
+      { title: 'PRESENTATION', component: RestaurantComponent, icon: 'flag'},
       { title: 'FAVORITES', component: WordpressFavorites, icon: 'heart' },
       { title: 'SETTINGS', component: SettingsComponent, icon: 'settings'},
+      { title: 'SLIDE', component: SlidesComponent, icon: 'arrow-dropright-circle'},
       { title: 'ABOUT', component: AboutComponent, icon: 'information-circle'},
       { title: 'LOGIN', component: WordpressHome, icon: 'finger-print' },
       { title: 'LOGIN', component: ImgcaptureComponent, icon: 'finger-print' },
 		];
 		this.wordpressMenusNavigation = config.wordpressMenusNavigation;
 
-		// this.myId = this.navParams.get('id');
 
 	}
 
@@ -104,7 +104,7 @@ export class MyApp {
 	}
 
 	setupPush(){
-    this.oneSignal.startInit('30413270-7809-4157-bdef-87fe60126fd1', '411044932758');
+    this.oneSignal.startInit('559c8e8f-f244-44c8-a51f-6fc66d516b0d', '411044932758');
 
     this.oneSignal.handleNotificationReceived().subscribe(data =>{
       console.log('recu un push: ', data );

@@ -6,6 +6,8 @@ WordpressCreatePost{
     max-height: 400px;
   }
 
+  h4 {text-align:center;}
+
   .card {
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
@@ -31,6 +33,16 @@ WordpressCreatePost{
     color: color($colors, Rouge)
   }
 
-
+  .block {
+    position: relative;
+    .deleteIcon {
+      position: absolute;
+      color: color($colors, danger);
+      margin-left: 90% ;
+    }
+    .deleteIcon:before {
+      font-size: 30px ;
+    }
+  }
 
 }

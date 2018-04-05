@@ -11,6 +11,16 @@ page-imgcapture{
 
   }
 
-
+  .block {
+    position: relative;
+    .deleteIcon {
+      position: absolute;
+      color: color($colors, danger);
+      margin-left: 90% ;
+    }
+    .deleteIcon:before {
+      font-size: 30px ;
+    }
+  }
 
 }
