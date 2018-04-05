@@ -105,20 +105,24 @@ console.log(query);
 
   // post avec pods
 
-  public postMenuduJour(title, content, price, token){
+  public postMenuduJour(title, content, price, photo, token){
 
   let data = {
     title: title,
     content: content,
     status: 'publish',
     prix: price,
-    // photomdj: photo
+    photomdj: photo,
   };
      // console.log(data);
   let The_token = token.__zone_symbol__value.token;
      // console.log(The_token);
 
-  let headers =  {headers: new  Headers({ 'Authorization': `Bearer ${The_token}`, 'Content-Type': 'application/json'})};
+  let headers =  {headers: new  Headers({
+      'Authorization': `Bearer ${The_token}`,
+      'Content-Disposition':"attachment; filename=\'stephane.jpeg\'",
+      'Content-Type': 'application/json'
+  })};
 
   return this.http.post( this.config.wordpressApiUrl + '/wp/v2/menu_du_jour/', data,  headers);
 

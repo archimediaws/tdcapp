@@ -60,12 +60,10 @@ export class WordpressCreatepost implements OnInit {
         {
           text: 'No',
           handler: () => {
-            console.log('Disagree clicked');
           }
         }, {
           text: 'Yes',
           handler: () => {
-            console.log('Agree clicked');
             this.photos.splice(index, 1);
           }
         }
@@ -92,7 +90,7 @@ export class WordpressCreatepost implements OnInit {
       this.photos.push(this.base64Image);
       this.photos.reverse();
       this.lastImage = imageData;
-      console.log('last:', this.lastImage);
+      console.log('last:', this.photo);
       // this.sendData(imageData);
     }, (err) => {
       console.log(err);
@@ -102,12 +100,12 @@ export class WordpressCreatepost implements OnInit {
 
   uploadPhoto(){
 	  let The_token = this.token.__zone_symbol__value.token;
-	  console.log(The_token);
+
 	  let trans = this.transfer.create();
-	  trans.upload(this.photo, "https://tdc.stephaneescobar.com/wp-json/wp/v2/menu_du_jour", {
+	  trans.upload(this.photo, "https://tdc.stephaneescobar.com/wp-json/wp/v2/media", {
 	    headers: {
         'Authorization': `Bearer ${The_token}`,
-        'content-disposition': "attachment; filename=\'maphoto.jpeg\'"
+        'Content-Disposition': "attachment; filename=\'maphoto.jpeg\'"
       }
     }).then((res) => {
       alert(JSON.stringify(res));
@@ -130,7 +128,7 @@ export class WordpressCreatepost implements OnInit {
 
   addMenudujour(){
 
-	  this.wordpressService.postMenuduJour(this.title, this.content, this.price, this.token).subscribe(data => {
+	  this.wordpressService.postMenuduJour(this.title, this.content, this.price, this.photo, this.token).subscribe(data => {
 	    console.log(data)
     });
 
