@@ -1,0 +1,15 @@
+page-satisfaction{
+
+    padding: 0px;
+
+  .card{
+    background-color: color($colors, dark);
+
+
+    p, h1, h2 {
+
+      color: color($colors, light);
+    }
+
+  }
+}

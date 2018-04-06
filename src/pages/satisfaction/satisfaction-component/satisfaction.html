@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle color="Rouge">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      <ion-title>{{'SATISFACTION' | translate}}</ion-title>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+
+  <ion-card>
+    <img src="assets/img/profile-img.jpg"/>
+    <h1 padding text-center >La Table de Cana à Perpignan</h1>
+    <h2 padding text-center> " Faites-nous part de votre expérience ! " </h2>
+    <ion-card-content text-justify>
+
+      <p>Répondez au questionnaire en ligne en cliquant sur le bouton "mon experience" ci-dessous. Merci pour votre participation.</p>
+
+    </ion-card-content>
+  </ion-card>
+<div padding>
+  <button ion-button full color="Rouge" (click)= gotoSatisfactionform()>{{'SATISFACTION' | translate}}</button>
+</div>
+</ion-content>

@@ -1,0 +1,22 @@
+[
+  {
+    "plu":"01234567891",
+    "name":"Sur le Pouce ",
+    "price":15,
+    "desc":"Menu pour le plus rapide..."
+  },
+  {
+    "plu":"01234567892",
+    "name":"Menu Cana",
+    "price":30,
+    "desc":"Menu gastronomique"
+  },
+
+  {
+    "plu":"https://goo.gl/forms/1Yy6AoGTqZOnXSpC3",
+    "name": "formulaire de satisfaction",
+    "price":0,
+    "desc": "vous allez etre dirigé vers le formulaire de satisfaction..."
+
+  }
+]

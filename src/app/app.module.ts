@@ -23,6 +23,10 @@ import { MyApp } from './app.component';
 import {RestaurantModule} from "../pages/restaurant/restaurant.module";
 import {DirectivesModule} from "../directives/directives.module";
 import {ImgcaptureModule} from "../pages/imgcapture/imgcapture.module";
+import {BarcodeScannerModule} from "../pages/barcode-scanner/barcode-scanner.module";
+import { DataServiceProvider } from '../providers/data-service/data-service';
+import { HttpModule } from '@angular/http';
+import {SatisfactionModule} from "../pages/satisfaction/satisfaction.module";
 
 @NgModule({
   declarations: [
@@ -43,6 +47,9 @@ import {ImgcaptureModule} from "../pages/imgcapture/imgcapture.module";
     RestaurantModule,
     DirectivesModule,
     ImgcaptureModule,
+    BarcodeScannerModule,
+    HttpModule,
+    SatisfactionModule
 
   ],
   bootstrap: [IonicApp],
@@ -60,7 +67,8 @@ import {ImgcaptureModule} from "../pages/imgcapture/imgcapture.module";
     provide: ErrorHandler,
     useClass: IonicErrorHandler,
   },
-  OneSignal
+  OneSignal,
+    DataServiceProvider
   ]
 })
 export class AppModule {}

@@ -17,6 +17,9 @@ import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Toast } from '@ionic-native/toast';
+
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 
@@ -67,6 +70,8 @@ export function createTranslateLoader(httpClient: HttpClient) {
     Transfer,
     Camera,
     FilePath,
+    BarcodeScanner,
+    Toast,
     Config
   ]
 })
