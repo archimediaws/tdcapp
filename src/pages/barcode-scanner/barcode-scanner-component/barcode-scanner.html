@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <ion-title>{{'BARCODE_SCANNER' | translate}}</ion-title>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+    <button ion-button icon-right block outline color="Rouge" full round (click)="scan()">
+      Scanner
+      <ion-icon name="barcode"></ion-icon>
+    </button>
+
+
+  <ion-card *ngIf="productFound">
+    <ion-card-header>
+      <h2>Prix:  {{selectedProduct.price}} €</h2>
+    </ion-card-header>
+    <ion-card-content>
+      <ul>
+        <!--<li>{{selectedProduct.plu}}</li>-->
+        <li>{{selectedProduct.name}}</li>
+        <li>{{selectedProduct.desc}}</li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>
+
