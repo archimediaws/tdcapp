@@ -20,7 +20,6 @@ import {WordpressFavorites} from "../pages/wordpress/wordpress-favorites/wordpre
 import {RestaurantComponent} from "../pages/restaurant/restaurant-component/restaurant.component";
 import {OneSignal} from "@ionic-native/onesignal";
 import {WordpressMenusdujour} from "../pages/wordpress/wordpress-menusdujour/wordpress-menusdujour.component";
-import {ImgcaptureComponent} from "../pages/imgcapture/imgcapture-component/imgcapture.component";
 import {BarcodeScannerComponent} from "../pages/barcode-scanner/barcode-scanner-component/barcode-scanner.component";
 import {SatisfactionComponent} from "../pages/satisfaction/satisfaction-component/satisfaction.component";
 
@@ -79,10 +78,9 @@ export class MyApp {
       { title: 'SATISFACTION', component: SatisfactionComponent, icon: 'thumbs-up'},
       { title: 'SETTINGS', component: SettingsComponent, icon: 'settings'},
       { title: 'SLIDE', component: SlidesComponent, icon: 'arrow-dropright-circle'},
+      { title: 'BARCODE-SCANNER', component: BarcodeScannerComponent, icon: 'qr-scanner' },
       { title: 'ABOUT', component: AboutComponent, icon: 'information-circle'},
       { title: 'LOGIN', component: WordpressHome, icon: 'finger-print' },
-      { title: 'LOGIN', component: ImgcaptureComponent, icon: 'finger-print' },
-      { title: 'BARCODE-SCANNER', component: BarcodeScannerComponent, icon: 'qr-scanner' },
 
 		];
 		this.wordpressMenusNavigation = config.wordpressMenusNavigation;

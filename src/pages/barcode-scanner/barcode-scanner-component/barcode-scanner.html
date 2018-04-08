@@ -1,13 +1,26 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle color="Rouge">
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
-      <ion-title>{{'BARCODE_SCANNER' | translate}}</ion-title>
+      <ion-title>{{'BARCODE-SCANNER' | translate}}</ion-title>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
+  <ion-card>
+    <img src="assets/img/profile-img.jpg"/>
+    <h1 padding text-center >La Table de Cana à Perpignan</h1>
+    <h2 padding text-center> " Obtenez plus d'infos sur nos produits marqués d'un QRCode !" </h2>
+    <ion-card-content text-justify>
+
+      <p>Cliquez sur le bouton ci-dessous et "Scanner" les QRCode de nos produits pour obtenir plus d'informations...</p>
+
+    </ion-card-content>
+  </ion-card>
 
     <button ion-button icon-right block outline color="Rouge" full round (click)="scan()">
       Scanner

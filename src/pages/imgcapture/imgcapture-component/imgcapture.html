@@ -1,45 +1,40 @@
 
-
 <ion-header>
   <ion-navbar color="dark">
     <button ion-button menuToggle color="Rouge">
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      <ion-title> test capture </ion-title>
+      <ion-title> Ajouter des  photos </ion-title>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<!--<ion-content >-->
-
-	<!--<ion-card>-->
-
-    <!--<h1 padding text-center >La Table de Cana </h1>-->
-
-	    <!--<ion-card-content text-justify>-->
-
-
-	     <!--</ion-card-content>-->
-	<!--</ion-card>-->
-
-
-<!--</ion-content>-->
 
 <ion-content padding>
-  <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
-  <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
 
-  <button ion-button full (click)="takePhoto()" >
-    <ion-icon name="camera"></ion-icon>Take Photo
+  <h3 [hidden]="lastImage !== null">Prendre une photo & l'uploader !</h3>
+
+  <button ion-button icon-right full color="Rouge"(click)="takePhoto()" >
+    Prendre une Photo <ion-icon name="camera" ></ion-icon>
   </button>
+
 
   <ion-grid>
     <ion-row>
       <ion-col col-12 *ngFor="let photo of photos; let id = index">
         <ion-card class="block">
-          <ion-icon  name="trash" class="deleteIcon" (click)="deletePhoto(id)" ></ion-icon>
-          <img [src]="photo" *ngIf="photo" />
+
+            <ion-icon  name="trash" class="deleteIcon" (click)="deletePhoto(id)" ></ion-icon>
+            <img [src]="photo" *ngIf="photo" />
+
+        <ion-card-content>
+          <ion-buttons >
+            <button ion-button icon-right full color="Rouge"(click)="uploadPhoto()" [disabled]="lastImage === null">
+              Uploader la Photo <ion-icon name="cloud-upload"></ion-icon>
+            </button>
+          </ion-buttons>
+        </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
@@ -50,15 +45,26 @@
 
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar color="primary">
-    <ion-buttons>
-      <button ion-button icon-left (click)="presentActionSheet()">
-        <ion-icon name="camera"></ion-icon>Select Image
-      </button>
-      <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
-        <ion-icon name="cloud-upload"></ion-icon>Upload
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
+<!--<ion-footer>-->
+  <!--<ion-toolbar color="Rouge">-->
+  <!--<ion-buttons>-->
+  <!--<button ion-button icon-right full (click)="uploadPhoto()" [disabled]="lastImage === null">-->
+    <!--Uploader la Photo <ion-icon name="cloud-upload"></ion-icon>-->
+  <!--</button>-->
+  <!--</ion-buttons>-->
+  <!--</ion-toolbar>-->
+
+<!--</ion-footer>-->
+
+<!--<ion-footer>-->
+  <!--<ion-toolbar color="primary">-->
+    <!--<ion-buttons>-->
+      <!--<button ion-button icon-left (click)="presentActionSheet()">-->
+        <!--<ion-icon name="camera"></ion-icon>Select Image-->
+      <!--</button>-->
+      <!--<button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">-->
+        <!--<ion-icon name="cloud-upload"></ion-icon>Upload-->
+      <!--</button>-->
+    <!--</ion-buttons>-->
+  <!--</ion-toolbar>-->
+<!--</ion-footer>-->
