@@ -65,7 +65,7 @@ export class WordpressMenusdujour implements OnInit{
     this.wordpressService.getNewsMenusduJour()
       .subscribe(result => {
               this.menusdujour = result;
-        console.log(this.menusdujour);
+        // console.log(this.menusdujour);
         loader.dismiss();
             });
 

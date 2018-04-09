@@ -103,6 +103,19 @@ console.log(query);
 
   }
 
+  // get all pods prod
+
+  public getAllPodProduits(){
+    let url = this.config.wordpressApiUrl + `/wp/v2/prod`;
+    return this.http.get(url)
+      .map(result => {
+        return result.json();
+      });
+  }
+
+  // end get all pods prod
+
+
   // post avec pods
 
   public postMenuduJour(title, content, price, photo, token){

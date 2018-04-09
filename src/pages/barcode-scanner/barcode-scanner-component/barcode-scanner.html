@@ -28,19 +28,32 @@
     </button>
 
 
+  <!--<ion-card *ngIf="productFound">-->
+    <!--<ion-card-header>-->
+      <!--<h2>Prix:  {{selectedProduct.price}} €</h2>-->
+    <!--</ion-card-header>-->
+    <!--<ion-card-content>-->
+      <!--<ul>-->
+        <!--&lt;!&ndash;<li>{{selectedProduct.plu}}</li>&ndash;&gt;-->
+        <!--<li>{{selectedProduct.name}}</li>-->
+        <!--<li>{{selectedProduct.desc}}</li>-->
+      <!--</ul>-->
+    <!--</ion-card-content>-->
+  <!--</ion-card>-->
+
+
   <ion-card *ngIf="productFound">
     <ion-card-header>
-      <h2>Prix:  {{selectedProduct.price}} €</h2>
+      <h2>Titre:  {{selectedProduct.titre}} </h2>
     </ion-card-header>
     <ion-card-content>
       <ul>
-        <!--<li>{{selectedProduct.plu}}</li>-->
-        <li>{{selectedProduct.name}}</li>
-        <li>{{selectedProduct.desc}}</li>
+        <li>{{selectedProduct.plu}}</li>
+        <li>{{selectedProduct.titre}}</li>
+        <li>{{selectedProduct.description}}</li>
       </ul>
     </ion-card-content>
   </ion-card>
-
 
 </ion-content>
 
