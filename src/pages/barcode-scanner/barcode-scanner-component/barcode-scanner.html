@@ -27,6 +27,8 @@
       <ion-icon name="barcode"></ion-icon>
     </button>
 
+  <ion-input type="text" [(ngModel)]="encodeData" ></ion-input>
+  <button ion-button (click)="encodeText()">Générer QRCode</button>
 
   <!--<ion-card *ngIf="productFound">-->
     <!--<ion-card-header>-->
@@ -41,17 +43,29 @@
     <!--</ion-card-content>-->
   <!--</ion-card>-->
 
-
   <ion-card *ngIf="productFound">
     <ion-card-header>
-      <h2>Titre:  {{selectedProduct.titre}} </h2>
+      <h2>{{selectedProduct.nickname}} €</h2>
     </ion-card-header>
     <ion-card-content>
       <ul>
         <li>{{selectedProduct.plu}}</li>
-        <li>{{selectedProduct.titre}}</li>
-        <li>{{selectedProduct.description}}</li>
+        <li>{{selectedProduct.hasEmail}}</li>
+        <li>{{selectedProduct.hasTelephone.hasValue}}</li>
       </ul>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card *ngIf="podFound ">
+    <ion-card-header>
+      <img *ngIf="selectedPod.imageproduit" [src]="selectedPod.imageproduit.guid">
+    </ion-card-header>
+    <ion-card-content>
+      <h2>{{selectedPod.title.rendered}} </h2>
+      <p [innerHTML]="selectedPod.content.rendered" >
+
+      </p>
     </ion-card-content>
   </ion-card>
 

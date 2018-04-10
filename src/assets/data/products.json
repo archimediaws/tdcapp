@@ -2,21 +2,43 @@
   {
     "plu":"01234567891",
     "name":"Sur le Pouce ",
-    "price":15,
-    "desc":"Menu pour le plus rapide..."
+    "price":12.50,
+    "desc":"Menu sur le Pouce..."
   },
   {
     "plu":"01234567892",
     "name":"Menu Cana",
     "price":30,
-    "desc":"Menu gastronomique"
+    "desc":"Menu Gastronomique..."
   },
 
   {
     "plu":"https://goo.gl/forms/1Yy6AoGTqZOnXSpC3",
     "name": "formulaire de satisfaction",
     "price":0,
-    "desc": "vous allez etre dirigé vers le formulaire de satisfaction..."
+    "desc": "vous allez être redirigé vers le formulaire de satisfaction ..."
 
+  },
+
+
+  {
+    "plu":"vcard",
+    "@context": "http://www.w3.org/2006/vcard/ns",
+    "@id": "http://example.com/me/corky",
+    "@type": "Individual",
+    "fn": "Corky Crystal",
+    "nickname": "Corks",
+    "hasEmail": "mailto:corky@example.com",
+    "hasAddress": {
+      "@type": "Home",
+      "country-name": "Australia",
+      "locality": "WonderCity",
+      "postal-code": "5555",
+      "street-address": "111 Lake Drive"
+    },
+    "hasTelephone": {
+      "@type": [ "Home", "Voice" ],
+      "hasValue": "tel:+61755555555"
+    }
   }
 ]

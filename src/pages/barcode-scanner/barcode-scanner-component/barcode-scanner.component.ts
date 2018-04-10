@@ -18,6 +18,13 @@ export class BarcodeScannerComponent {
   productFound:boolean = false;
 
   podsproduits: any[] = [];
+  selectedPod: any;
+  podFound:boolean = false;
+
+  vcard: string = "vcard";
+
+  encodeData : string ;
+  encodedData : {} ;
 
 	constructor(
 		public navCtrl: NavController,
@@ -34,10 +41,16 @@ export class BarcodeScannerComponent {
         console.log(this.products);
       });
 
+
+
+  }
+
+  ngOnInit(): void {
+
     this.wordpressService.getAllPodProduits()
       .subscribe(result => {
         this.podsproduits = result;
-         console.log(this.podsproduits);
+        console.log("pods", this.podsproduits);
       });
 
   }
@@ -83,11 +96,16 @@ export class BarcodeScannerComponent {
 
   scan() {
     this.selectedProduct = {};
+    this.selectedPod = {};
     this.barcodeScanner.scan().then((barcodeData) => {
-      this.selectedProduct = this.podsproduits.find(podsproduit => podsproduit.plu === barcodeData.text);
-
+      this.selectedProduct = this.products.find(product => product.plu === barcodeData.text);
+      this.selectedPod = this.podsproduits.find(podsproduit => podsproduit.plu === barcodeData.text);
       if(this.selectedProduct !== undefined) {
         this.productFound = true;
+      }
+
+      if(this.selectedPod !== undefined){
+        this.podFound = true;
       }
 
       if(this.selectedProduct.plu === this.urlformsatisfaction ){
@@ -102,8 +120,20 @@ export class BarcodeScannerComponent {
 
       }
 
+      if(this.selectedProduct.plu === this.vcard ){
+
+        this.productFound = true;
+        this.toast.show(`VCARD`, '5000', 'center').subscribe(
+          toast => {
+            console.log(toast);
+          }
+        );
+
+      }
+
       else{
         this.productFound = false;
+        this.podFound = false;
         this.toast.show(`scan non valide`, '5000', 'center').subscribe(
           toast => {
             console.log(toast);
@@ -119,6 +149,17 @@ export class BarcodeScannerComponent {
     });
   }
 
+
+  encodeText(){
+    this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE,this.encodeData).then((encodedData) => {
+
+      console.log(encodedData);
+      this.encodedData = encodedData;
+
+    }, (err) => {
+      console.log("Error occured : " + err);
+    });
+  }
 
   gotoSatisfactionform(){
 
