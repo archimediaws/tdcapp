@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 // import {HttpHeaders} from "@angular/common/http";
 import { Headers, RequestOptions } from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class WordpressService {
@@ -114,6 +115,15 @@ console.log(query);
   }
 
   // end get all pods prod
+
+  getSaveImage(profiledata): Observable<any>{
+
+    let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.post(this.config.wordpressApiUrl + '/wp/v2/menu_du_jour?photomdj',{data:profiledata},{headers:headers})
+      .map(data=> data.json());
+  }
+
+
 
 
   // post avec pods

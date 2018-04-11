@@ -65,7 +65,6 @@ export class WordpressMenusdujour implements OnInit{
     this.wordpressService.getNewsMenusduJour()
       .subscribe(result => {
               this.menusdujour = result;
-        // console.log(this.menusdujour);
         loader.dismiss();
             });
 
@@ -142,7 +141,7 @@ export class WordpressMenusdujour implements OnInit{
   }
 
 
-  // creation de la query
+  // creation de la query page
 
   createQuery() {
     let query = {};
@@ -155,7 +154,7 @@ export class WordpressMenusdujour implements OnInit{
   // FAB Btn method / CallNumberFixe -> call Fixe Number , CallNumberMobile -> call Mobile Number
 
   callNumberFixe(): void {
-     //setTimeout option : fixe un leger temps avant l'ouverture du Téléphone += fluid
+     //setTimeout option : fixe un leger temps avant l'ouverture du Téléphone
      setTimeout(() => {
        let tel = '+33468734085'; // Fixe Number
        window.open(`tel:${tel}`, '_system');

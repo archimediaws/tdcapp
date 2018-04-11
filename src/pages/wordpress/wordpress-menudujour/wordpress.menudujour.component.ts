@@ -62,10 +62,8 @@ export class WordpressMenudujour {
     this.socialSharing.share(message, subject, '', url);
   }
 
-  // FAB Btn method / CallNumberFixe -> call Fixe Number , CallNumberMobile -> call Mobile Number
 
   callNumberFixe(): void {
-    //setTimeout option : fixe un leger temps avant l'ouverture du Téléphone += fluid
     setTimeout(() => {
       let tel = '+33468734085'; // Fixe Number
       window.open(`tel:${tel}`, '_system');

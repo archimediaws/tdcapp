@@ -157,7 +157,7 @@ export class BarcodeScannerComponent {
       this.encodedData = encodedData;
 
     }, (err) => {
-      console.log("Error occured : " + err);
+      console.log("Error : " + err);
     });
   }
 
