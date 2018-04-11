@@ -118,12 +118,12 @@ console.log(query);
 
   getSaveImage(profiledata): Observable<any>{
 
+    console.log(profiledata);
     let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
     return this.http.post(this.config.wordpressApiUrl + '/wp/v2/menu_du_jour?photomdj',{data:profiledata},{headers:headers})
       .map(data=> data.json());
+
   }
-
-
 
 
   // post avec pods
