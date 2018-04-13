@@ -141,11 +141,9 @@ export class WordpressMenusdujour implements OnInit{
 
 
   // creation de la query page
-
   createQuery() {
     let query = {};
     query['page'] = this.pageCount;
-
     return query;
   }
 

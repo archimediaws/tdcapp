@@ -90,8 +90,10 @@ export class WordpressCreatepost implements OnInit {
       this.photos.push(this.base64Image);
       this.photos.reverse();
       this.lastImage = imageData;
-      console.log('last:', this.photo);
+      console.log('last:', this.lastImage);
       // this.upload();
+      this.uploadPhoto();
+
     }, (err) => {
       console.log(err);
       this.presentToast('Erreur lors de la selection de l\'image.');
@@ -99,29 +101,28 @@ export class WordpressCreatepost implements OnInit {
   }
 
 
-  upload(){
 
-	  let mdjdata = {
-
-	   //  "title" : this.title,
-      // "content": this.content,
-      // "prix": this.price,
-      "photomdj": this.photo
-      // "status": "publish"
-    }
-
-    this.wordpressService.getSaveImage(mdjdata, this.token).subscribe(
-      response => {
-        console.log("data add sucessfully");
-      },
-      err => {
-        console.log("err...."+err );
-      }
-    );
-
-
-
-  }
+  // upload(){
+  //
+	//   let mdjdata = {
+  //
+	//    //  "title" : this.title,
+  //     // "content": this.content,
+  //     // "prix": this.price,
+  //     "photomdj": this.lastImage
+  //     // "status": "publish"
+  //   }
+  //
+  //   this.wordpressService.getSaveImage(mdjdata, this.token).subscribe(
+  //     response => {
+  //       console.log("data add sucessfully");
+  //     },
+  //     err => {
+  //       console.log("err...."+err );
+  //     }
+  //   );
+	//
+  // }
 
 
   uploadPhoto(){
@@ -131,7 +132,7 @@ export class WordpressCreatepost implements OnInit {
 	  trans.upload(this.photo, "https://tdc.stephaneescobar.com/wp-json/wp/v2/media", {
 	    headers: {
         'Authorization': `Bearer ${The_token}`,
-        'Content-Disposition': "attachment; filename=\'maphoto.jpeg\'"
+        'Content-Disposition': "attachment; filename=\'photo.jpeg\'"
       }
     }).then((res) => {
       alert(JSON.stringify(res));
@@ -154,7 +155,7 @@ export class WordpressCreatepost implements OnInit {
 
   addMenudujour(){
 
-	  this.wordpressService.postMenuduJour(this.title, this.content, this.price, this.photo, this.token).subscribe(data => {
+	  this.wordpressService.postMenuduJour(this.title, this.content, this.price, this.token).subscribe(data => {
 	    console.log(data)
     });
 
