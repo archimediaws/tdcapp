@@ -171,28 +171,19 @@ console.log(query);
 
   // post Menu du Jour avec pods
 
-  public postMenuduJour(title, content, price, token){
+  public postMenuduJour(title, content, price, photomdjurl, token){
 
   let body = {
     title: title,
     content: content,
     status: 'publish',
     prix: price,
-    photomdj: 'http://tdc.stephaneescobar.com/wp-content/uploads/2018/04/image.jpg',
+    photomdj: photomdjurl
   };
-    console.log(body);
+
   let The_token = token.__zone_symbol__value.token;
 
 console.log(The_token);
-
-  // let headers =  {headers: new  Headers({
-  //     'Authorization': `Bearer ${The_token}`,
-  //     'Content-Disposition':"attachment; filename=\'photo\'.jpeg",
-  //     'Content-Type': 'application/json'
-  //     // 'Content-Type': 'multipart/form-data'
-  //
-  // })};
-
 
     let headers = new Headers();
     headers.append('Authorization', `Bearer ${The_token}` );

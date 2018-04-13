@@ -23,9 +23,7 @@
         Prendre une Photo <ion-icon name="camera" ></ion-icon>
       </button>
 
-      <!--<button ion-button icon-right full (click)="uploadPhoto()" >-->
-        <!--Upload Photo <ion-icon name="cloud-upload" ></ion-icon>-->
-      <!--</button>-->
+
 
       <ion-grid>
         <ion-row>
@@ -37,6 +35,10 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+
+        <button ion-button icon-right full *ngIf="lastImage !== null" (click)="uploadPhoto()" >
+          Enregistrer la Photo <ion-icon name="cloud-upload" ></ion-icon>
+        </button>
 
       </div>
 
@@ -58,8 +60,8 @@
     </ion-item>
 
 
-    <div padding>
-    <button ion-button  color="Rouge" type="submit" block >{{ 'ADDSUGGESTION' | translate }}</button>
+    <div padding >
+    <button *ngIf="lastImage !== null" ion-button  color="Rouge" type="submit" block >{{ 'ADDSUGGESTION' | translate }}</button>
     </div>
   </form>
 </ion-content>

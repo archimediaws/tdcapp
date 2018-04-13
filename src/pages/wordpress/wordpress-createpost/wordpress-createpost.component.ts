@@ -5,9 +5,11 @@ import { Storage } from '@ionic/storage';
 import { WordpressService } from '../shared/services/wordpress.service';
 
 import { File } from '@ionic-native/file';
-import { Transfer, TransferObject } from '@ionic-native/transfer';
+import { Transfer, TransferObject} from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import {WordpressMenusdujour} from "../wordpress-menusdujour/wordpress-menusdujour.component";
+
 
 declare var cordova: any;
 
@@ -29,6 +31,7 @@ export class WordpressCreatepost implements OnInit {
   photo;
   token;
 
+  photomdjurl;
 
   constructor(private navParams: NavParams,
               private wordpressService: WordpressService,
@@ -41,7 +44,8 @@ export class WordpressCreatepost implements OnInit {
               private file: File,
               private filePath: FilePath,
               public alertCtrl: AlertController,
-              public toastCtrl: ToastController,) {
+              public toastCtrl: ToastController
+             ) {
   }
 
 
@@ -90,39 +94,12 @@ export class WordpressCreatepost implements OnInit {
       this.photos.push(this.base64Image);
       this.photos.reverse();
       this.lastImage = imageData;
-      console.log('last:', this.lastImage);
-      // this.upload();
-      this.uploadPhoto();
 
     }, (err) => {
       console.log(err);
       this.presentToast('Erreur lors de la selection de l\'image.');
     });
   }
-
-
-
-  // upload(){
-  //
-	//   let mdjdata = {
-  //
-	//    //  "title" : this.title,
-  //     // "content": this.content,
-  //     // "prix": this.price,
-  //     "photomdj": this.lastImage
-  //     // "status": "publish"
-  //   }
-  //
-  //   this.wordpressService.getSaveImage(mdjdata, this.token).subscribe(
-  //     response => {
-  //       console.log("data add sucessfully");
-  //     },
-  //     err => {
-  //       console.log("err...."+err );
-  //     }
-  //   );
-	//
-  // }
 
 
   uploadPhoto(){
@@ -135,9 +112,18 @@ export class WordpressCreatepost implements OnInit {
         'Content-Disposition': "attachment; filename=\'photo.jpeg\'"
       }
     }).then((res) => {
-      alert(JSON.stringify(res));
+      // alert(JSON.stringify(res));
+      // let sourceUrl = res.response;
+
+      let imgUrl = JSON.parse(res.response);
+      console.log("test:", imgUrl.guid);
+      this.photomdjurl = imgUrl.guid;
+
+      this.presentToast('Photo bien enregistre');
+
     }).catch((err)=> {
       alert(JSON.stringify(err));
+      this.presentToast('Erreur lors de l\'enregistrement de l\'image.');
     })
   }
 
@@ -152,17 +138,21 @@ export class WordpressCreatepost implements OnInit {
   }
 
 
-
   addMenudujour(){
 
-	  this.wordpressService.postMenuduJour(this.title, this.content, this.price, this.token).subscribe(data => {
+	  this.wordpressService.postMenuduJour(this.title, this.content, this.price, this.photomdjurl, this.token).subscribe(data => {
 	    console.log(data)
     });
 
+	  this.goTosuggestions();
   }
 
 
+goTosuggestions(): void {
 
+  this.navController.push(WordpressMenusdujour);
+
+}
 
 
 
