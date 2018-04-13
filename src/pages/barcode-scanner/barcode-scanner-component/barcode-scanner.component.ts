@@ -7,6 +7,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import {WordpressService} from "../../wordpress/shared/services/wordpress.service";
 
 @Component({
+  selector: 'page-barcode-scanner',
   templateUrl: 'barcode-scanner.html',
   providers: [ WordpressService ]
 })
@@ -23,8 +24,8 @@ export class BarcodeScannerComponent {
 
   vcard: string = "vcard";
 
-  encodeData : string ;
-  encodedData : {} ;
+  // encodeData : string ;
+  // encodedData : {} ;
 
 	constructor(
 		public navCtrl: NavController,
@@ -150,16 +151,16 @@ export class BarcodeScannerComponent {
   }
 
 
-  encodeText(){
-    this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE,this.encodeData).then((encodedData) => {
-
-      console.log(encodedData);
-      this.encodedData = encodedData;
-
-    }, (err) => {
-      console.log("Error : " + err);
-    });
-  }
+  // encodeText(){
+  //   this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE,this.encodeData).then((encodedData) => {
+  //
+  //     console.log(encodedData);
+  //     this.encodedData = encodedData;
+  //
+  //   }, (err) => {
+  //     console.log("Error : " + err);
+  //   });
+  // }
 
   gotoSatisfactionform(){
 

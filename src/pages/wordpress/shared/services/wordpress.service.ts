@@ -104,7 +104,24 @@ console.log(query);
 
   }
 
-  // get all pods prod
+  public deleteNewsMenuduJourbyId(id, token) {
+
+    let The_token = token.__zone_symbol__value.token;
+
+    let headers =  {headers: new  Headers({
+        'Authorization': `Bearer ${The_token}`,
+        'Content-Type': 'application/json'
+      })};
+
+    return this.http.delete(this.config.wordpressApiUrl + `/wp/v2/menu_du_jour/${id}?force=true`, headers)
+      .map(result => {
+        return result.json();
+      });
+
+  }
+
+
+  // get all pods produits
 
   public getAllPodProduits(){
     let url = this.config.wordpressApiUrl + `/wp/v2/prod`;
@@ -114,19 +131,44 @@ console.log(query);
       });
   }
 
-  // end get all pods prod
+  // end get all pods produits
 
-  getSaveImage(profiledata): Observable<any>{
+  // get all pods  produits with query ( page, author )
 
-    console.log(profiledata);
-    let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-    return this.http.post(this.config.wordpressApiUrl + '/wp/v2/menu_du_jour?photomdj',{data:profiledata},{headers:headers})
+  public getMorePodProduits(query){
+    query = this.transformRequest(query);
+    console.log(query);
+    let url = this.config.wordpressApiUrl + `/wp/v2/menu_du_jour?${query}`;
+    return this.http.get(url)
+      .map(result => {
+        return result.json();
+      });
+  }
+  // get mdj media avec pods
+
+
+
+
+ public getSaveImage(mdjdata, token ): Observable<any>{
+
+    console.log("getsave", mdjdata);
+
+    let The_token = token.__zone_symbol__value.token;
+
+    let headers = new Headers({
+      'Authorization': `Bearer ${The_token}`,
+      'Content-Disposition':"attachment; filename='monimage.jpeg'",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'multipart/form-data'
+
+    });
+    return this.http.post(this.config.wordpressApiUrl + '/wp/v2/menu_du_jour/277',{data:mdjdata},{headers:headers})
       .map(data=> data.json());
 
   }
 
 
-  // post avec pods
+  // post Menu du Jour avec pods
 
   public postMenuduJour(title, content, price, photo, token){
 
@@ -137,13 +179,14 @@ console.log(query);
     prix: price,
     photomdj: photo,
   };
-     // console.log(data);
+
   let The_token = token.__zone_symbol__value.token;
-     // console.log(The_token);
+
+console.log(The_token);
 
   let headers =  {headers: new  Headers({
       'Authorization': `Bearer ${The_token}`,
-      'Content-Disposition':"attachment; filename=\'stephane.jpeg\'",
+      'Content-Disposition':"attachment; filename='stephane.jpeg'",
       'Content-Type': 'application/json'
   })};
 
@@ -151,7 +194,7 @@ console.log(query);
 
   }
 
-//'content-disposition':"attachment; filename=\'stephane.jpeg\'",
+
   // END custom post type menu_du_jour
 
 	public getPages() {
@@ -181,6 +224,9 @@ console.log(query);
 			return result.json();
 		});
 	}
+
+
+	// Transform Query
 
 	private transformRequest(obj) {
 		let p, str;

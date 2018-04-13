@@ -34,7 +34,6 @@ export class SettingsComponent {
           if(value) {
             this.track = value;
             console.log(this.track);
-            // this.setPush(this.track);
             this.toggle = true;
           }
           });
@@ -59,6 +58,7 @@ export class SettingsComponent {
       this.oneSignal.deleteTag('notification');
       this.storage.remove('notification')
 	    //Unsubscribe
+
 
 
     }

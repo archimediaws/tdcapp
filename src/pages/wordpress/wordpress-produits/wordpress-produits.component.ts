@@ -2,43 +2,43 @@ import {Component, OnInit} from '@angular/core';
 import {LoadingController, NavController, NavParams, ToastController} from "ionic-angular";
 import {Storage} from "@ionic/storage";
 import {WordpressService} from "../shared/services/wordpress.service";
-import {WordpressMenudujour} from "../wordpress-menudujour/wordpress.menudujour.component";
-import {InAppBrowser} from "@ionic-native/in-app-browser";
-import {ContactComponent} from "../../contact/contact-component/contact.component";
-import {WordpressCreatepost} from "../wordpress-createpost/wordpress-createpost.component";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+
+
 
 
 @Component({
-  selector: "WordpressMenusdujour",
-  templateUrl: './wordpress-menusdujour.html',
+  selector: "WordpressProduits",
+  templateUrl: './wordpress-produits.html',
   providers: [ WordpressService ]
 })
 
-export class WordpressMenusdujour implements OnInit{
+export class WordpressProduits implements OnInit{
 
 
-  now: any; // date du jour
-  menusdujour: any; // suggestion du chef
+
+  produits: any; // produits
   pageCount: number; // nbs page
-  category: any; // Catégories Suggestions
+  category: any; // Catégories produits
   addbutton: boolean = false;
   user: any;
 
-
+  // encodeData : string ;
+  encodedData : {} ;
 
   constructor(
-    private inAppBrowser: InAppBrowser,
     private navParams: NavParams,
     private wordpressService: WordpressService,
     private navController: NavController,
     private loadingController: LoadingController,
     private toastController: ToastController,
     private storage: Storage,
+    private barcodeScanner: BarcodeScanner,
     ) {}
 
   ngOnInit() {
-    this.now =  Date.now(); // date du jour Object
-    this.getMenusduJour();
+
+    this.getAllProduits();
     this.storage.get('wordpress.user')
       .then( value => {
         if(value) {
@@ -50,7 +50,7 @@ export class WordpressMenusdujour implements OnInit{
   }
 
 
-  getMenusduJour(){
+  getAllProduits(){
 
       this.pageCount = 1;
 
@@ -61,9 +61,9 @@ export class WordpressMenusdujour implements OnInit{
 
       loader.present();
 
-    this.wordpressService.getNewsMenusduJour()
+    this.wordpressService.getAllPodProduits()
       .subscribe(result => {
-              this.menusdujour = result;
+              this.produits = result;
         loader.dismiss();
             });
 
@@ -107,19 +107,19 @@ export class WordpressMenusdujour implements OnInit{
       content: "Chargement en cours"
     });
     let toast = this.toastController.create({
-      message: "il n'y a plus d'autres suggestions ",
+      message: "il n'y a plus d'autres produits ",
       duration: 2000
     });
 
     loader.present();
-    this.wordpressService.getMoreNewsMenusduJour(query)
+    this.wordpressService.getMorePodProduits(query)
       .subscribe(result => {
           infiniteScroll.complete();
           if(result.length < 1) {
             infiniteScroll.enable(false);
             toast.present();
           } else {
-            this.menusdujour = this.menusdujour.concat(result);
+            this.produits = this.produits.concat(result);
           }
         },
         error => console.log(error),
@@ -127,17 +127,23 @@ export class WordpressMenusdujour implements OnInit{
 
   }
 
-  loadPost(menudujour) {
-    this.navController.push(WordpressMenudujour, {
-      menudujour: menudujour
-   });
+  // loadPost(menudujour) {
+  //   this.navController.push(WordpressMenudujour, {
+  //     menudujour: menudujour
+  //  });
+  // }
+
+  encodeText(plu){
+    this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE,plu).then((encodedData) => {
+
+      console.log(encodedData);
+      this.encodedData = encodedData;
+
+    }, (err) => {
+      console.log("Error : " + err);
+    });
   }
 
-
-
-  goToCreateSuggestion(): void {
-    this.navController.push(WordpressCreatepost);
-  }
 
 
   // creation de la query page
@@ -150,26 +156,6 @@ export class WordpressMenusdujour implements OnInit{
   }
 
 
-  // FAB Btn method / CallNumberFixe -> call Fixe Number , CallNumberMobile -> call Mobile Number
-
-  callNumberFixe(): void {
-     //setTimeout option : fixe un leger temps avant l'ouverture du Téléphone
-     setTimeout(() => {
-       let tel = '+33468734085'; // Fixe Number
-       window.open(`tel:${tel}`, '_system');
-     },100);
-   }
-
-   callNumberMobile(): void {
-    setTimeout(() => {
-      let tel = '+33767095522'; // Mobile Number
-      window.open(`tel:${tel}`, '_system');
-    },10);
-   }
-
-  goToContact(): void {
-    this.navController.push(ContactComponent);
-  }
 
 
 }

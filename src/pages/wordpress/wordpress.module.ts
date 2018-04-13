@@ -16,6 +16,7 @@ import { WordpressMenuItem } from './wordpress-menu-item/wordpress-menu-item.com
 import { WordpressMenusdujour } from "./wordpress-menusdujour/wordpress-menusdujour.component";
 import { WordpressMenudujour } from "./wordpress-menudujour/wordpress.menudujour.component";
 import {WordpressCreatepost} from "./wordpress-createpost/wordpress-createpost.component";
+import {WordpressProduits} from "./wordpress-produits/wordpress-produits.component";
 
 
 
@@ -36,7 +37,8 @@ import {WordpressCreatepost} from "./wordpress-createpost/wordpress-createpost.c
     WordpressMenuItem,
     WordpressMenusdujour,
     WordpressMenudujour,
-    WordpressCreatepost
+    WordpressCreatepost,
+    WordpressProduits
 
 
 
@@ -60,7 +62,8 @@ import {WordpressCreatepost} from "./wordpress-createpost/wordpress-createpost.c
     WordpressMenuItem,
     WordpressMenusdujour,
     WordpressMenudujour,
-    WordpressCreatepost
+    WordpressCreatepost,
+    WordpressProduits
 
   ],
   entryComponents:[
@@ -79,6 +82,7 @@ import {WordpressCreatepost} from "./wordpress-createpost/wordpress-createpost.c
     WordpressMenusdujour,
     WordpressMenudujour,
     WordpressCreatepost,
+    WordpressProduits
 
   ]
 })

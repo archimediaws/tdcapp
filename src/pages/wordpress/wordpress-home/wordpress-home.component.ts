@@ -7,6 +7,7 @@ import { WordpressPosts } from '../wordpress-posts/wordpress-posts.component';
 import { WordpressPages } from '../wordpress-pages/wordpress-pages.component';
 import {WordpressMenusdujour} from "../wordpress-menusdujour/wordpress-menusdujour.component";
 import {ImgcaptureComponent} from "../../imgcapture/imgcapture-component/imgcapture.component";
+import {WordpressProduits} from "../wordpress-produits/wordpress-produits.component";
 
 @Component({
   templateUrl: 'wordpress-home.html'
@@ -28,7 +29,8 @@ export class WordpressHome {
 		this.getUser();
 	  	this.pages = [
         { title: 'POSTS', component: WordpressPosts, icon: 'cafe', note: 'voir liste' },
-        { title: 'SUGGESTIONS', component: WordpressMenusdujour, icon: 'restaurant', note: 'voir liste & ajouter'},
+        { title: 'SUGGESTIONS', component: WordpressMenusdujour, icon: 'restaurant', note: 'liste & Ajouter'},
+        { title: 'PRODUCTS', component: WordpressProduits, icon: 'qr-scanner', note: 'liste & QRCode'},
         { title: 'PAGES', component: WordpressPages, icon: 'document', note: 'voir liste' },
         { title: 'PHOTOS', component: ImgcaptureComponent, icon: 'images', note:'Ajouter des Photos' }
 	    ];

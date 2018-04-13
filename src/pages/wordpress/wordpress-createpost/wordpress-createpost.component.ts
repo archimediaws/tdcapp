@@ -53,15 +53,15 @@ export class WordpressCreatepost implements OnInit {
 
   deletePhoto(index) {
     let confirm = this.alertCtrl.create({
-      title: 'Sure you want to delete this photo? There is NO undo!',
+      title: 'Voulez-vous supprimer cette photo?',
       message: '',
       buttons: [
         {
-          text: 'No',
+          text: 'Non',
           handler: () => {
           }
         }, {
-          text: 'Yes',
+          text: 'Oui',
           handler: () => {
             this.photos.splice(index, 1);
           }
@@ -80,7 +80,7 @@ export class WordpressCreatepost implements OnInit {
       mediaType: this.camera.MediaType.PICTURE,
       targetWidth: 600,
       targetHeight: 600,
-      allowEdit: true,
+      // allowEdit: true,
       saveToPhotoAlbum: false,
       correctOrientation: true
     }
@@ -91,26 +91,28 @@ export class WordpressCreatepost implements OnInit {
       this.photos.reverse();
       this.lastImage = imageData;
       console.log('last:', this.photo);
-      // this.sendData(imageData);
-      this.upload();
+      // this.upload();
     }, (err) => {
       console.log(err);
-      this.presentToast('Error while selecting image.');
+      this.presentToast('Erreur lors de la selection de l\'image.');
     });
   }
 
 
   upload(){
 
-	  let profildata = {
+	  let mdjdata = {
 
-	    "name" : 'YO',
-      "image": this.base64Image
+	   //  "title" : this.title,
+      // "content": this.content,
+      // "prix": this.price,
+      "photomdj": this.photo
+      // "status": "publish"
     }
 
-    this.wordpressService.getSaveImage(profildata).subscribe(
+    this.wordpressService.getSaveImage(mdjdata, this.token).subscribe(
       response => {
-        console.log("user add sucessfully");
+        console.log("data add sucessfully");
       },
       err => {
         console.log("err...."+err );

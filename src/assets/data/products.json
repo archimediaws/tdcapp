@@ -1,16 +1,4 @@
 [
-  {
-    "plu":"01234567891",
-    "name":"Sur le Pouce ",
-    "price":12.50,
-    "desc":"Menu sur le Pouce..."
-  },
-  {
-    "plu":"01234567892",
-    "name":"Menu Cana",
-    "price":30,
-    "desc":"Menu Gastronomique..."
-  },
 
   {
     "plu":"https://goo.gl/forms/1Yy6AoGTqZOnXSpC3",
@@ -24,21 +12,21 @@
   {
     "plu":"vcard",
     "@context": "http://www.w3.org/2006/vcard/ns",
-    "@id": "http://example.com/me/corky",
+    "@id": "http://latabledecana-perpignan.com",
     "@type": "Individual",
-    "fn": "Corky Crystal",
-    "nickname": "Corks",
-    "hasEmail": "mailto:corky@example.com",
+    "fn": "La Table de Cana Perpignan",
+    "nickname": "La Table de Cana",
+    "hasEmail": "mailto:contact@latabledecana-perpigan.com",
     "hasAddress": {
       "@type": "Home",
-      "country-name": "Australia",
-      "locality": "WonderCity",
-      "postal-code": "5555",
-      "street-address": "111 Lake Drive"
+      "country-name": "France",
+      "locality": "Perpignan",
+      "postal-code": "66000",
+      "street-address": "200 Rue Louis Delaunay"
     },
     "hasTelephone": {
       "@type": [ "Home", "Voice" ],
-      "hasValue": "tel:+61755555555"
+      "hasValue": "tel:+33468734085"
     }
   }
 ]

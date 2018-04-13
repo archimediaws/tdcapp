@@ -1,0 +1,72 @@
+
+<ion-header>
+
+  <ion-navbar color="dark">
+
+      <button ion-button menuToggle icon-only >
+        <ion-icon name="menu" color="Rouge"></ion-icon>
+      </button>
+
+    <ion-title *ngIf="!category">{{'PRODUCTS' | translate}}</ion-title>
+    <ion-title *ngIf="category">{{category.name}} <span *ngIf="category.count">({{category.count}})</span></ion-title>
+
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-card  *ngFor="let produit of produits;" >
+
+    <img *ngIf="produit.imageproduit" [src]="produit.imageproduit.guid">
+
+    <ion-item color="dark" >
+      <ion-avatar item-left>
+        <img src="assets/img/appicon.png">
+      </ion-avatar>
+      LA TABLE DE CANA PERPIGNAN
+    </ion-item>
+
+    <!-- display content / card affichage en grille : titre, description, plu -->
+    <ion-card-content>
+      <ion-grid>
+        <ion-row no-padding>
+          <ion-col text-left>
+            <h2 class="titre" [innerHTML]="produit.title.rendered" text-uppercase ></h2>
+          </ion-col>
+        </ion-row>
+        <ion-row no-padding>
+          <ion-col text-left>
+            <p [innerHTML]="produit.content.rendered | trimHTML | truncate: 60 "></p>
+          </ion-col>
+          <ion-col col-4 text-right>
+
+            <h4 class="prix"> <p class="small-prix" >PLU</p> <br>{{ produit.plu }} </h4>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+
+    <ion-row no-padding class="rowcolor">
+
+      <ion-col text-right>
+
+        <ion-buttons *ngIf="addbutton===true" end>
+          <button ion-button color="Rouge"  (click)="encodeText(produit.plu)">
+              <ion-icon color="light" name="qr-scanner"> Créer QRCode </ion-icon>
+          </button>
+        </ion-buttons>
+
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+</ion-content>
