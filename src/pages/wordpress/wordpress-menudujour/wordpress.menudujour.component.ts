@@ -70,8 +70,8 @@ deletemdj(id){
   this.wordpressService.deleteNewsMenuduJourbyId(id, this.token)
     .subscribe(result => {
         // this.menudujour = result;
-      this.goToMdj()
 
+        this.goToMdj()
       },
       error => console.log(error),
       () => loader.dismiss()

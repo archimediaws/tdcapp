@@ -58,7 +58,25 @@ export class WordpressService {
       });
   }
 
-	public getCategories() {
+
+  public deleteMediabyId(id, token) {
+
+    let The_token = token.__zone_symbol__value.token;
+
+    let headers =  {headers: new  Headers({
+        'Authorization': `Bearer ${The_token}`,
+        'Content-Type': 'application/json'
+      })};
+
+    return this.http.delete(this.config.wordpressApiUrl + `/wp/v2/media/${id}?force=true`, headers)
+      .map(result => {
+        return result.json();
+      });
+
+  }
+
+
+  public getCategories() {
 		return this.http.get(this.config.wordpressApiUrl + '/wp/v2/categories?per_page=100')
 		.map(result => {
 			return result.json();

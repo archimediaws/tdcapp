@@ -10,7 +10,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {Storage} from "@ionic/storage";
 import {WordpressService} from "../shared/services/wordpress.service";
-
+import {WordpressHome} from '../wordpress-home/wordpress-home.component';
 
 
 declare var cordova: any;
@@ -23,14 +23,17 @@ declare var cordova: any;
 export class WordpressMedias implements OnInit {
 
 
-  medias: any;
+  //  Tableau des MEDIAS vide
+  public medias: any[] = [];
+
+  // medias: any;
   pageCount: number;
 
   // photos : any;
   // base64Image : string;
   // lastImage: string = null;
   // loading: Loading;
-  // token: any;
+  token: any;
 
   constructor(
     public navCtrl: NavController,
@@ -50,7 +53,7 @@ export class WordpressMedias implements OnInit {
 
   ngOnInit() {
     this.getMedias();
-    // this.token = this.storage.get('wordpress.user');
+    this.token = this.storage.get('wordpress.user');
     // this.photos = [];
   }
 
@@ -190,5 +193,51 @@ export class WordpressMedias implements OnInit {
     query['page'] = this.pageCount;
     return query;
   }
+
+
+  deleteMedia(id, index) {
+    //  Alerte de confirmation
+    let alert = this.alertCtrl.create({
+      title: 'Êtes vous sûr ?',
+      subTitle: 'La suppression de ce media est définitif',
+      buttons: [
+        {
+          text: 'Non',
+          role: 'cancel'    //  Il ne se passera rien
+        },
+        {
+          text: 'Oui',
+          handler: () => {    //  On a cliqué sur oui, du coup fonction !
+            //  On supprime notre Media sur notre API
+            this.wordpressService.deleteMediabyId(id, this.token).subscribe(response => {
+              if( response ['success'] ) {
+                //  On retire notre media du tableau
+                this.medias.splice(index, 1);
+                this.goToMedias();
+              } else {
+                //  Une erreur est survenue, message !!!
+                let toast = this.toastCtrl.create({
+                  message: response['error'],
+                  duration: 2500,
+                  cssClass: 'toast-danger',
+                });
+                toast.present();
+              }
+            });
+          }
+        }
+      ]
+    });
+
+    //  On affiche l'alerte de confirmation
+    alert.present();
+  }
+
+
+  goToMedias(){
+    this.navCtrl.push(WordpressHome);
+  }
+
+
 
 }

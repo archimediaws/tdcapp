@@ -39,13 +39,37 @@
     <!--</ion-row>-->
   <!--</ion-grid>-->
 
-  <ion-list *ngFor="let media of medias;">
+  <!--<ion-list *ngFor="let media of medias;">-->
 
-    <ion-item>
-      {{media.title.rendered}}
-    </ion-item>
+    <!--<ion-item>-->
+      <!--{{media.title.rendered}}-->
+    <!--</ion-item>-->
 
+  <!--</ion-list>-->
+
+  <ion-list >
+    <ion-item-sliding *ngFor="let media of medias; let i = index">
+      <ion-item>
+        <button item-right ion-button color="dark" (click)="openMedia(media)">
+          <ion-icon name="eye"></ion-icon>
+          voir
+        </button>
+        <ion-row>
+          <ion-col col-4><img src="{{ media.source_url }}"></ion-col>
+          <ion-col col-8><p>{{ media.title.rendered | trimHTML | truncate: 10  }}</p></ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="deleteMedia(media.id, i)">
+          <ion-icon name="trash"></ion-icon>
+          Supprimer
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
+
+
+
 
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
