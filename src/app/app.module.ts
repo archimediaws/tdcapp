@@ -28,6 +28,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
 import { HttpModule } from '@angular/http';
 import {SatisfactionModule} from "../pages/satisfaction/satisfaction.module";
 
+
 @NgModule({
   declarations: [
     MyApp
@@ -69,6 +70,7 @@ import {SatisfactionModule} from "../pages/satisfaction/satisfaction.module";
   },
   OneSignal,
     DataServiceProvider
+
   ]
 })
 export class AppModule {}

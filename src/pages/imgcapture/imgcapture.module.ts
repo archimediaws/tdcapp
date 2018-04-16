@@ -4,13 +4,15 @@ import { SharedModule } from '../../app/shared/shared.module';
 
 import {ImgcaptureComponent} from "./imgcapture-component/imgcapture.component";
 
+
 @NgModule({
   declarations: [
     ImgcaptureComponent
   ],
   imports: [
   	CommonModule,
-  	SharedModule
+  	SharedModule,
+
   ],
   exports: [
     ImgcaptureComponent

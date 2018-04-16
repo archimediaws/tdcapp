@@ -42,6 +42,22 @@ export class WordpressService {
 		});
 	}
 
+  public getMedias() {
+
+    return this.http.get(this.config.wordpressApiUrl + `/wp/v2/media`)
+      .map(result => {
+        return result.json();
+      });
+  }
+
+  public getMoreMedias(query) {
+    query = this.transformRequest(query);
+    return this.http.get(this.config.wordpressApiUrl + `/wp/v2/media?${query}`)
+      .map(result => {
+        return result.json();
+      });
+  }
+
 	public getCategories() {
 		return this.http.get(this.config.wordpressApiUrl + '/wp/v2/categories?per_page=100')
 		.map(result => {
