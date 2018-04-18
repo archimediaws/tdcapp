@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {NavController, NavParams, LoadingController, AlertController, ToastController, Loading} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
 import { WordpressService } from '../shared/services/wordpress.service';
-
-import { File } from '@ionic-native/file';
-import { Transfer, TransferObject} from '@ionic-native/transfer';
-import { FilePath } from '@ionic-native/file-path';
+import { Transfer} from '@ionic-native/transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {WordpressMenusdujour} from "../wordpress-menusdujour/wordpress-menusdujour.component";
+import {Config} from "../../../app/app.config";
 
 
 declare var cordova: any;
@@ -20,35 +17,31 @@ declare var cordova: any;
 })
 export class WordpressCreatepost implements OnInit {
 
+  url = this.config.wordpressApiUrl + '/wp/v2/media';
   photos: any;
   photo;
   base64Image: string;
   lastImage: boolean = false;
-
+  photoUploaded: boolean = false;
   loading: Loading;
-
   content;
   title;
   price;
   photomdjurl;
   token;
 
-
-
-
-
-  constructor(private navParams: NavParams,
-              private wordpressService: WordpressService,
-              private navController: NavController,
-              private loadingController: LoadingController,
-              private toastController: ToastController,
-              private storage: Storage,
-              private camera: Camera,
-              private transfer: Transfer,
-              private file: File,
-              private filePath: FilePath,
-              public alertCtrl: AlertController,
-              public toastCtrl: ToastController
+  constructor(
+    private config: Config,
+    private navParams: NavParams,
+    private wordpressService: WordpressService,
+    private navController: NavController,
+    private loadingController: LoadingController,
+    private toastController: ToastController,
+    private storage: Storage,
+    private camera: Camera,
+    private transfer: Transfer,
+    public alertCtrl: AlertController,
+    public toastCtrl: ToastController
              ) {
   }
 
@@ -99,26 +92,43 @@ export class WordpressCreatepost implements OnInit {
       this.photos.reverse();
       this.lastImage = true;
 
+
     }, (err) => {
       console.log(err);
       this.presentToast('Erreur lors de la selection de l\'image.');
     });
   }
 
+  // Create a new name for the image
+  private createFileName() {
+    var d = new Date(),
+      n = d.getTime(),
+      newFileName = n + ".jpg";
+    return newFileName;
+  }
+
+
 
   uploadPhoto(){
 	  let The_token = this.token.__zone_symbol__value.token;
+    let newFileName = this.createFileName();
 
 	  let trans = this.transfer.create();
-	  trans.upload(this.base64Image, "https://tdc.stephaneescobar.com/wp-json/wp/v2/media", {
+	  trans.upload(this.base64Image, this.url, {
+
+	    fileName: newFileName,
+
 	    headers: {
         'Authorization': `Bearer ${The_token}`,
-        'Content-Disposition': "attachment; filename=\'photo.jpeg\'"
-      }
+        'Content-Disposition': 'attachment;'
+      },
+      params: {'fileName': newFileName}
+
     }).then((res) => {
 
       let imgUrl = JSON.parse(res.response);
       this.photomdjurl = imgUrl.guid;
+      this.photoUploaded = true;
 
       this.presentToast('La photo est enregistrée !');
 
@@ -127,6 +137,9 @@ export class WordpressCreatepost implements OnInit {
       this.presentToast('Erreur lors de l\'enregistrement de la photo.');
     })
   }
+
+
+
 
 
   private presentToast(text) {
@@ -149,14 +162,11 @@ export class WordpressCreatepost implements OnInit {
   }
 
 
-goTosuggestions(): void {
+  goTosuggestions(): void {
 
-  this.navController.push(WordpressMenusdujour);
+    this.navController.push(WordpressMenusdujour);
 
-}
-
-
-
+  }
 
 
 

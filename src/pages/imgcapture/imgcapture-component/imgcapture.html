@@ -13,7 +13,7 @@
 
 <ion-content padding>
 
-  <h3 [hidden]="lastImage !== null">Prendre une photo & l'uploader !</h3>
+  <h6 [hidden]="lastImage === true">Prendre une photo & l'uploader !</h6>
 
   <button ion-button icon-right full color="Rouge"(click)="takePhoto()" >
     Prendre une Photo <ion-icon name="camera" ></ion-icon>
@@ -30,7 +30,7 @@
 
         <ion-card-content>
           <ion-buttons >
-            <button ion-button icon-right full color="Rouge"(click)="uploadPhoto()" [disabled]="lastImage === null">
+            <button ion-button icon-right full color="Rouge"(click)="uploadPhoto()" [disabled]="lastImage === false">
               Uploader la Photo <ion-icon name="cloud-upload"></ion-icon>
             </button>
           </ion-buttons>
@@ -41,30 +41,4 @@
   </ion-grid>
 
 
-
-
 </ion-content>
-
-<!--<ion-footer>-->
-  <!--<ion-toolbar color="Rouge">-->
-  <!--<ion-buttons>-->
-  <!--<button ion-button icon-right full (click)="uploadPhoto()" [disabled]="lastImage === null">-->
-    <!--Uploader la Photo <ion-icon name="cloud-upload"></ion-icon>-->
-  <!--</button>-->
-  <!--</ion-buttons>-->
-  <!--</ion-toolbar>-->
-
-<!--</ion-footer>-->
-
-<!--<ion-footer>-->
-  <!--<ion-toolbar color="primary">-->
-    <!--<ion-buttons>-->
-      <!--<button ion-button icon-left (click)="presentActionSheet()">-->
-        <!--<ion-icon name="camera"></ion-icon>Select Image-->
-      <!--</button>-->
-      <!--<button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">-->
-        <!--<ion-icon name="cloud-upload"></ion-icon>Upload-->
-      <!--</button>-->
-    <!--</ion-buttons>-->
-  <!--</ion-toolbar>-->
-<!--</ion-footer>-->

@@ -19,7 +19,7 @@
 
       <h6 [hidden]="lastImage !== false">vous devez ajouter une photo!</h6>
 
-      <button ion-button color="Rouge" icon-right full (click)="takePhoto()" >
+      <button [hidden]="photoUploaded === true " ion-button color="Rouge" icon-right full (click)="takePhoto()" >
         Prendre une Photo <ion-icon name="camera" ></ion-icon>
       </button>
 
@@ -29,21 +29,21 @@
         <ion-row>
           <ion-col col-12 *ngFor="let photo of photos; let id = index">
             <ion-card class="block">
-              <ion-icon  name="trash" class="deleteIcon" (click)="deletePhoto(id)" ></ion-icon>
+              <ion-icon  [hidden]="photoUploaded === true" name="trash" class="deleteIcon" (click)="deletePhoto(id)" ></ion-icon>
               <img [src]="photo" *ngIf="photo" />
             </ion-card>
           </ion-col>
         </ion-row>
       </ion-grid>
 
-        <button ion-button color="Rouge" icon-right full *ngIf="lastImage === true" (click)="uploadPhoto()" >
+        <button [hidden]="photoUploaded === true " ion-button color="Rouge" icon-right full *ngIf="lastImage === true" (click)="uploadPhoto()" >
           Choisir cette Photo <ion-icon name="cloud-upload" ></ion-icon>
         </button>
 
       </div>
 
 
-  <form (ngSubmit)="addMenudujour()">
+  <form *ngIf="photoUploaded === true" (ngSubmit)="addMenudujour()">
     <ion-item>
       <ion-label stacked >titre</ion-label>
       <ion-input type="text" placeholder="titre de la suggestion" [(ngModel)]="title" name="title"></ion-input>

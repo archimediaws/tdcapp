@@ -3,7 +3,7 @@ import {NavParams, LoadingController, NavController, AlertController, ToastContr
 
 import {Storage} from "@ionic/storage";
 import { WordpressService } from '../shared/services/wordpress.service';
-import {WordpressHome} from "../wordpress-home/wordpress-home.component";
+import {WordpressMedias} from "../wordpress-medias/wordpress-medias-component";
 
 @Component({
   selector:'WordpressMedia',
@@ -74,9 +74,9 @@ export class WordpressMedia {
 
               console.log(response);
 
-              if( response ['success'] ) {
+              if( response["deleted"]=== true  ) {
                 // retour Home
-                this.goToWPHome();
+                this.goToMedias();
               } else {
                 //  Une erreur est survenue, message !!!
                 let toast = this.toastCtrl.create({
@@ -96,8 +96,9 @@ export class WordpressMedia {
     alert.present();
   }
 
-  goToWPHome(){
-    this.navCtrl.push(WordpressHome);
+  goToMedias(){
+    this.navCtrl.push(WordpressMedias);
   }
+
 
 }

@@ -23,7 +23,11 @@
 
       <ion-card-content text-wrap *ngIf="media">
         <!--<p padding [innerHtml]="media.content.rendered"></p>-->
-        <p> test</p>
+        <p>
+          largeur: {{media.media_details.height}} px <br>
+          hauteur: {{media.media_details.width}} px <br>
+          nom: {{media.media_details.file}}
+        </p>
       </ion-card-content>
         <ion-grid>
               <ion-row no-padding>

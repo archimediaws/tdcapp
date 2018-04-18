@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  ActionSheetController, AlertController, Loading, LoadingController, NavController, Platform,
+  AlertController, Loading, LoadingController, NavController, Platform,
   ToastController
 } from 'ionic-angular';
 
@@ -9,6 +9,9 @@ import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {Storage} from "@ionic/storage";
+import {Config} from "../../../app/app.config";
+import {WordpressMedias} from "../../wordpress/wordpress-medias/wordpress-medias-component";
+
 
 
 
@@ -21,21 +24,21 @@ declare var cordova: any;
 })
 export class ImgcaptureComponent implements OnInit{
 
-
+  url = this.config.wordpressApiUrl + '/wp/v2/media';
 
   photos : any;
   base64Image : string;
-  lastImage: string = null;
+  lastImage: boolean = false;
   loading: Loading;
   token: any;
 
   constructor(
+    private config: Config,
     public navCtrl: NavController,
     private camera: Camera,
     private transfer: Transfer,
     private file: File,
     private filePath: FilePath,
-    public actionSheetCtrl: ActionSheetController,
     public toastCtrl: ToastController,
     private storage: Storage,
     public platform: Platform,
@@ -81,6 +84,7 @@ export class ImgcaptureComponent implements OnInit{
       mediaType: this.camera.MediaType.PICTURE,
       targetWidth: 600,
       targetHeight: 600,
+      allowEdit: true,
       saveToPhotoAlbum: false,
       correctOrientation: true
     }
@@ -88,18 +92,25 @@ export class ImgcaptureComponent implements OnInit{
       this.base64Image = "data:image/jpeg;base64," + imageData;
       this.photos.push(this.base64Image);
       this.photos.reverse();
-      this.lastImage = imageData;
-      // this.sendData(imageData);
+      this.lastImage = true;
+
     }, (err) => {
       console.log(err);
-      this.presentToast('Error while selecting image.');
+      this.presentToast('Erreur lors de la selection de la photo.');
     });
   }
 
-
+  // Create a new name for the image
+  private createFileName() {
+    var d = new Date(),
+      n = d.getTime(),
+      newFileName = n + ".jpg";
+    return newFileName;
+  }
 
   uploadPhoto(){
     let The_token = this.token.__zone_symbol__value.token;
+    let newFileName = this.createFileName();
 
     this.loading = this.loadingCtrl.create({
           content: 'Uploading...',
@@ -107,22 +118,28 @@ export class ImgcaptureComponent implements OnInit{
     this.loading.present();
 
     let trans = this.transfer.create();
-    trans.upload(this.base64Image, "https://tdc.stephaneescobar.com/wp-json/wp/v2/media", {
+    trans.upload(this.base64Image, this.url, {
+
+      fileName: newFileName,
+
       headers: {
         'Authorization': `Bearer ${The_token}`,
-        'Content-Disposition': "attachment; filename='maphoto.jpeg'"
-      }
+        'Content-Disposition': "attachment;"
+      },
+
+      params: {'fileName': newFileName}
+
     }).then((res) => {
-      // alert(JSON.stringify(res));
+
       this.loading.dismissAll();
       this.presentToast('La Photo est bien Uploadée !');
+      this.goToMedias();
     }).catch((err)=> {
-      // alert(JSON.stringify(err));
+
       this.loading.dismissAll();
       this.presentToast('Erreur pendant l\'upload !');
     })
   }
-
 
 
   private presentToast(text) {
@@ -135,5 +152,8 @@ export class ImgcaptureComponent implements OnInit{
   }
 
 
+  goToMedias(): void {
+    this.navCtrl.push(WordpressMedias);
+  }
 
 }

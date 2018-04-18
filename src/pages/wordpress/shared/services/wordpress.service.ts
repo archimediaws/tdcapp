@@ -3,8 +3,7 @@ import { Http, Headers } from '@angular/http';
 import { Config } from '../../../../app/app.config';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
-// import {HttpHeaders} from "@angular/common/http";
-import {Observable} from 'rxjs/Observable';
+
 
 @Injectable()
 export class WordpressService {
@@ -213,6 +212,7 @@ console.log(query);
     status: 'publish',
     prix: price,
     photomdj: photomdjurl
+
   };
 
   let The_token = token.__zone_symbol__value.token;
