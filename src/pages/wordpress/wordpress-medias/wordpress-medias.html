@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      <ion-title> Voir les  Medias </ion-title>
+      <ion-title> Voir & Supprimer les  Medias </ion-title>
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -12,47 +12,12 @@
 
 <ion-content padding>
 
-  <!--<h3 [hidden]="lastImage !== null">Prendre une photo & l'uploader !</h3>-->
-
-  <!--<button ion-button icon-right full color="Rouge"(click)="takePhoto()" >-->
-    <!--Prendre une Photo <ion-icon name="camera" ></ion-icon>-->
-  <!--</button>-->
-
-
-  <!--<ion-grid>-->
-    <!--<ion-row>-->
-      <!--<ion-col col-12 *ngFor="let photo of photos; let id = index">-->
-        <!--<ion-card class="block">-->
-
-          <!--<ion-icon  name="trash" class="deleteIcon" (click)="deletePhoto(id)" ></ion-icon>-->
-          <!--<img [src]="photo" *ngIf="photo" />-->
-
-          <!--<ion-card-content>-->
-            <!--<ion-buttons >-->
-              <!--<button ion-button icon-right full color="Rouge"(click)="uploadPhoto()" [disabled]="lastImage === null">-->
-                <!--Uploader la Photo <ion-icon name="cloud-upload"></ion-icon>-->
-              <!--</button>-->
-            <!--</ion-buttons>-->
-          <!--</ion-card-content>-->
-        <!--</ion-card>-->
-      <!--</ion-col>-->
-    <!--</ion-row>-->
-  <!--</ion-grid>-->
-
-  <!--<ion-list *ngFor="let media of medias;">-->
-
-    <!--<ion-item>-->
-      <!--{{media.title.rendered}}-->
-    <!--</ion-item>-->
-
-  <!--</ion-list>-->
-
   <ion-list >
     <ion-item-sliding *ngFor="let media of medias; let i = index">
       <ion-item>
         <button item-right ion-button color="dark" (click)="openMedia(media)">
           <ion-icon name="eye"></ion-icon>
-          voir
+          {{'SEE' | translate}}
         </button>
         <ion-row>
           <ion-col col-4><img src="{{ media.source_url }}"></ion-col>
@@ -67,7 +32,6 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-
 
 
 

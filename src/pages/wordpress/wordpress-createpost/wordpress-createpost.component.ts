@@ -21,17 +21,21 @@ declare var cordova: any;
 export class WordpressCreatepost implements OnInit {
 
   photos: any;
+  photo;
   base64Image: string;
-  lastImage: string = null;
+  lastImage: boolean = false;
+
   loading: Loading;
 
   content;
   title;
   price;
-  photo;
+  photomdjurl;
   token;
 
-  photomdjurl;
+
+
+
 
   constructor(private navParams: NavParams,
               private wordpressService: WordpressService,
@@ -78,22 +82,22 @@ export class WordpressCreatepost implements OnInit {
 
   takePhoto() {
     const options: CameraOptions = {
-      quality: 50, // picture quality
+      quality: 70, // picture quality
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       targetWidth: 600,
       targetHeight: 600,
-      // allowEdit: true,
+      allowEdit: true,
       saveToPhotoAlbum: false,
       correctOrientation: true
     }
     this.camera.getPicture(options).then((imageData) => {
       this.base64Image = "data:image/jpeg;base64," + imageData;
       this.photo = "data:image/jpeg;base64," + imageData;
-      this.photos.push(this.base64Image);
+      this.photos.push(this.photo);
       this.photos.reverse();
-      this.lastImage = imageData;
+      this.lastImage = true;
 
     }, (err) => {
       console.log(err);
@@ -106,24 +110,21 @@ export class WordpressCreatepost implements OnInit {
 	  let The_token = this.token.__zone_symbol__value.token;
 
 	  let trans = this.transfer.create();
-	  trans.upload(this.photo, "https://tdc.stephaneescobar.com/wp-json/wp/v2/media", {
+	  trans.upload(this.base64Image, "https://tdc.stephaneescobar.com/wp-json/wp/v2/media", {
 	    headers: {
         'Authorization': `Bearer ${The_token}`,
         'Content-Disposition': "attachment; filename=\'photo.jpeg\'"
       }
     }).then((res) => {
-      // alert(JSON.stringify(res));
-      // let sourceUrl = res.response;
 
       let imgUrl = JSON.parse(res.response);
-      console.log("test:", imgUrl.guid);
       this.photomdjurl = imgUrl.guid;
 
-      this.presentToast('Photo bien enregistre');
+      this.presentToast('La photo est enregistrée !');
 
     }).catch((err)=> {
       alert(JSON.stringify(err));
-      this.presentToast('Erreur lors de l\'enregistrement de l\'image.');
+      this.presentToast('Erreur lors de l\'enregistrement de la photo.');
     })
   }
 

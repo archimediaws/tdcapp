@@ -114,7 +114,7 @@ export class MyApp {
     });
 
     this.oneSignal.handleNotificationOpened().subscribe(data => {
-      console.log('ouvert un push: ', data );
+      // console.log('ouvert un push: ', data );
 
       let message = data.notification.payload.body;
       let title = data.notification.payload.title;

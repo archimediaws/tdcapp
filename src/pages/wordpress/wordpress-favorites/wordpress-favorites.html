@@ -20,12 +20,20 @@
 <ion-content>
     <ion-list>
         <ion-item-sliding *ngFor="let post of favoritePosts">
-            <ion-item (click)="loadPost(post)">
-                {{post.title.rendered}}
-                <button ion-button item-right outline>{{'READ' | translate}} </button>
+            <ion-item >
+                <button ion-button color="dark" item-right outline (click)="loadPost(post)">
+                  <ion-icon name="eye"></ion-icon>
+                  {{'READ' | translate}}
+                </button>
+              <ion-row>
+                <ion-col col-6><h3>{{post.title.rendered | trimHTML | truncate: 10 }}</h3></ion-col>
+                <ion-col col-6><p>{{ post.content.rendered | trimHTML | truncate: 10  }}</p></ion-col>
+              </ion-row>
             </ion-item>
-            <ion-item-options>
-                <button primary (click)="removeFavoritePost(post)">Remove</button>
+            <ion-item-options side="right">
+                <button ion-button color="danger" (click)="removeFavoritePost(post)">
+                  <ion-icon name="trash"></ion-icon>
+                  Supprimer</button>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>

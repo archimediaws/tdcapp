@@ -18,6 +18,7 @@ import { WordpressMenudujour } from "./wordpress-menudujour/wordpress.menudujour
 import {WordpressCreatepost} from "./wordpress-createpost/wordpress-createpost.component";
 import {WordpressProduits} from "./wordpress-produits/wordpress-produits.component";
 import {WordpressMedias} from "./wordpress-medias/wordpress-medias-component";
+import {WordpressMedia} from "./wordpress-media/wordpress-media.component";
 
 
 
@@ -40,7 +41,8 @@ import {WordpressMedias} from "./wordpress-medias/wordpress-medias-component";
     WordpressMenudujour,
     WordpressCreatepost,
     WordpressProduits,
-    WordpressMedias
+    WordpressMedias,
+    WordpressMedia
 
 
 
@@ -66,7 +68,8 @@ import {WordpressMedias} from "./wordpress-medias/wordpress-medias-component";
     WordpressMenudujour,
     WordpressCreatepost,
     WordpressProduits,
-    WordpressMedias
+    WordpressMedias,
+    WordpressMedia
 
   ],
   entryComponents:[
@@ -86,7 +89,8 @@ import {WordpressMedias} from "./wordpress-medias/wordpress-medias-component";
     WordpressMenudujour,
     WordpressCreatepost,
     WordpressProduits,
-    WordpressMedias
+    WordpressMedias,
+    WordpressMedia
 
   ]
 })

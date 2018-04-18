@@ -17,9 +17,9 @@
 
       <div padding>
 
-      <h4 [hidden]="lastImage !== null">Ajouter une photo!</h4>
+      <h6 [hidden]="lastImage !== false">vous devez ajouter une photo!</h6>
 
-      <button ion-button icon-right full (click)="takePhoto()" >
+      <button ion-button color="Rouge" icon-right full (click)="takePhoto()" >
         Prendre une Photo <ion-icon name="camera" ></ion-icon>
       </button>
 
@@ -36,8 +36,8 @@
         </ion-row>
       </ion-grid>
 
-        <button ion-button icon-right full *ngIf="lastImage !== null" (click)="uploadPhoto()" >
-          Enregistrer la Photo <ion-icon name="cloud-upload" ></ion-icon>
+        <button ion-button color="Rouge" icon-right full *ngIf="lastImage === true" (click)="uploadPhoto()" >
+          Choisir cette Photo <ion-icon name="cloud-upload" ></ion-icon>
         </button>
 
       </div>
@@ -61,7 +61,7 @@
 
 
     <div padding >
-    <button *ngIf="lastImage !== null" ion-button  color="Rouge" type="submit" block >{{ 'ADDSUGGESTION' | translate }}</button>
+    <button *ngIf="lastImage !== false" ion-button  color="Rouge" type="submit" block >{{ 'ADDSUGGESTION' | translate }}</button>
     </div>
   </form>
 </ion-content>

@@ -33,7 +33,7 @@ export class WordpressHome {
         { title: 'SUGGESTIONS', component: WordpressMenusdujour, icon: 'restaurant', note: 'liste & Ajouter'},
         { title: 'PRODUCTS', component: WordpressProduits, icon: 'qr-scanner', note: 'liste & QRCode'},
         { title: 'PAGES', component: WordpressPages, icon: 'document', note: 'voir liste' },
-        { title: 'MEDIAS', component: WordpressMedias, icon: 'images', note:'voir liste' },
+        { title: 'MEDIAS', component: WordpressMedias, icon: 'images', note:'liste & Supprimer' },
         { title: 'PHOTOS', component: ImgcaptureComponent, icon: 'camera', note:'Ajouter des Photos' }
 
 	    ];

@@ -11,6 +11,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import {Storage} from "@ionic/storage";
 import {WordpressService} from "../shared/services/wordpress.service";
 import {WordpressHome} from '../wordpress-home/wordpress-home.component';
+import {WordpressMedia} from "../wordpress-media/wordpress-media.component";
 
 
 declare var cordova: any;
@@ -203,17 +204,21 @@ export class WordpressMedias implements OnInit {
       buttons: [
         {
           text: 'Non',
-          role: 'cancel'    //  Il ne se passera rien
+          role: 'cancel'    //  annuler
         },
         {
           text: 'Oui',
-          handler: () => {    //  On a cliqué sur oui, du coup fonction !
-            //  On supprime notre Media sur notre API
+          handler: () => {    //  Si oui
+            //  On supprime le Media sur WP API
             this.wordpressService.deleteMediabyId(id, this.token).subscribe(response => {
+
+              console.log(response);
+
               if( response ['success'] ) {
-                //  On retire notre media du tableau
+                //  On retire le media du tableau
                 this.medias.splice(index, 1);
-                this.goToMedias();
+                // retour Home
+                this.goToWPHome();
               } else {
                 //  Une erreur est survenue, message !!!
                 let toast = this.toastCtrl.create({
@@ -234,7 +239,14 @@ export class WordpressMedias implements OnInit {
   }
 
 
-  goToMedias(){
+  openMedia(media) {
+    this.navCtrl.push(WordpressMedia, {
+      media: media
+    });
+  }
+
+
+  goToWPHome(){
     this.navCtrl.push(WordpressHome);
   }
 
