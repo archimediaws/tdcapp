@@ -5,6 +5,8 @@ import { Storage } from '@ionic/storage';
 import { WordpressService } from '../shared/services/wordpress.service';
 import { WordpressPost } from '../wordpress-post/wordpress-post.component';
 
+import {WordpressCreateNews} from "../wordpress-createnews/wordpress-createnews.component";
+
 @Component({
   selector: "WordpressPosts",
 	templateUrl: './wordpress-posts.html',
@@ -19,6 +21,8 @@ export class WordpressPosts implements OnInit {
 	search: string;
 	hideSearchbar: boolean;
 	favoritePosts: any;
+  addbutton: boolean = false;
+  user: any;
 
 	constructor(
 		private navParams: NavParams,
@@ -40,6 +44,13 @@ export class WordpressPosts implements OnInit {
 	        	this.favoritePosts = JSON.parse(data);
 	        }
 	    });
+    this.storage.get('wordpress.user')
+      .then( value => {
+        if(value) {
+          this.user = value;
+          this.addbutton = true;
+        }
+      });
 		this.getPosts();
 	}
 
@@ -131,7 +142,13 @@ export class WordpressPosts implements OnInit {
 		this.hideSearchbar = !this.hideSearchbar;
 	}
 
-	createQuery() {
+  goToCreateNews(): void {
+    this.navController.push(WordpressCreateNews);
+  }
+
+
+
+  createQuery() {
 	let query = {};
 	query['page'] = this.pageCount;
 	if(this.search) {

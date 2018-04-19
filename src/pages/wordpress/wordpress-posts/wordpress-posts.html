@@ -10,6 +10,13 @@
 		<ion-title *ngIf="!category">{{'POSTS' | translate}}</ion-title>
 		<ion-title *ngIf="category">{{category.name}} <span *ngIf="category.count">({{category.count}})</span></ion-title>
 
+    <ion-buttons *ngIf="addbutton===true" end>
+      <button ion-button icon-only (click)="goToCreateNews()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+
+
 		<ion-buttons end>
 	      <button (tap)="toggleSearchbar()" ion-button icon-only color="Rouge">
           <ion-icon name="search"></ion-icon>
