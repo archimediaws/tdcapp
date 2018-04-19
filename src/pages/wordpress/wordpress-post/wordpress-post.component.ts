@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavParams, LoadingController } from 'ionic-angular';
+import {NavParams, LoadingController, NavController} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SocialSharing } from '@ionic-native/social-sharing';
-
+import {Storage} from "@ionic/storage";
 import { WordpressService } from '../shared/services/wordpress.service';
+import {WordpressPosts} from "../wordpress-posts/wordpress-posts.component";
 
 @Component({
   selector:'WordpressPost',
@@ -11,8 +12,10 @@ import { WordpressService } from '../shared/services/wordpress.service';
 	providers: [ WordpressService ]
 })
 export class WordpressPost {
-	post: any;
+
+	  post: any;
     authorData: any;
+    token;
 
 
 	constructor(
@@ -20,7 +23,9 @@ export class WordpressPost {
 			private wordpressService: WordpressService,
 			private loadingController: LoadingController,
 			private iab: InAppBrowser,
-			private socialSharing: SocialSharing
+			private socialSharing: SocialSharing,
+      private navController: NavController,
+      private storage: Storage,
 		) {
 		if (navParams.get('post')) {
 			this.post = navParams.get('post');
@@ -31,6 +36,13 @@ export class WordpressPost {
 			this.getPost(navParams.get('id'));
 		}
 	}
+
+  ngOnInit() {
+
+    this.token = this.storage.get('wordpress.user');
+
+  }
+
 
 	getPost(id) {
 		let loader = this.loadingController.create({
@@ -47,6 +59,23 @@ export class WordpressPost {
     () => loader.dismiss());
 	}
 
+
+  deleteNews(id){
+    let loader = this.loadingController.create({
+      content: "Suppression en cours ..."
+    });
+    loader.present();
+    this.wordpressService.deleteNewsbyId(id, this.token)
+      .subscribe(result => {
+          // this.menudujour = result;
+
+          this.goToPosts()
+        },
+        error => console.log(error),
+        () => loader.dismiss()
+      );
+  }
+
 	previewPost() {
 		const browser = this.iab.create(this.post.link, '_blank');
 		browser.show();
@@ -59,5 +88,9 @@ export class WordpressPost {
 		let url = this.post.link;
 		this.socialSharing.share(message, subject, '', url);
 	}
+
+  goToPosts(){
+    this.navController.push(WordpressPosts);
+  }
 
 }

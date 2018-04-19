@@ -19,6 +19,7 @@ import {WordpressCreatepost} from "./wordpress-createpost/wordpress-createpost.c
 import {WordpressProduits} from "./wordpress-produits/wordpress-produits.component";
 import {WordpressMedias} from "./wordpress-medias/wordpress-medias-component";
 import {WordpressMedia} from "./wordpress-media/wordpress-media.component";
+import {WordpressCreateNews} from "./wordpress-createnews/wordpress-createnews.component";
 
 
 
@@ -42,7 +43,9 @@ import {WordpressMedia} from "./wordpress-media/wordpress-media.component";
     WordpressCreatepost,
     WordpressProduits,
     WordpressMedias,
-    WordpressMedia
+    WordpressMedia,
+    WordpressCreateNews
+
 
 
 
@@ -69,7 +72,8 @@ import {WordpressMedia} from "./wordpress-media/wordpress-media.component";
     WordpressCreatepost,
     WordpressProduits,
     WordpressMedias,
-    WordpressMedia
+    WordpressMedia,
+    WordpressCreateNews
 
   ],
   entryComponents:[
@@ -90,7 +94,8 @@ import {WordpressMedia} from "./wordpress-media/wordpress-media.component";
     WordpressCreatepost,
     WordpressProduits,
     WordpressMedias,
-    WordpressMedia
+    WordpressMedia,
+    WordpressCreateNews
 
   ]
 })

@@ -32,7 +32,36 @@
 		</ion-item>
 
       <ion-card-content text-wrap *ngIf="post.content.rendered">
-        <p padding [innerHtml]="post.content.rendered"></p>
+
+
+        <ion-grid>
+
+          <ion-row no-padding>
+            <ion-col col-8 text-left>
+              <h2 class="titre" [innerHTML]="post.title.rendered" text-uppercase></h2>
+            </ion-col>
+
+            <ion-col col-4 text-right>
+              <h4 class="prix">{{ post.title.rendered }} categorie <br> <p class="small-prix" >{{'PRIX' | translate}}</p> </h4>
+            </ion-col>
+          </ion-row>
+
+
+        <ion-row no-padding>
+          <ion-col text-left>
+            <p padding [innerHtml]="post.content.rendered"></p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row no-padding>
+          <ion-col text-right>
+            <button ion-button icon-left clear (click)="deleteNews(post.id)">
+              <ion-icon name='trash' color="Rouge"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+
+        </ion-grid>
       </ion-card-content>
 
     </ion-card>

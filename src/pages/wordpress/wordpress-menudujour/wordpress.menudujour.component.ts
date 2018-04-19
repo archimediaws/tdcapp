@@ -62,7 +62,7 @@ export class WordpressMenudujour {
         () => loader.dismiss());
   }
 
-deletemdj(id){
+  deletemdj(id){
   let loader = this.loadingController.create({
     content: "Suppression en cours ..."
   });

@@ -1,0 +1,67 @@
+<ion-header>
+
+	<ion-navbar color="dark">
+
+			<button ion-button menuToggle icon-only>
+				<ion-icon name="menu" color="Rouge"></ion-icon>
+			</button>
+
+		<ion-title>{{'ADDSUGGESTION' | translate}}</ion-title>
+
+	</ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+
+      <div padding>
+
+      <h6 [hidden]="lastImage !== false">vous devez ajouter une photo!</h6>
+
+      <button [hidden]="photoUploaded === true " ion-button color="Rouge" icon-right full (click)="takePhoto()" >
+        Prendre une Photo <ion-icon name="camera" ></ion-icon>
+      </button>
+
+
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12 *ngFor="let photo of photos; let id = index">
+            <ion-card class="block">
+              <ion-icon  [hidden]="photoUploaded === true" name="trash" class="deleteIcon" (click)="deletePhoto(id)" ></ion-icon>
+              <img [src]="photo" *ngIf="photo" />
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+        <button [hidden]="photoUploaded === true " ion-button color="Rouge" icon-right full *ngIf="lastImage === true" (click)="uploadPhoto()" >
+          Choisir cette Photo <ion-icon name="cloud-upload" ></ion-icon>
+        </button>
+
+      </div>
+
+
+  <form *ngIf="photoUploaded === true" (ngSubmit)="addNews()">
+    <ion-item>
+      <ion-label stacked >titre</ion-label>
+      <ion-input type="text" placeholder="titre de la suggestion" [(ngModel)]="title" name="title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked >Description</ion-label>
+      <ion-textarea placeholder="détails de la suggestion" [(ngModel)]="content" name="content"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+    <ion-label stacked>Prix</ion-label>
+    <ion-input type="text" placeholder="Prix ex: 18,50 " [(ngModel)]="price" name="prix"></ion-input>
+    </ion-item>
+
+
+    <div padding >
+    <button *ngIf="lastImage !== false" ion-button  color="Rouge" type="submit" block >{{ 'ADDSUGGESTION' | translate }}</button>
+    </div>
+  </form>
+</ion-content>

@@ -10,6 +10,10 @@ export class WordpressService {
 
 	constructor(private http: Http, private config: Config, private storage: Storage) {}
 
+	/**
+	*  Login width JWT on WP API
+	**/
+
 	public login(data) {
 		let url = this.config.wordpressApiUrl + '/jwt-auth/v1/token';
 		return this.http.post(url, data)
@@ -17,6 +21,13 @@ export class WordpressService {
 			return result.json();
 		});
 	}
+
+  /**
+   *  GET / POST / PUT / DELETE -> WP Posts( news)
+   **/
+
+
+  /** GET All Posts whith Query filter ( page, authors, catégories ...**/
 
 	public getPosts(query) {
 		query = this.transformRequest(query);
@@ -27,28 +38,74 @@ export class WordpressService {
 		});
 	}
 
-	public getPost(id) {
+  /** GET Post by Id **/
+  public getPost(id) {
 		return this.http.get(this.config.wordpressApiUrl + `/wp/v2/posts/${id}?_embed`)
 	  	.map(result => {
 			return result.json();
 		});
 	}
 
-	public getMedia(id) {
-		return this.http.get(this.config.wordpressApiUrl + `/wp/v2/media/${id}`)
-	  	.map(result => {
-			return result.json();
-		});
-	}
 
+  /** POST WP News + Auth/ token **/
+
+  public postNews(title, content, price, photomdjurl, token){
+
+    let body = {
+      title: title,
+      content: content,
+      status: 'publish',
+      prix: price,
+      photomdj: photomdjurl
+
+    };
+
+    let The_token = token.__zone_symbol__value.token;
+
+    console.log(The_token);
+
+    let headers = new Headers();
+    headers.append('Authorization', `Bearer ${The_token}` );
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post( this.config.wordpressApiUrl + '/wp/v2/posts/', JSON.stringify(body), {headers: headers})
+      .map(result => {
+        return result.json();
+
+      });
+
+  }
+
+  /** DELETE WP News by Id  + auth / token **/
+  public deleteNewsbyId(id, token) {
+    let The_token = token.__zone_symbol__value.token;
+    let headers =  {headers: new  Headers({
+        'Authorization': `Bearer ${The_token}`,
+        'Content-Type': 'application/json'
+      })};
+    return this.http.delete(this.config.wordpressApiUrl + `/wp/v2/posts/${id}?force=true`, headers)
+      .map(result => {
+        return result.json();
+      });
+  }
+
+
+
+
+  /**
+   *  GET / POST / DELETE -> WP Media( news, ...)
+   **/
+
+
+  /** GET All Media **/
   public getMedias() {
-
     return this.http.get(this.config.wordpressApiUrl + `/wp/v2/media`)
       .map(result => {
         return result.json();
       });
   }
 
+  /** GET All Media query filter ( page) **/
   public getMoreMedias(query) {
     query = this.transformRequest(query);
     return this.http.get(this.config.wordpressApiUrl + `/wp/v2/media?${query}`)
@@ -57,11 +114,18 @@ export class WordpressService {
       });
   }
 
+  /** GET Media by Id **/
+  public getMedia(id) {
+    return this.http.get(this.config.wordpressApiUrl + `/wp/v2/media/${id}`)
+      .map(result => {
+        return result.json();
+      });
+  }
 
+
+  /** DELETE Media by Id  + auth / token **/
   public deleteMediabyId(id, token) {
-
     let The_token = token.__zone_symbol__value.token;
-
     let headers =  {headers: new  Headers({
         'Authorization': `Bearer ${The_token}`,
         'Content-Type': 'application/json'
@@ -74,6 +138,9 @@ export class WordpressService {
 
   }
 
+  /**
+   *  GET / POST -> WP Categories( news, ...)
+   **/
 
   public getCategories() {
 		return this.http.get(this.config.wordpressApiUrl + '/wp/v2/categories?per_page=100')
@@ -83,20 +150,11 @@ export class WordpressService {
 	}
 
 
-	// START custom get post menu_du_jour
+  /**
+   *  GET / POST / DELETE -> WP Custom Posts Type ( menu_du_jour)
+   **/
 
-  // public getMenusduJour(query) {
-  //   query = this.transformRequest(query);
-  //   let url = this.config.wordpressApiUrl + `/wp/v2/menu_du_jour/?${query}&_embed`;
-  //   return this.http.get(url)
-  //     .map(result => {
-  //       return result.json();
-  //     });
-  //
-  // }
-
-  // get all mdj pods
-
+  /** GET All menu_du_jour **/
   public getNewsMenusduJour(){
     let url = this.config.wordpressApiUrl + `/wp/v2/menu_du_jour`;
     return this.http.get(url)
@@ -105,56 +163,75 @@ export class WordpressService {
       });
   }
 
-  // get all mdj pods with query ( page, author )
-
+  /** GET All menu_du_jour with query filter ( page) **/
   public getMoreNewsMenusduJour(query){
     query = this.transformRequest(query);
-console.log(query);
     let url = this.config.wordpressApiUrl + `/wp/v2/menu_du_jour?${query}`;
     return this.http.get(url)
       .map(result => {
         return result.json();
       });
   }
-  // get mdj media avec pods
 
-  // public getmdjMedia(id) {
-  //   return this.http.get(this.config.wordpressApiUrl + `/wp/v2/menu_du_jour?media/${id}`)
-  //     .map(result => {
-  //       return result.json();
-  //
-  //     });
-  // }
-
-  // end get mdj media avec pods
-
+  /** GET All menu_du_jour by Id **/
   public getNewsMenuduJourbyId(id) {
     return this.http.get(this.config.wordpressApiUrl + `/wp/v2/menu_du_jour?${id}`)
       .map(result => {
         return result.json();
       });
-
   }
 
-  public deleteNewsMenuduJourbyId(id, token) {
+
+  /** POST menu_du_jour + Auth/ token **/
+
+  public postMenuduJour(title, content, price, photomdjurl, token){
+
+    let body = {
+      title: title,
+      content: content,
+      status: 'publish',
+      prix: price,
+      photomdj: photomdjurl
+
+    };
 
     let The_token = token.__zone_symbol__value.token;
 
-    let headers =  {headers: new  Headers({
-        'Authorization': `Bearer ${The_token}`,
-        'Content-Type': 'application/json'
-      })};
+    console.log(The_token);
 
-    return this.http.delete(this.config.wordpressApiUrl + `/wp/v2/menu_du_jour/${id}?force=true`, headers)
+    let headers = new Headers();
+    headers.append('Authorization', `Bearer ${The_token}` );
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post( this.config.wordpressApiUrl + '/wp/v2/menu_du_jour/', JSON.stringify(body), {headers: headers})
       .map(result => {
         return result.json();
+
       });
 
   }
 
 
-  // get all pods produits
+  /** DELETE menu_du_jour by Id  + auth / token **/
+  public deleteNewsMenuduJourbyId(id, token) {
+    let The_token = token.__zone_symbol__value.token;
+    let headers =  {headers: new  Headers({
+        'Authorization': `Bearer ${The_token}`,
+        'Content-Type': 'application/json'
+      })};
+    return this.http.delete(this.config.wordpressApiUrl + `/wp/v2/menu_du_jour/${id}?force=true`, headers)
+      .map(result => {
+        return result.json();
+      });
+  }
 
+
+  /**
+   *  GET  -> WP Custom Posts Type ( produits )
+   **/
+
+
+  /** GET All produits **/
   public getAllPodProduits(){
     let url = this.config.wordpressApiUrl + `/wp/v2/prod`;
     return this.http.get(url)
@@ -163,10 +240,8 @@ console.log(query);
       });
   }
 
-  // end get all pods produits
 
-  // get all pods  produits with query ( page, author )
-
+  /** GET All produits with query (page) **/
   public getMorePodProduits(query){
     query = this.transformRequest(query);
     let url = this.config.wordpressApiUrl + `/wp/v2/menu_du_jour?${query}`;
@@ -176,64 +251,13 @@ console.log(query);
       });
   }
 
-  // END get all pods  produits with query ( page, author )
 
 
-  // get mdj media avec pods
+  /**
+   *  GET  -> WP pages
+   **/
 
-
-
- // public getSaveImage(mdjdata, token ): Observable<any>{
- //
- //    console.log("getsave", mdjdata);
- //
- //    let The_token = token.__zone_symbol__value.token;
- //
- //    let headers = new Headers({
- //      'Authorization': `Bearer ${The_token}`,
- //      'Content-Disposition':"attachment; filename='monimage.jpeg'",
- //      // 'Content-Type': 'application/x-www-form-urlencoded',
- //      'Content-Type': 'multipart/form-data'
- //
- //    });
- //    return this.http.post(this.config.wordpressApiUrl + '/wp/v2/media',{data:mdjdata},{headers:headers})
- //      .map(data=> data.json());
- //
- //  }
-
-
-  // post Menu du Jour avec pods
-
-  public postMenuduJour(title, content, price, photomdjurl, token){
-
-  let body = {
-    title: title,
-    content: content,
-    status: 'publish',
-    prix: price,
-    photomdj: photomdjurl
-
-  };
-
-  let The_token = token.__zone_symbol__value.token;
-
-console.log(The_token);
-
-    let headers = new Headers();
-    headers.append('Authorization', `Bearer ${The_token}` );
-    headers.append('Content-Type', 'application/json');
-
-  return this.http.post( this.config.wordpressApiUrl + '/wp/v2/menu_du_jour/', JSON.stringify(body), {headers: headers})
-    .map(result => {
-      return result.json();
-
-    });
-
-  }
-
-
-  // END custom post type menu_du_jour
-
+  /** GET All pages **/
 	public getPages() {
 		return this.http.get(this.config.wordpressApiUrl + '/wp/v2/pages?per_page=100')
 		.map(result => {
@@ -241,6 +265,7 @@ console.log(The_token);
 		});
 	}
 
+  /** GET page by Id **/
 	public getPage(id) {
 		return this.http.get(this.config.wordpressApiUrl + `/wp/v2/pages/${id}`)
 	  	.map(result => {
@@ -248,6 +273,12 @@ console.log(The_token);
 		});
 	}
 
+
+  /**
+   *  GET  -> WP menus
+   **/
+
+  /** GET All menus **/
 	public getMenus() {
 		return this.http.get(this.config.wordpressApiUrl + '/wp-api-menus/v2/menus')
 		.map(result => {
@@ -255,6 +286,7 @@ console.log(The_token);
 		});
 	}
 
+  /** GET menu by Id **/
 	public getMenu(id) {
 		return this.http.get(this.config.wordpressApiUrl + `/wp-api-menus/v2/menus/${id}`)
 	  	.map(result => {
@@ -263,7 +295,7 @@ console.log(The_token);
 	}
 
 
-	// Transform Query
+	/** fx Transform Query + encode **/
 
 	private transformRequest(obj) {
 		let p, str;
