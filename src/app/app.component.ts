@@ -22,6 +22,7 @@ import {OneSignal} from "@ionic-native/onesignal";
 import {WordpressMenusdujour} from "../pages/wordpress/wordpress-menusdujour/wordpress-menusdujour.component";
 import {BarcodeScannerComponent} from "../pages/barcode-scanner/barcode-scanner-component/barcode-scanner.component";
 import {SatisfactionComponent} from "../pages/satisfaction/satisfaction-component/satisfaction.component";
+import {WordpressPosts} from "../pages/wordpress/wordpress-posts/wordpress-posts.component";
 
 
 
@@ -72,14 +73,16 @@ export class MyApp {
       });
 
 		this.pages = [
-		  { title: 'HOME', component: TabsComponent, icon: 'home' },
-      { title: 'PRESENTATION', component: RestaurantComponent, icon: 'flag'},
+		  { title: 'PRESENTATION', component: TabsComponent, icon: 'home' },
+      { title: 'VALEURS', component: RestaurantComponent, icon: 'flag'},
+      { title: 'SUGGESTIONS', component: WordpressMenusdujour, icon: 'restaurant' },
+      { title: 'POSTS', component: WordpressPosts, icon: 'cafe' },
       { title: 'FAVORITES', component: WordpressFavorites, icon: 'heart' },
       { title: 'SATISFACTION', component: SatisfactionComponent, icon: 'thumbs-up'},
-      { title: 'SETTINGS', component: SettingsComponent, icon: 'settings'},
       { title: 'SLIDE', component: SlidesComponent, icon: 'arrow-dropright-circle'},
       { title: 'BARCODE-SCANNER', component: BarcodeScannerComponent, icon: 'qr-scanner' },
       { title: 'ABOUT', component: AboutComponent, icon: 'information-circle'},
+      { title: 'SETTINGS', component: SettingsComponent, icon: 'settings'},
       { title: 'LOGIN', component: WordpressHome, icon: 'finger-print' },
 
 		];

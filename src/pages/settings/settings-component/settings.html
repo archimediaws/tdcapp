@@ -23,10 +23,19 @@
   </ion-list>
   <ion-row *ngIf="toggle==true" padding>
     <ion-col col-10 >
-      {{'NOTIFICATIONOK' | translate}}
+     <p>{{'NOTIFICATIONOK' | translate}}</p>
     </ion-col>
     <ion-col col-2>
     <ion-icon color="Rouge" name="notifications"></ion-icon>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="toggle==false" padding>
+    <ion-col col-10 >
+      <p>{{'NOTIFICATIONNOTOK' | translate}}</p>
+    </ion-col>
+    <ion-col col-2>
+      <ion-icon color="Rouge" name="notifications-off"></ion-icon>
     </ion-col>
   </ion-row>
 

@@ -4,9 +4,16 @@ page-about{
     background-color: color($colors, dark);
 
 
+
     p, h1, h2 {
 
       color: color($colors, light);
+    }
+
+    img {
+      height: 150px;
+      width: 150px;
+      margin: auto;
     }
 
   }
