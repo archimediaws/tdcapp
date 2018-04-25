@@ -30,6 +30,8 @@ import {ContactComponent} from "../pages/contact/contact-component/contact.compo
 
 
 
+
+
 @Component({
 	templateUrl: './app.html'
 
@@ -85,7 +87,7 @@ export class MyApp {
       { title: 'ABOUT', component: AboutComponent, icon: 'information-circle'},
       { title: 'CONTACT', component: ContactComponent, icon: 'contacts'},
       { title: 'SETTINGS', component: SettingsComponent, icon: 'settings'},
-      { title: 'LOGIN', component: WordpressHome, icon: 'finger-print' },
+      { title: 'LOGIN', component: WordpressHome, icon: 'finger-print' }
 
 		];
 		this.wordpressMenusNavigation = config.wordpressMenusNavigation;

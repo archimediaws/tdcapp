@@ -7,7 +7,7 @@
 			</button>
 
 
-		<ion-title *ngIf="!category">{{'POSTS' | translate}}</ion-title>
+		<ion-title *ngIf="!category">{{'POSTS' | translate}} </ion-title>
 		<ion-title *ngIf="category">{{category.name}} <span *ngIf="category.count">({{category.count}})</span></ion-title>
 
     <ion-buttons *ngIf="addbutton===true" end>

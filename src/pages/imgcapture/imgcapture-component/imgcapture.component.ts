@@ -56,7 +56,7 @@ export class ImgcaptureComponent implements OnInit{
 
   deletePhoto(index) {
     let confirm = this.alertCtrl.create({
-      title: 'Supprimer cette photo ? ',
+      title: 'Supprimer la photo ? ',
       message: '',
       buttons: [
         {

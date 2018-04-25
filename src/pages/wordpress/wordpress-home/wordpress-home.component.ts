@@ -9,6 +9,8 @@ import {WordpressMenusdujour} from "../wordpress-menusdujour/wordpress-menusdujo
 import {ImgcaptureComponent} from "../../imgcapture/imgcapture-component/imgcapture.component";
 import {WordpressProduits} from "../wordpress-produits/wordpress-produits.component";
 import {WordpressMedias} from "../wordpress-medias/wordpress-medias-component";
+import {WordpressCategories} from "../wordpress-categories/wordpress-categories.component";
+import {WordpressMenus} from "../wordpress-menus/wordpress-menus.component";
 
 @Component({
   templateUrl: 'wordpress-home.html'
@@ -29,13 +31,13 @@ export class WordpressHome {
 	ngOnInit() {
 		this.getUser();
 	  	this.pages = [
+        { title: 'PAGES', component: WordpressPages, icon: 'document', note: 'voir & Partager' },
         { title: 'POSTS', component: WordpressPosts, icon: 'cafe', note: 'liste & Ajouter' },
+        { title: 'POSTS', component: WordpressCategories, icon: 'list', note: 'Actualités par Catégories' },
         { title: 'SUGGESTIONS', component: WordpressMenusdujour, icon: 'restaurant', note: 'liste & Ajouter'},
         { title: 'PRODUCTS', component: WordpressProduits, icon: 'qr-scanner', note: 'liste & Créer QRcode'},
-        { title: 'MENUS', component: WordpressPages, icon: 'document', note: 'voir & Partager' },
         { title: 'MEDIAS', component: WordpressMedias, icon: 'images', note:'voir & Supprimer' },
         { title: 'PHOTOS', component: ImgcaptureComponent, icon: 'camera', note:'Ajouter des Photos' }
-
 	    ];
 	}
 
