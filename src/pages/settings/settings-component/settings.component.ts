@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import {OneSignal} from "@ionic-native/onesignal";
-import {WordpressMedias} from "../../wordpress/wordpress-medias/wordpress-medias-component";
 import {NavController} from "ionic-angular";
 
 @Component({
@@ -37,7 +36,6 @@ export class SettingsComponent {
         .then( value => {
           if(value) {
             this.track = value;
-            console.log(this.track);
             this.toggle = true;
           }
           });
@@ -54,7 +52,6 @@ export class SettingsComponent {
   setPush(track: any){
 
 
-
 	  if(track.isChecked){
       this.oneSignal.sendTag('notification', 'true');
       this.storage.set('notification', 'true' );
@@ -67,8 +64,6 @@ export class SettingsComponent {
       this.goToSettings();
 	    //Unsubscribe
 
-
-
     }
 
 
@@ -76,7 +71,6 @@ export class SettingsComponent {
 
 
   goToSettings(): void {
-
 	  this.navCtrl.push(SettingsComponent);
   }
 }

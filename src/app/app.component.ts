@@ -23,6 +23,7 @@ import {WordpressMenusdujour} from "../pages/wordpress/wordpress-menusdujour/wor
 import {BarcodeScannerComponent} from "../pages/barcode-scanner/barcode-scanner-component/barcode-scanner.component";
 import {SatisfactionComponent} from "../pages/satisfaction/satisfaction-component/satisfaction.component";
 import {WordpressPosts} from "../pages/wordpress/wordpress-posts/wordpress-posts.component";
+import {ContactComponent} from "../pages/contact/contact-component/contact.component";
 
 
 
@@ -82,6 +83,7 @@ export class MyApp {
       { title: 'SLIDE', component: SlidesComponent, icon: 'arrow-dropright-circle'},
       { title: 'BARCODE-SCANNER', component: BarcodeScannerComponent, icon: 'qr-scanner' },
       { title: 'ABOUT', component: AboutComponent, icon: 'information-circle'},
+      { title: 'CONTACT', component: ContactComponent, icon: 'contacts'},
       { title: 'SETTINGS', component: SettingsComponent, icon: 'settings'},
       { title: 'LOGIN', component: WordpressHome, icon: 'finger-print' },
 

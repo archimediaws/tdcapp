@@ -1,16 +1,26 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {AlertController, NavController, ToastController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { TabsComponent } from '../../tabs/tabs-component/tabs.component';
+import {OneSignal} from "@ionic-native/onesignal";
+import {HomeComponent} from "../../home/home-component/home.component";
 
 @Component({
   templateUrl: 'slides.html'
 })
 export class SlidesComponent {
 
-  bgimg = "assets/img/ardoise.jpg"
+  bgimg = "assets/img/ardoise.jpg";
+  track: Array<{name: string, isChecked: boolean}> = [];
+  toggle: boolean = false;
 
-  constructor(public nav: NavController, private storage: Storage) {}
+  constructor(public nav: NavController,
+              private storage: Storage,
+              private oneSignal: OneSignal,
+              private navCtrl: NavController,
+              public alertCtrl : AlertController,
+              public toastCtrl: ToastController,
+              ) {}
 
   slides = [
     {
@@ -30,10 +40,68 @@ export class SlidesComponent {
     }
   ];
 
+  ngOnInit() {
+
+    this.storage.get('notification')
+      .then( value => {
+        if(value) {
+          this.track = value;
+          this.toggle = true;
+        }
+      });
+
+  }
+
+
   openPage() {
+
+
+    if(this.toggle === false) {
+
+      let confirm = this.alertCtrl.create({
+        title: 'Souhaitez-vous recevoir les Suggestions du Chef',
+        message: '',
+        buttons: [
+          {
+            text: 'Non',
+            handler: () => {
+
+              this.oneSignal.deleteTag('notification');
+              this.storage.remove('notification');
+              this.presentToast('Notifications désactivées ... ');
+              this.nav.setRoot(TabsComponent);
+            }
+          }, {
+            text: 'Oui',
+            handler: () => {
+
+              this.oneSignal.sendTag('notification', 'true');
+              this.storage.set('notification', 'true');
+              this.presentToast('Vous êtes abonné aux Suggestions du Chef');
+              this.nav.setRoot(TabsComponent);
+            }
+          }
+        ]
+      });
+      confirm.present();
+    }
     this.storage.set('slide', true);
     this.nav.setRoot(TabsComponent);
   }
+
+
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
+  }
+
+
+
+
 }
 
 
