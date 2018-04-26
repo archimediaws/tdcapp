@@ -71,34 +71,6 @@ export class WordpressMenusdujour implements OnInit{
 
 
 
-  // getMenusduJour() {
-  //   this.pageCount = 1;
-  //
-  //   let query = this.createQuery();
-  //   let loader = this.loadingController.create({
-  //     content: "Chargement en cours",
-  //     duration: 10000
-  //   });
-  //
-  //   loader.present();
-  //   this.wordpressService.getMenusduJour(query)
-  //     .subscribe(result => {
-  //       this.menusdujour = result;
-  //       loader.dismiss();
-  //     });
-  // }
-
-  // getAuthorPosts(author) {
-  //   this.author = author;
-  //   this.getMenusduJour();
-  // }
-  //
-  // searchPosts() {
-  //   this.getMenusduJour();
-  // }
-
-
-
   loadMore(infiniteScroll) {
     this.pageCount++;
 

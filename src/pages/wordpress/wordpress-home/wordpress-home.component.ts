@@ -33,7 +33,7 @@ export class WordpressHome {
 	  	this.pages = [
         { title: 'PAGES', component: WordpressPages, icon: 'document', note: 'voir & Partager' },
         { title: 'POSTS', component: WordpressPosts, icon: 'cafe', note: 'liste & Ajouter' },
-        { title: 'POSTS', component: WordpressCategories, icon: 'list', note: 'Actualités par Catégories' },
+        { title: 'POSTS', component: WordpressCategories, icon: 'list', note: 'par Catégories' },
         { title: 'SUGGESTIONS', component: WordpressMenusdujour, icon: 'restaurant', note: 'liste & Ajouter'},
         { title: 'PRODUCTS', component: WordpressProduits, icon: 'qr-scanner', note: 'liste & Créer QRcode'},
         { title: 'MEDIAS', component: WordpressMedias, icon: 'images', note:'voir & Supprimer' },

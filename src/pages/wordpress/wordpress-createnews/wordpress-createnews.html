@@ -46,22 +46,22 @@
   <form *ngIf="photoUploaded === true" (ngSubmit)="addNews()">
     <ion-item>
       <ion-label stacked >titre</ion-label>
-      <ion-input type="text" placeholder="titre de la suggestion" [(ngModel)]="title" name="title"></ion-input>
+      <ion-input type="text" placeholder="titre" [(ngModel)]="title" name="title"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked >Description</ion-label>
-      <ion-textarea placeholder="détails de la suggestion" [(ngModel)]="content" name="content"></ion-textarea>
+      <ion-textarea placeholder="description " [(ngModel)]="content" name="content"></ion-textarea>
     </ion-item>
 
-    <ion-item>
-    <ion-label stacked>Prix</ion-label>
-    <ion-input type="text" placeholder="Prix ex: 18,50 " [(ngModel)]="price" name="prix"></ion-input>
-    </ion-item>
+    <!--<ion-item>-->
+    <!--<ion-label stacked>Prix</ion-label>-->
+    <!--<ion-input type="text" placeholder="Prix ex: 18,50 " [(ngModel)]="price" name="prix"></ion-input>-->
+    <!--</ion-item>-->
 
 
     <div padding >
-    <button *ngIf="lastImage !== false" ion-button  color="Rouge" type="submit" block >{{ 'ADDSUGGESTION' | translate }}</button>
+    <button *ngIf="lastImage !== false" ion-button  color="Rouge" type="submit" block >{{ 'ADDPOST' | translate }}</button>
     </div>
   </form>
 </ion-content>

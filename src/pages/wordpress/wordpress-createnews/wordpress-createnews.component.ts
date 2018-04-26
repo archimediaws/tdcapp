@@ -27,8 +27,7 @@ export class WordpressCreateNews implements OnInit {
   loading: Loading;
   content;
   title;
-  price;
-  photomdjurl;
+  photonewsid;
   token;
 
   constructor(
@@ -55,7 +54,7 @@ export class WordpressCreateNews implements OnInit {
 
   deletePhoto(index) {
     let confirm = this.alertCtrl.create({
-      title: 'Voulez-vous supprimer cette photo?',
+      title: 'Voulez-vous supprimer la photo?',
       message: '',
       buttons: [
         {
@@ -76,7 +75,7 @@ export class WordpressCreateNews implements OnInit {
 
   takePhoto() {
     const options: CameraOptions = {
-      quality: 70, // picture quality
+      quality: 50, // picture quality
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -127,8 +126,8 @@ export class WordpressCreateNews implements OnInit {
 
     }).then((res) => {
 
-      let imgUrl = JSON.parse(res.response);
-      this.photomdjurl = imgUrl.guid;
+      let imgId = JSON.parse(res.response);
+      this.photonewsid = imgId.id;
       this.photoUploaded = true;
 
       this.presentToast('La photo est enregistrée !');
@@ -155,7 +154,7 @@ export class WordpressCreateNews implements OnInit {
 
   addNews(){
 
-	  this.wordpressService.postNews(this.title, this.content, this.price, this.photomdjurl, this.token).subscribe(data => {
+	  this.wordpressService.postNews(this.title, this.content, this.photonewsid, this.token).subscribe(data => {
 	    console.log(data)
     });
 

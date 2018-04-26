@@ -6,6 +6,8 @@ import { Transfer} from '@ionic-native/transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {WordpressMenusdujour} from "../wordpress-menusdujour/wordpress-menusdujour.component";
 import {Config} from "../../../app/app.config";
+import {WordpressMenudujour} from "../wordpress-menudujour/wordpress.menudujour.component";
+import {MyApp} from "../../../app/app.component";
 
 
 declare var cordova: any;
@@ -29,6 +31,7 @@ export class WordpressCreatepost implements OnInit {
   price;
   photomdjurl;
   token;
+  mdj: boolean = false;
 
   constructor(
     private config: Config,
@@ -157,8 +160,15 @@ export class WordpressCreatepost implements OnInit {
 	  this.wordpressService.postMenuduJour(this.title, this.content, this.price, this.photomdjurl, this.token).subscribe(data => {
 	    console.log(data)
     });
-
+    this.mdj === true;
+    this.loadMdj(this.mdj);
 	  this.goTosuggestions();
+  }
+
+  loadMdj(mdj) {
+    this.navController.push(MyApp, {
+      mdj: mdj
+    });
   }
 
 

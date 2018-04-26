@@ -49,14 +49,13 @@ export class WordpressService {
 
   /** POST WP News + Auth/ token **/
 
-  public postNews(title, content, price, photomdjurl, token){
+  public postNews(title, content, photonewsid, token){
 
     let body = {
       title: title,
       content: content,
       status: 'publish',
-      prix: price,
-      photomdj: photomdjurl
+      featured_media: photonewsid
 
     };
 
@@ -139,7 +138,7 @@ export class WordpressService {
   }
 
   /**
-   *  GET / POST -> WP Categories( news, ...)
+   *  GET / POST -> WP Categories( actu, ...)
    **/
 
   public getCategories() {

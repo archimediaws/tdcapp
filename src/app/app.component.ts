@@ -43,6 +43,7 @@ export class MyApp {
 	menuPage = WordpressMenus;
 	pages: Array<{title: string, component: any, icon: string}>;
 	wordpressMenusNavigation: boolean = false;
+	mdj: boolean = false;
 
 
 	constructor(
@@ -143,8 +144,13 @@ export class MyApp {
             handler: () => {
               if (action === 'openPage'){
                 this.menuController.close();
-                this.nav.setRoot(WordpressMenusdujour);
 
+                if(this.mdj === true) {
+                  this.nav.setRoot(WordpressMenusdujour);
+                }
+                else {
+                  this.nav.setRoot(WordpressPosts);
+                }
               }
             }
           }

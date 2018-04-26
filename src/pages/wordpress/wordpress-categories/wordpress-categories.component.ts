@@ -23,10 +23,10 @@ export class WordpressCategories {
 
 	getCategories() {
 		let loader = this.loadingController.create({
-			content: "Please wait"
+			content: "Chargement en cours"
 		});
 		loader.present();
-		
+
 		this.wordpressService.getCategories()
 		.subscribe(result => {
 			this.categories = result;
