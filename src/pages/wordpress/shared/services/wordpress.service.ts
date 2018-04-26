@@ -75,6 +75,29 @@ export class WordpressService {
 
   }
 
+
+  /** UPDATE WP News by Id  + auth / token **/
+  public updateNewsbyId(id, title, content, photonewsid, token){
+
+    let body = {
+      title: title,
+      content: content,
+      status: 'publish',
+      featured_media: photonewsid
+
+    };
+
+    let The_token = token.__zone_symbol__value.token;
+    let headers = new Headers();
+    headers.append('Authorization', `Bearer ${The_token}` );
+    headers.append('Content-Type', 'application/json');
+    return this.http.put(this.config.wordpressApiUrl + `/wp/v2/posts/${id}`, JSON.stringify(body), {headers: headers})
+      .map(result => {
+        return result.json();
+      });
+  }
+
+
   /** DELETE WP News by Id  + auth / token **/
   public deleteNewsbyId(id, token) {
     let The_token = token.__zone_symbol__value.token;

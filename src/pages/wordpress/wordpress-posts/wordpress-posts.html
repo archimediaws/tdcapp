@@ -51,7 +51,7 @@
 		<ion-card-content>
 			<p>{{post.content.rendered | trimHTML | truncate: 100 }}</p>
 		</ion-card-content>
-		<ion-row no-padding>
+		<ion-row no-padding class="rowcolor">
 			<ion-col text-left>
 				<button ion-button icon-left clear  color="Rouge" (click)="favoritePost(post)">
 					<ion-icon name='heart' color="Rouge"></ion-icon>
@@ -59,7 +59,7 @@
 				</button>
 			</ion-col>
 			<ion-col text-right>
-				<button ion-button clear color="Rouge"(click)="loadPost(post)">
+				<button ion-button icon-left clear color="Rouge"(click)="loadPost(post)">
           <ion-icon name='arrow-dropright-circle' color="Rouge"></ion-icon>
           {{'MORE' | translate}}
 				</button>

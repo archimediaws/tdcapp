@@ -16,6 +16,7 @@ export class WordpressPost {
 	  post: any;
     authorData: any;
     token;
+    user: any;
 
 
 	constructor(
@@ -40,6 +41,12 @@ export class WordpressPost {
   ngOnInit() {
 
     this.token = this.storage.get('wordpress.user');
+    this.token
+      .then( value => {
+        if(value) {
+          this.user = value;
+        }
+      });
 
   }
 
@@ -58,6 +65,25 @@ export class WordpressPost {
 		error => console.log(error),
     () => loader.dismiss());
 	}
+
+
+
+  // updatePost(id){
+  //   let loader = this.loadingController.create({
+  //     content: "Modification en cours ..."
+  //   });
+  //   loader.present();
+  //   this.wordpressService.updateNewsbyId(id, this.token)
+  //     .subscribe(result => {
+  //         // this.menudujour = result;
+  //
+  //         this.goToPosts()
+  //       },
+  //       error => console.log(error),
+  //       () => loader.dismiss()
+  //     );
+  // }
+
 
 
   deleteNews(id){

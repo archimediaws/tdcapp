@@ -6,7 +6,6 @@ import { Transfer} from '@ionic-native/transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {WordpressMenusdujour} from "../wordpress-menusdujour/wordpress-menusdujour.component";
 import {Config} from "../../../app/app.config";
-import {WordpressMenudujour} from "../wordpress-menudujour/wordpress.menudujour.component";
 import {MyApp} from "../../../app/app.component";
 
 
@@ -57,7 +56,7 @@ export class WordpressCreatepost implements OnInit {
 
   deletePhoto(index) {
     let confirm = this.alertCtrl.create({
-      title: 'Voulez-vous supprimer cette photo?',
+      title: 'Voulez-vous supprimer la photo?',
       message: '',
       buttons: [
         {
@@ -136,7 +135,7 @@ export class WordpressCreatepost implements OnInit {
       this.presentToast('La photo est enregistrée !');
 
     }).catch((err)=> {
-      alert(JSON.stringify(err));
+      // alert(JSON.stringify(err));
       this.presentToast('Erreur lors de l\'enregistrement de la photo.');
     })
   }
@@ -156,9 +155,13 @@ export class WordpressCreatepost implements OnInit {
 
 
   addMenudujour(){
-
+    let loader = this.loadingController.create({
+      content: "Création de la suggestion en cours..."
+    });
+    loader.present();
 	  this.wordpressService.postMenuduJour(this.title, this.content, this.price, this.photomdjurl, this.token).subscribe(data => {
-	    console.log(data)
+	    console.log(data);
+      loader.dismiss();
     });
     this.mdj === true;
     this.loadMdj(this.mdj);
@@ -173,9 +176,7 @@ export class WordpressCreatepost implements OnInit {
 
 
   goTosuggestions(): void {
-
     this.navController.push(WordpressMenusdujour);
-
   }
 
 

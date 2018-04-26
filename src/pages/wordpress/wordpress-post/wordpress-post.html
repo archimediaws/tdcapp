@@ -33,41 +33,37 @@
 
       <ion-card-content text-wrap *ngIf="post.content.rendered">
 
-
-        <ion-grid>
-
-          <ion-row no-padding>
-            <ion-col col-8 text-left>
-              <h2 class="titre" [innerHTML]="post.title.rendered" text-uppercase></h2>
-            </ion-col>
-
-            <ion-col col-4 text-right>
-              <h4 class="prix">{{ post.title.rendered }} categorie <br> <p class="small-prix" >{{'PRIX' | translate}}</p> </h4>
-            </ion-col>
-          </ion-row>
-
-
         <ion-row no-padding>
-          <ion-col text-left>
+          <ion-col>
+            <h3 padding class="titre" [innerHTML]="post.title.rendered" text-uppercase></h3>
             <p padding [innerHtml]="post.content.rendered"></p>
           </ion-col>
         </ion-row>
 
-        <ion-row no-padding>
+      </ion-card-content>
+
+        <ion-row *ngIf="user" no-padding class="rowcolor">
+
+          <ion-col text-left>
+            <button ion-button icon-left clear  color="Rouge" (click)="updatePost(post.id)">
+              <ion-icon name='create' color="Rouge"></ion-icon>
+              Modifier
+            </button>
+          </ion-col>
+
           <ion-col text-right>
-            <button ion-button icon-left clear (click)="deleteNews(post.id)">
+            <button ion-button icon-left clear color="Rouge" (click)="deleteNews(post.id)">
               <ion-icon name='trash' color="Rouge"></ion-icon>
+              {{'DELETE' | translate}}
             </button>
           </ion-col>
         </ion-row>
 
-        </ion-grid>
-      </ion-card-content>
 
     </ion-card>
 
 
-	<button ion-button full color="Rouge" (click)=previewPost()>{{'PREVIEW' | translate}}</button>
+	<button *ngIf="user" ion-button full color="Rouge" (click)=previewPost()>{{'PREVIEW' | translate}}</button>
 
 
 

@@ -4,7 +4,6 @@ import { Storage } from '@ionic/storage';
 import { WordpressService } from '../shared/services/wordpress.service';
 import { Transfer} from '@ionic-native/transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-
 import {Config} from "../../../app/app.config";
 import {WordpressPosts} from "../wordpress-posts/wordpress-posts.component";
 
@@ -133,7 +132,7 @@ export class WordpressCreateNews implements OnInit {
       this.presentToast('La photo est enregistrée !');
 
     }).catch((err)=> {
-      alert(JSON.stringify(err));
+      // alert(JSON.stringify(err));
       this.presentToast('Erreur lors de l\'enregistrement de la photo.');
     })
   }
@@ -153,9 +152,13 @@ export class WordpressCreateNews implements OnInit {
 
 
   addNews(){
-
+    let loader = this.loadingController.create({
+      content: "Création de l'actualité en cours..."
+    });
+    loader.present();
 	  this.wordpressService.postNews(this.title, this.content, this.photonewsid, this.token).subscribe(data => {
-	    console.log(data)
+	    console.log(data);
+      loader.dismiss();
     });
 
 	  this.goToPosts();
@@ -163,9 +166,7 @@ export class WordpressCreateNews implements OnInit {
 
 
   goToPosts(): void {
-
     this.navController.push(WordpressPosts);
-
   }
 
 

@@ -31,6 +31,10 @@ WordpressPosts{
     color: color($colors, Rouge)
   }
 
+  .rowcolor {
+    border-top: 2px solid color($colors, Rouge);
+
+  }
 
 
 }

@@ -37,9 +37,9 @@
               <button ion-fab mini color="Rouge"><ion-icon  name="contact"></ion-icon></button>
 
               <ion-fab-list  side="left">
-                <button ion-fab (click)="callNumberFixe()" ><ion-icon name="call" ></ion-icon></button>
-                <button ion-fab (click)="callNumberMobile()"><ion-icon name="phone-portrait"></ion-icon></button>
-                <button ion-fab (click)="goToContact()"><ion-icon name="mail"></ion-icon></button>
+                <button ion-fab (click)="callNumberFixe()" ><ion-icon color="light" name="call" ></ion-icon></button>
+                <button ion-fab (click)="callNumberMobile()"><ion-icon color="light" name="phone-portrait"></ion-icon></button>
+                <button ion-fab (click)="goToContact()"><ion-icon color="light" name="mail"></ion-icon></button>
               </ion-fab-list>
 
             </ion-fab>
@@ -62,7 +62,7 @@
 
       <ion-card-content text-wrap *ngIf="menudujour.content.rendered">
 
-        <ion-grid>
+
 
           <ion-row no-padding>
             <ion-col col-8 text-left>
@@ -75,22 +75,29 @@
           </ion-row>
 
           <ion-row no-padding>
-            <ion-col text-left>
+            <ion-col col-12 text-left>
               <p [innerHTML]="menudujour.content.rendered"></p>
             </ion-col>
           </ion-row>
 
-          <ion-row no-padding>
-            <ion-col text-right>
-              <button ion-button icon-left clear (click)="deletemdj(menudujour.id)">
-                <ion-icon name='trash' color="Rouge"></ion-icon>
-              </button>
-            </ion-col>
-          </ion-row>
-
-        </ion-grid>
 
       </ion-card-content>
+
+      <ion-row  *ngIf="user" no-padding class="rowcolor">
+        <ion-col text-left>
+          <button ion-button icon-left clear color="Rouge" (click)="sharePost()">
+            <ion-icon name='share' color="Rouge"></ion-icon>
+            Partager
+          </button>
+        </ion-col>
+
+        <ion-col text-right>
+          <button ion-button  icon-left clear color="Rouge" (click)="deletemdj(menudujour.id)">
+            <ion-icon name='trash' color="Rouge"></ion-icon>
+            {{'DELETE' | translate}}
+          </button>
+        </ion-col>
+      </ion-row>
 
     </ion-card>
 

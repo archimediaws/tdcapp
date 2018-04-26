@@ -20,6 +20,8 @@ export class WordpressMenudujour {
   now: any;
   menudujour: any;
   token;
+  user: any;
+  ok:boolean = false;
 
 
   constructor(
@@ -44,6 +46,13 @@ export class WordpressMenudujour {
   ngOnInit() {
 
     this.token = this.storage.get('wordpress.user');
+    this.token
+      .then( value => {
+        if(value) {
+          this.user = value;
+          this.ok = true;
+        }
+      });
 
   }
 

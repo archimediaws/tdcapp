@@ -14,12 +14,16 @@ WordpressPost{
 
     h2{
       color:color($colors, light);
+      margin: auto;
+    }
+
+    h3{
+      color:color($colors, dark);
+      margin: auto;
     }
 
     p {
       color: color( $colors, dark);
-      margin-top: 10px;
-      margin-right: 5px;
     }
 
   }
@@ -28,6 +32,9 @@ WordpressPost{
     color: color($colors, Rouge)
   }
 
+  .rowcolor {
+    border-top: 2px solid color($colors, Rouge);
 
+  }
 }
 
