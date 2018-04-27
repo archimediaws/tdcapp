@@ -87,7 +87,7 @@ export class MyApp {
       { title: 'BARCODE-SCANNER', component: BarcodeScannerComponent, icon: 'qr-scanner' },
       { title: 'ABOUT', component: AboutComponent, icon: 'information-circle'},
       { title: 'CONTACT', component: ContactComponent, icon: 'contacts'},
-      { title: 'SETTINGS', component: SettingsComponent, icon: 'settings'},
+      { title: 'SETTINGS', component: SettingsComponent, icon: 'options'},
       { title: 'LOGIN', component: WordpressHome, icon: 'finger-print' }
 
 		];

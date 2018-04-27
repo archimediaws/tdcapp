@@ -34,6 +34,8 @@ export class WordpressUpdateNews implements OnInit {
   user: any;
 
 
+  formtitle: boolean = false;
+
   constructor(
     private config: Config,
     private navParams: NavParams,
@@ -195,19 +197,6 @@ export class WordpressUpdateNews implements OnInit {
   }
 
 
-  // addNews(){
-  //   let loader = this.loadingController.create({
-  //     content: "Création de l'actualité en cours..."
-  //   });
-  //   loader.present();
-	//   this.wordpressService.postNews(this.title, this.content, this.photonewsid, this.token).subscribe(data => {
-	//     console.log(data);
-  //     loader.dismiss();
-  //   });
-  //
-	//   this.goToPosts();
-  // }
-
   updateNews(id){
     let loader = this.loadingController.create({
       content: "Modification en cours ..."
@@ -223,63 +212,16 @@ export class WordpressUpdateNews implements OnInit {
       );
   }
 
-  deleteNews(id){
 
-    //  Alerte de confirmation
-    let alert = this.alertCtrl.create({
-      title: 'Êtes vous sûr ?',
-      subTitle: 'La suppression est définitive',
-      buttons: [
-        {
-          text: 'Non',
-          role: 'cancel'    //  annuler
-        },
-        {
-          text: 'Oui',
-          handler: () => {    //  Si oui
-            //  On supprime la news sur WP API
-            let loader = this.loadingController.create({
-              content: "Suppression en cours ..."
-            });
-            loader.present();
-
-            this.wordpressService.deleteNewsbyId(id, this.token).subscribe(response => {
-
-              console.log(response);
-              loader.dismiss()
-              if( response["deleted"]=== true  ) {
-                // retour posts
-
-                this.goToPosts();
-              } else {
-
-                //  Une erreur est survenue, message !!!
-                let toast = this.toastCtrl.create({
-                  message: response['error'],
-                  duration: 2500,
-                  cssClass: 'toast-danger',
-                });
-                toast.present();
-              }
-            });
-          }
-        }
-      ]
-    });
-
-    //  On affiche l'alerte de confirmation
-    alert.present();
-
-
-
-  }
 
   goToPosts(): void {
     this.navController.push(WordpressPosts);
   }
 
 
-
+  opentitle(){
+    this.formtitle = true;
+  }
 
 
 

@@ -16,93 +16,96 @@
 
   <ion-card *ngIf="post">
 
-    <ion-item text-wrap>
-      <h1 class="titre"[innerHTML]="post.title.rendered"></h1>
-      <h4 class="date">{{post.date | date: 'dd/MM/yyyy'}}</h4>
-    </ion-item>
+    <wordpress-feature-media [hidden]="photoUploaded === true" *ngIf="post.featured_media" [id]="post.featured_media"></wordpress-feature-media>
 
-    <wordpress-feature-media *ngIf="post.featured_media" [id]="post.featured_media"></wordpress-feature-media>
+    <button [hidden]="photoUploaded === true " ion-button color="Rouge" icon-right full (click)="takePhoto()" >
+      Modifier la Photo <ion-icon name="camera" ></ion-icon>
+    </button>
 
-    <ion-item color="dark" *ngIf="authorData && authorData.avatar_urls">
-      <ion-avatar item-left>
-        <img [src]="authorData.avatar_urls[96]">
-      </ion-avatar>
-      <h2>{{authorData.name}}</h2>
-    </ion-item>
-
-    <ion-card-content text-wrap *ngIf="post.content.rendered">
-
-      <ion-row no-padding>
-        <ion-col>
-          <h3 padding class="titre" [innerHTML]="post.title.rendered" text-uppercase></h3>
-          <p padding [innerHtml]="post.content.rendered"></p>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12 *ngFor="let photo of photos; let id = index">
+          <ion-card class="block">
+            <ion-icon  [hidden]="photoUploaded === true" name="trash" class="deleteIcon" (click)="deletePhoto(id)" ></ion-icon>
+            <img [src]="photo" *ngIf="photo" />
+          </ion-card>
         </ion-col>
       </ion-row>
+    </ion-grid>
 
+    <button [hidden]="photoUploaded === true " ion-button color="Rouge" icon-right full *ngIf="lastImage === true" (click)="uploadPhoto()" >
+      Choisir cette Photo <ion-icon name="cloud-upload" ></ion-icon>
+    </button>
+
+    <ion-row [hidden]="formtitle === true " class="block2" >
+
+      <ion-grid>
+        <ion-row>
+        <ion-col col-10>
+          Titre : <h1 class="titre"[innerHTML]="post.title.rendered"></h1>
+        </ion-col>
+
+        <ion-col col-2>
+        <ion-icon name="create" color="Rouge" class="createIcon" (click)="opentitle()" ></ion-icon>
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-row>
+
+    <ion-card-content text-wrap *ngIf="post.content.rendered" [hidden]="formtitle === true ">
+      <ion-row no-padding>
+        <ion-col>
+         Description :  <p padding [innerHtml]="post.content.rendered"></p>
+        </ion-col>
+      </ion-row>
     </ion-card-content>
+
+
+    <form (ngSubmit)="updateNews(post.id)">
+
+      <ion-item *ngIf="formtitle === true">
+        <ion-label stacked >titre</ion-label>
+        <ion-input type="text" placeholder="Nouveau titre" [(ngModel)]="title" name="title"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="formtitle === true">
+        <ion-label stacked >Description</ion-label>
+        <ion-textarea placeholder="Nouvelle description " [(ngModel)]="content" name="content"></ion-textarea>
+      </ion-item>
+
+      <!--<div padding >-->
+        <!--<button ion-button  color="Rouge" type="submit" block >{{ 'UPDATE' | translate }}</button>-->
+      <!--</div>-->
+    </form>
 
     <ion-row *ngIf="user" no-padding class="rowcolor">
 
-      <ion-col text-left>
-        <button ion-button icon-left clear  color="Rouge" (click)="updateNews(post.id)">
-          <ion-icon name='cloud-upload' color="Rouge"></ion-icon>
-          {{'UPDATE' | translate}}
-        </button>
-      </ion-col>
+      <ion-grid>
 
-      <ion-col text-right>
-        <button ion-button icon-left clear color="Rouge" (click)="deleteNews(post.id)">
-          <ion-icon name='trash' color="Rouge"></ion-icon>
-          {{'DELETE' | translate}}
-        </button>
-      </ion-col>
+        <ion-row>
+          <ion-col col-6 text-left>
+            <button ion-button icon-left clear type="submit" color="Rouge" (click)="updateNews(post.id)">
+              <ion-icon name='cloud-upload' color="Rouge"></ion-icon>
+              <!--{{'UPDATE' | translate}}-->ENREGISTRER
+            </button>
+          </ion-col>
+
+          <ion-col col-6 text-center>
+            <button ion-button icon-left clear color="Rouge" (click)="goToPosts()">
+              <ion-icon name='undo' color="Rouge"></ion-icon>
+              {{'UNDO' | translate}}
+            </button>
+          </ion-col>
+
+        </ion-row>
+
+      </ion-grid>
+
     </ion-row>
 
 
   </ion-card>
 
 
-      <!--<div padding>-->
-
-      <!--<h6 [hidden]="lastImage !== false">vous devez ajouter une photo!</h6>-->
-
-      <!--<button [hidden]="photoUploaded === true " ion-button color="Rouge" icon-right full (click)="takePhoto()" >-->
-        <!--Prendre une Photo <ion-icon name="camera" ></ion-icon>-->
-      <!--</button>-->
-
-
-
-      <!--<ion-grid>-->
-        <!--<ion-row>-->
-          <!--<ion-col col-12 *ngFor="let photo of photos; let id = index">-->
-            <!--<ion-card class="block">-->
-              <!--<ion-icon  [hidden]="photoUploaded === true" name="trash" class="deleteIcon" (click)="deletePhoto(id)" ></ion-icon>-->
-              <!--<img [src]="photo" *ngIf="photo" />-->
-            <!--</ion-card>-->
-          <!--</ion-col>-->
-        <!--</ion-row>-->
-      <!--</ion-grid>-->
-
-        <!--<button [hidden]="photoUploaded === true " ion-button color="Rouge" icon-right full *ngIf="lastImage === true" (click)="uploadPhoto()" >-->
-          <!--Choisir cette Photo <ion-icon name="cloud-upload" ></ion-icon>-->
-        <!--</button>-->
-
-      <!--</div>-->
-
-
-  <!--<form *ngIf="photoUploaded === true" (ngSubmit)="addNews()">-->
-    <!--<ion-item>-->
-      <!--<ion-label stacked >titre</ion-label>-->
-      <!--<ion-input type="text" placeholder="titre" [(ngModel)]="title" name="title"></ion-input>-->
-    <!--</ion-item>-->
-
-    <!--<ion-item>-->
-      <!--<ion-label stacked >Description</ion-label>-->
-      <!--<ion-textarea placeholder="description " [(ngModel)]="content" name="content"></ion-textarea>-->
-    <!--</ion-item>-->
-
-    <!--<div padding >-->
-    <!--<button *ngIf="lastImage !== false" ion-button  color="Rouge" type="submit" block >{{ 'ADDPOST' | translate }}</button>-->
-    <!--</div>-->
-  <!--</form>-->
 </ion-content>

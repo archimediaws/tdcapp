@@ -55,4 +55,16 @@ WordpressUpdateNews{
     }
   }
 
+  .block2 {
+    position: relative;
+    .createIcon {
+      position: relative;
+      color: color($colors, danger);
+      margin-left: 50%;
+    }
+    .createIcon:before {
+      font-size: 30px;
+    }
+  }
+
 }
