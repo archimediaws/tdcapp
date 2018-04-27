@@ -45,9 +45,9 @@
         <ion-row *ngIf="user" no-padding class="rowcolor">
 
           <ion-col text-left>
-            <button ion-button icon-left clear  color="Rouge" (click)="updatePost(post.id)">
+            <button ion-button icon-left clear  color="Rouge" (click)="updatePost(post)">
               <ion-icon name='create' color="Rouge"></ion-icon>
-              Modifier
+              {{'UPDATE' | translate}}
             </button>
           </ion-col>
 

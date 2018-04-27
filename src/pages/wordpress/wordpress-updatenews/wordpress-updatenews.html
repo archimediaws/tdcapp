@@ -1,0 +1,108 @@
+<ion-header>
+
+	<ion-navbar color="dark">
+
+			<button ion-button menuToggle icon-only>
+				<ion-icon name="menu" color="Rouge"></ion-icon>
+			</button>
+
+		<ion-title>{{'UPDATEPOST' | translate}}</ion-title>
+
+	</ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngIf="post">
+
+    <ion-item text-wrap>
+      <h1 class="titre"[innerHTML]="post.title.rendered"></h1>
+      <h4 class="date">{{post.date | date: 'dd/MM/yyyy'}}</h4>
+    </ion-item>
+
+    <wordpress-feature-media *ngIf="post.featured_media" [id]="post.featured_media"></wordpress-feature-media>
+
+    <ion-item color="dark" *ngIf="authorData && authorData.avatar_urls">
+      <ion-avatar item-left>
+        <img [src]="authorData.avatar_urls[96]">
+      </ion-avatar>
+      <h2>{{authorData.name}}</h2>
+    </ion-item>
+
+    <ion-card-content text-wrap *ngIf="post.content.rendered">
+
+      <ion-row no-padding>
+        <ion-col>
+          <h3 padding class="titre" [innerHTML]="post.title.rendered" text-uppercase></h3>
+          <p padding [innerHtml]="post.content.rendered"></p>
+        </ion-col>
+      </ion-row>
+
+    </ion-card-content>
+
+    <ion-row *ngIf="user" no-padding class="rowcolor">
+
+      <ion-col text-left>
+        <button ion-button icon-left clear  color="Rouge" (click)="updateNews(post.id)">
+          <ion-icon name='cloud-upload' color="Rouge"></ion-icon>
+          {{'UPDATE' | translate}}
+        </button>
+      </ion-col>
+
+      <ion-col text-right>
+        <button ion-button icon-left clear color="Rouge" (click)="deleteNews(post.id)">
+          <ion-icon name='trash' color="Rouge"></ion-icon>
+          {{'DELETE' | translate}}
+        </button>
+      </ion-col>
+    </ion-row>
+
+
+  </ion-card>
+
+
+      <!--<div padding>-->
+
+      <!--<h6 [hidden]="lastImage !== false">vous devez ajouter une photo!</h6>-->
+
+      <!--<button [hidden]="photoUploaded === true " ion-button color="Rouge" icon-right full (click)="takePhoto()" >-->
+        <!--Prendre une Photo <ion-icon name="camera" ></ion-icon>-->
+      <!--</button>-->
+
+
+
+      <!--<ion-grid>-->
+        <!--<ion-row>-->
+          <!--<ion-col col-12 *ngFor="let photo of photos; let id = index">-->
+            <!--<ion-card class="block">-->
+              <!--<ion-icon  [hidden]="photoUploaded === true" name="trash" class="deleteIcon" (click)="deletePhoto(id)" ></ion-icon>-->
+              <!--<img [src]="photo" *ngIf="photo" />-->
+            <!--</ion-card>-->
+          <!--</ion-col>-->
+        <!--</ion-row>-->
+      <!--</ion-grid>-->
+
+        <!--<button [hidden]="photoUploaded === true " ion-button color="Rouge" icon-right full *ngIf="lastImage === true" (click)="uploadPhoto()" >-->
+          <!--Choisir cette Photo <ion-icon name="cloud-upload" ></ion-icon>-->
+        <!--</button>-->
+
+      <!--</div>-->
+
+
+  <!--<form *ngIf="photoUploaded === true" (ngSubmit)="addNews()">-->
+    <!--<ion-item>-->
+      <!--<ion-label stacked >titre</ion-label>-->
+      <!--<ion-input type="text" placeholder="titre" [(ngModel)]="title" name="title"></ion-input>-->
+    <!--</ion-item>-->
+
+    <!--<ion-item>-->
+      <!--<ion-label stacked >Description</ion-label>-->
+      <!--<ion-textarea placeholder="description " [(ngModel)]="content" name="content"></ion-textarea>-->
+    <!--</ion-item>-->
+
+    <!--<div padding >-->
+    <!--<button *ngIf="lastImage !== false" ion-button  color="Rouge" type="submit" block >{{ 'ADDPOST' | translate }}</button>-->
+    <!--</div>-->
+  <!--</form>-->
+</ion-content>

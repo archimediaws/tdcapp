@@ -30,14 +30,16 @@
         </p>
       </ion-card-content>
         <ion-grid>
-              <ion-row no-padding>
+              <ion-row no-padding class="rowcolor">
                 <ion-col text-right>
-                  <button ion-button icon-left clear (click)="deleteMedia(media.id)">
+                  <button ion-button icon-left clear color="Rouge" (click)="deleteMedia(media.id)">
                     <ion-icon name='trash' color="Rouge"></ion-icon>
+                    {{'DELETE' | translate}}
                   </button>
                 </ion-col>
               </ion-row>
         </ion-grid>
+
     </ion-card>
 
 

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import {NavParams, LoadingController, NavController} from 'ionic-angular';
+import {NavParams, LoadingController, NavController, ToastController, AlertController} from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import {Storage} from "@ionic/storage";
 import { WordpressService } from '../shared/services/wordpress.service';
 import {WordpressPosts} from "../wordpress-posts/wordpress-posts.component";
+import {WordpressUpdateNews} from "../wordpress-updatenews/wordpress-updatenews.component";
 
 @Component({
   selector:'WordpressPost',
@@ -27,6 +28,8 @@ export class WordpressPost {
 			private socialSharing: SocialSharing,
       private navController: NavController,
       private storage: Storage,
+      public alertCtrl : AlertController,
+      public toastCtrl: ToastController
 		) {
 		if (navParams.get('post')) {
 			this.post = navParams.get('post');
@@ -67,40 +70,65 @@ export class WordpressPost {
 	}
 
 
-
-  // updatePost(id){
-  //   let loader = this.loadingController.create({
-  //     content: "Modification en cours ..."
-  //   });
-  //   loader.present();
-  //   this.wordpressService.updateNewsbyId(id, this.token)
-  //     .subscribe(result => {
-  //         // this.menudujour = result;
-  //
-  //         this.goToPosts()
-  //       },
-  //       error => console.log(error),
-  //       () => loader.dismiss()
-  //     );
-  // }
+  updatePost(post){
+    this.navController.push(WordpressUpdateNews, {
+      post: post
+    });
+  }
 
 
 
   deleteNews(id){
-    let loader = this.loadingController.create({
-      content: "Suppression en cours ..."
-    });
-    loader.present();
-    this.wordpressService.deleteNewsbyId(id, this.token)
-      .subscribe(result => {
-          // this.menudujour = result;
 
-          this.goToPosts()
+    //  Alerte de confirmation
+    let alert = this.alertCtrl.create({
+      title: 'Êtes vous sûr ?',
+      subTitle: 'La suppression est définitive',
+      buttons: [
+        {
+          text: 'Non',
+          role: 'cancel'    //  annuler
         },
-        error => console.log(error),
-        () => loader.dismiss()
-      );
+        {
+          text: 'Oui',
+          handler: () => {    //  Si oui
+            //  On supprime la news sur WP API
+            let loader = this.loadingController.create({
+              content: "Suppression en cours ..."
+            });
+            loader.present();
+
+            this.wordpressService.deleteNewsbyId(id, this.token).subscribe(response => {
+
+              console.log(response);
+              loader.dismiss()
+              if( response["deleted"]=== true  ) {
+                // retour posts
+
+                this.goToPosts();
+              } else {
+
+                //  Une erreur est survenue, message !!!
+                let toast = this.toastCtrl.create({
+                  message: response['error'],
+                  duration: 2500,
+                  cssClass: 'toast-danger',
+                });
+                toast.present();
+              }
+            });
+          }
+        }
+      ]
+    });
+
+    //  On affiche l'alerte de confirmation
+    alert.present();
+
+
   }
+
+
 
 	previewPost() {
 		const browser = this.iab.create(this.post.link, '_blank');

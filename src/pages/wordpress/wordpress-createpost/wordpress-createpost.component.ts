@@ -114,7 +114,12 @@ export class WordpressCreatepost implements OnInit {
   uploadPhoto(){
 	  let The_token = this.token.__zone_symbol__value.token;
     let newFileName = this.createFileName();
+    let loader = this.loadingController.create({
+      content: "Enregistrement en cours",
+      duration: 10000
+    });
 
+    loader.present();
 	  let trans = this.transfer.create();
 	  trans.upload(this.base64Image, this.url, {
 
@@ -131,7 +136,7 @@ export class WordpressCreatepost implements OnInit {
       let imgUrl = JSON.parse(res.response);
       this.photomdjurl = imgUrl.guid;
       this.photoUploaded = true;
-
+      loader.dismiss();
       this.presentToast('La photo est enregistrée !');
 
     }).catch((err)=> {

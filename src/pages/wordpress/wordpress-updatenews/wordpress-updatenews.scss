@@ -1,10 +1,12 @@
-WordpressPosts{
+WordpressUpdateNews{
 
 
   ion-card img{
 
     max-height: 320px;
   }
+
+  //h4 {text-align:center;}
 
   .card {
     -webkit-border-radius: 15px;
@@ -18,10 +20,15 @@ WordpressPosts{
       color: color($colors, light);
     }
 
+    h3{
+      color:color($colors, dark);
+      margin: auto;
+    }
+
+
     p {
       color: color( $colors, dark);
-      margin-top: 10px;
-      margin-right: 5px;
+
     }
 
 
@@ -36,5 +43,16 @@ WordpressPosts{
 
   }
 
+  .block {
+    position: relative;
+    .deleteIcon {
+      position: absolute;
+      color: color($colors, danger);
+      margin-left: 90% ;
+    }
+    .deleteIcon:before {
+      font-size: 30px ;
+    }
+  }
 
 }
