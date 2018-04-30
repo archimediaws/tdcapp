@@ -29,11 +29,9 @@ import {ContactComponent} from "../pages/contact/contact-component/contact.compo
 
 
 
-
-
-
 @Component({
-	templateUrl: './app.html'
+	templateUrl: './app.html',
+
 
 })
 export class MyApp {
@@ -43,7 +41,7 @@ export class MyApp {
 	menuPage = WordpressMenus;
 	pages: Array<{title: string, component: any, icon: string}>;
 	wordpressMenusNavigation: boolean = false;
-	mdj: boolean = false;
+	mdj: boolean = true;
 
 
 	constructor(
@@ -56,6 +54,7 @@ export class MyApp {
 		private menuController: MenuController,
     private oneSignal: OneSignal,
     private alertCtrl: AlertController
+
 		) {
 		this.initializeApp();
 
@@ -75,6 +74,8 @@ export class MyApp {
           this.nav.setRoot(TabsComponent);
         }
       });
+
+
 
 		this.pages = [
 		  { title: 'PRESENTATION', component: TabsComponent, icon: 'home' },
@@ -114,11 +115,12 @@ export class MyApp {
 		this.nav.setRoot(page.component);
 	}
 
+
 	setupPush(){
     this.oneSignal.startInit('559c8e8f-f244-44c8-a51f-6fc66d516b0d', '411044932758');
 
     this.oneSignal.handleNotificationReceived().subscribe(data =>{
-      console.log('recu un push: ', data );
+      // console.log('recu un push: ', data );
     });
 
     this.oneSignal.handleNotificationOpened().subscribe(data => {
@@ -145,11 +147,11 @@ export class MyApp {
               if (action === 'openPage'){
                 this.menuController.close();
 
-                if(this.mdj === true) {
-                  this.nav.setRoot(WordpressMenusdujour);
+                if(this.mdj === false) {
+                  this.nav.setRoot(WordpressPosts);
                 }
                 else {
-                  this.nav.setRoot(WordpressPosts);
+                  this.nav.setRoot(WordpressMenusdujour);
                 }
               }
             }

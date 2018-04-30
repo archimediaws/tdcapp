@@ -27,6 +27,7 @@ import {BarcodeScannerModule} from "../pages/barcode-scanner/barcode-scanner.mod
 import { DataServiceProvider } from '../providers/data-service/data-service';
 import { HttpModule } from '@angular/http';
 import {SatisfactionModule} from "../pages/satisfaction/satisfaction.module";
+import {WordpressCreatepost} from "../pages/wordpress/wordpress-createpost/wordpress-createpost.component";
 
 
 @NgModule({
