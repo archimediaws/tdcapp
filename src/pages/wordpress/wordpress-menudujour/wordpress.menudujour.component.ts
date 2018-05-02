@@ -7,6 +7,9 @@ import {ContactComponent} from "../../contact/contact-component/contact.componen
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {Storage} from "@ionic/storage";
 import {WordpressMenusdujour} from '../wordpress-menusdujour/wordpress-menusdujour.component';
+import * as moment from 'moment';
+
+
 
 @Component({
   selector: "WordpressMenudujour",
@@ -19,20 +22,26 @@ export class WordpressMenudujour {
   menudujour: any;
   token;
   user: any;
-  ok:boolean = false;
+  ok: boolean = false;
+  ladate: any;
+  date: string ="";
+
+  title: any;
+  content: any;
+  price: any;
+  photomdjurl: any;
 
 
-  constructor(
-    private inAppBrowser: InAppBrowser,
-    private navParams: NavParams,
-    private wordpressService: WordpressService,
-    private navController: NavController,
-    private loadingController: LoadingController,
-    private socialSharing: SocialSharing,
-    private storage: Storage,
-    public alertCtrl : AlertController,
-    public toastCtrl: ToastController
-  ) {
+
+  constructor(private inAppBrowser: InAppBrowser,
+              private navParams: NavParams,
+              private wordpressService: WordpressService,
+              private navController: NavController,
+              private loadingController: LoadingController,
+              private socialSharing: SocialSharing,
+              private storage: Storage,
+              public alertCtrl: AlertController,
+              public toastCtrl: ToastController) {
     if (navParams.get('menudujour')) {
       this.menudujour = navParams.get('menudujour');
 
@@ -40,20 +49,22 @@ export class WordpressMenudujour {
     if (navParams.get('id')) {
       this.getMenuduJour(navParams.get('id'));
     }
-    this.now= Date.now();
+    this.now = Date.now();
+
   }
 
   ngOnInit() {
-
+    // this.ladate = moment(this.now).format();
+    // this.date = this.ladate.toString();
     this.token = this.storage.get('wordpress.user');
     this.token
-      .then( value => {
-        if(value) {
+      .then(value => {
+        if (value) {
           this.user = value;
           this.ok = true;
         }
       });
-
+    console.log(this.token);
   }
 
   getMenuduJour(id) {
@@ -69,6 +80,48 @@ export class WordpressMenudujour {
         },
         error => console.log(error),
         () => loader.dismiss());
+  }
+
+
+
+  ReactivePost(menudujour){
+
+    let loader = this.loadingController.create({
+      content: "Reactivation de la suggestion en cours..."
+    });
+    loader.present();
+
+    this.title = menudujour.title.rendered;
+    this.content = menudujour.content.rendered;
+    console.log(this.title)
+    this.price = menudujour.prix;
+    this.photomdjurl = menudujour.photomdj.guid;
+
+    this.wordpressService.deleteNewsMenuduJourbyId(menudujour.id, this.token).subscribe(response => {
+
+      console.log(response);
+
+      if( response["deleted"]=== true  ) {
+
+        this.wordpressService.postMenuduJour(this.title, this.content, this.price, this.photomdjurl, this.token).subscribe(data => {
+          console.log(data);
+          loader.dismiss();
+          this.goToMdj();
+        });
+
+
+      } else {
+
+        //  Une erreur est survenue, message !!!
+        let toast = this.toastCtrl.create({
+          message: response['error'],
+          duration: 2500,
+          cssClass: 'toast-danger',
+        });
+        toast.present();
+      }
+    })
+
   }
 
   deletemdj(id){
@@ -97,7 +150,6 @@ export class WordpressMenudujour {
               loader.dismiss()
               if( response["deleted"]=== true  ) {
                 // retour MDJ
-
                 this.goToMdj();
               } else {
 
@@ -118,20 +170,6 @@ export class WordpressMenudujour {
     //  On affiche l'alerte de confirmation
     alert.present();
 
-
-  // let loader = this.loadingController.create({
-  //   content: "Suppression en cours ..."
-  // });
-  // loader.present();
-  // this.wordpressService.deleteNewsMenuduJourbyId(id, this.token)
-  //   .subscribe(result => {
-  //       // this.menudujour = result;
-  //
-  //       this.goToMdj()
-  //     },
-  //     error => console.log(error),
-  //     () => loader.dismiss()
-  //   );
 }
 
   goToMdj(){

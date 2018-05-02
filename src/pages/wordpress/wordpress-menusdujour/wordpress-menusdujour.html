@@ -75,7 +75,8 @@
         </ion-row>
         <ion-row no-padding>
           <ion-col text-left>
-            <p>{{menudujour.content.rendered | trimHTML | truncate: 60 }}</p>
+            <p [innerHTML]="menudujour.content.rendered" maxlength="60" ></p>
+            <!--<p>{{menudujour.content.rendered | trimHTML | truncate: 60 }}</p>-->
           </ion-col>
           <ion-col col-4 text-right>
 

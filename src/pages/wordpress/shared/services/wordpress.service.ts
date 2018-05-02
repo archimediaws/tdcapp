@@ -219,8 +219,6 @@ export class WordpressService {
 
     let The_token = token.__zone_symbol__value.token;
 
-    console.log(The_token);
-
     let headers = new Headers();
     headers.append('Authorization', `Bearer ${The_token}` );
     headers.append('Content-Type', 'application/json');
