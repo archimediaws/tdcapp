@@ -7,7 +7,7 @@ import {ContactComponent} from "../../contact/contact-component/contact.componen
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {Storage} from "@ionic/storage";
 import {WordpressMenusdujour} from '../wordpress-menusdujour/wordpress-menusdujour.component';
-import * as moment from 'moment';
+
 
 
 
@@ -22,10 +22,6 @@ export class WordpressMenudujour {
   menudujour: any;
   token;
   user: any;
-  ok: boolean = false;
-  ladate: any;
-  date: string ="";
-
   title: any;
   content: any;
   price: any;
@@ -54,17 +50,13 @@ export class WordpressMenudujour {
   }
 
   ngOnInit() {
-    // this.ladate = moment(this.now).format();
-    // this.date = this.ladate.toString();
     this.token = this.storage.get('wordpress.user');
     this.token
       .then(value => {
         if (value) {
           this.user = value;
-          this.ok = true;
         }
       });
-    console.log(this.token);
   }
 
   getMenuduJour(id) {
@@ -112,7 +104,6 @@ export class WordpressMenudujour {
 
       } else {
 
-        //  Une erreur est survenue, message !!!
         let toast = this.toastCtrl.create({
           message: response['error'],
           duration: 2500,
@@ -149,11 +140,9 @@ export class WordpressMenudujour {
               console.log(response);
               loader.dismiss()
               if( response["deleted"]=== true  ) {
-                // retour MDJ
                 this.goToMdj();
               } else {
 
-                //  Une erreur est survenue, message !!!
                 let toast = this.toastCtrl.create({
                   message: response['error'],
                   duration: 2500,
