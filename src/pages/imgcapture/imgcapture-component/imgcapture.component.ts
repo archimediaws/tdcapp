@@ -8,7 +8,7 @@ import {
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
-import {Camera, CameraOptions, CameraPopoverOptions} from '@ionic-native/camera';
+import {Camera, CameraOptions} from '@ionic-native/camera';
 import {Storage} from "@ionic/storage";
 import {Config} from "../../../app/app.config";
 import {WordpressMedias} from "../../wordpress/wordpress-medias/wordpress-medias-component";
@@ -32,7 +32,6 @@ export class ImgcaptureComponent implements OnInit{
   lastImage: boolean = false;
   loading: Loading;
   token: any;
-
   lastImage2: string = null;
 
 

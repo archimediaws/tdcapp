@@ -18,8 +18,21 @@
 
     <wordpress-feature-media [hidden]="photoUploaded === true" *ngIf="post.featured_media" [id]="post.featured_media"></wordpress-feature-media>
 
-    <button [hidden]="photoUploaded === true " ion-button color="Rouge" icon-right full (click)="takePhoto()" >
-      Modifier la Photo <ion-icon name="camera" ></ion-icon>
+    <!--<h6 [hidden]="lastImage === true" [hidden]="lastImage2 !== null">Selectionner une image & l'uploader !</h6>-->
+
+    <button [hidden]="photoUploaded === true " ion-button icon-right full color="Rouge" (click)="presentActionSheet()">
+      Modifier la Photo
+      <ion-icon name="camera"></ion-icon>
+    </button>
+
+    <!--<button [hidden]="photoUploaded === true " ion-button color="Rouge" icon-right full (click)="takePhoto()" >-->
+      <!--Modifier la Photo <ion-icon name="camera" ></ion-icon>-->
+    <!--</button>-->
+
+    <img src="{{pathForImage(lastImage2)}}" style="width: 100%" [hidden]="lastImage2 === null">
+    <button ion-button icon-right full color="Rouge"(click)="uploadImage()" [hidden]="lastImage2 === null">
+      Enregistrer cette Photo
+      <ion-icon name="cloud-upload"></ion-icon>
     </button>
 
     <ion-grid>
@@ -37,28 +50,28 @@
       Choisir cette Photo <ion-icon name="cloud-upload" ></ion-icon>
     </button>
 
-    <ion-row [hidden]="formtitle === true " class="block2" >
-
-      <ion-grid>
-        <ion-row>
-        <ion-col col-10>
-          Titre : <h1 class="titre"[innerHTML]="post.title.rendered"></h1>
-        </ion-col>
-
-        <ion-col col-2>
-        <ion-icon name="create" color="Rouge" class="createIcon" (click)="opentitle()" ></ion-icon>
-        </ion-col>
-        </ion-row>
-      </ion-grid>
-
-    </ion-row>
 
     <ion-card-content text-wrap *ngIf="post.content.rendered" [hidden]="formtitle === true ">
-      <ion-row no-padding>
-        <ion-col>
-         Description :  <p padding [innerHtml]="post.content.rendered"></p>
-        </ion-col>
-      </ion-row>
+
+    <ion-row [hidden]="formtitle === true " class="block2" >
+      <ion-grid>
+        <ion-row no-padding>
+          <ion-col col-10>
+            <h1 [innerHTML]="post.title.rendered"></h1>
+          </ion-col>
+          <ion-col col-2>
+            <ion-icon name="create" color="Rouge" class="createIcon" (click)="opentitle()" ></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+
+    <ion-row no-padding>
+      <ion-col>
+       <p padding [innerHtml]="post.content.rendered"></p>
+      </ion-col>
+    </ion-row>
+
     </ion-card-content>
 
 
@@ -74,9 +87,6 @@
         <ion-textarea placeholder="Nouvelle description " [(ngModel)]="content" name="content"></ion-textarea>
       </ion-item>
 
-      <!--<div padding >-->
-        <!--<button ion-button  color="Rouge" type="submit" block >{{ 'UPDATE' | translate }}</button>-->
-      <!--</div>-->
     </form>
 
     <ion-row *ngIf="user" no-padding class="rowcolor">
@@ -87,7 +97,7 @@
           <ion-col col-6 text-left>
             <button ion-button icon-left clear type="submit" color="Rouge" (click)="updateNews(post.id)">
               <ion-icon name='cloud-upload' color="Rouge"></ion-icon>
-              <!--{{'UPDATE' | translate}}-->ENREGISTRER
+              {{'SAVE' | translate}}
             </button>
           </ion-col>
 
