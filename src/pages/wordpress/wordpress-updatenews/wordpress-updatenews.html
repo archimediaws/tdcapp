@@ -18,16 +18,13 @@
 
     <wordpress-feature-media [hidden]="photoUploaded === true" *ngIf="post.featured_media" [id]="post.featured_media"></wordpress-feature-media>
 
-    <!--<h6 [hidden]="lastImage === true" [hidden]="lastImage2 !== null">Selectionner une image & l'uploader !</h6>-->
 
     <button [hidden]="photoUploaded === true " ion-button icon-right full color="Rouge" (click)="presentActionSheet()">
       Modifier la Photo
       <ion-icon name="camera"></ion-icon>
     </button>
 
-    <!--<button [hidden]="photoUploaded === true " ion-button color="Rouge" icon-right full (click)="takePhoto()" >-->
-      <!--Modifier la Photo <ion-icon name="camera" ></ion-icon>-->
-    <!--</button>-->
+
 
     <img src="{{pathForImage(lastImage2)}}" style="width: 100%" [hidden]="lastImage2 === null">
     <button ion-button icon-right full color="Rouge"(click)="uploadImage()" [hidden]="lastImage2 === null">

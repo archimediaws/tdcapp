@@ -120,12 +120,13 @@ export class MyApp {
     this.oneSignal.startInit('559c8e8f-f244-44c8-a51f-6fc66d516b0d', '411044932758');
 
     this.oneSignal.handleNotificationReceived().subscribe(data =>{
-      // console.log('recu un push: ', data );
+      console.log('recu un push: ', data );
     });
 
     this.oneSignal.handleNotificationOpened().subscribe(data => {
-      // console.log('ouvert un push: ', data );
+      console.log('ouvert un push: ', data );
 
+      let payload = data;
       let message = data.notification.payload.body;
       let title = data.notification.payload.title;
 
@@ -146,13 +147,9 @@ export class MyApp {
             handler: () => {
               if (action === 'openPage'){
                 this.menuController.close();
+                this.nav.setRoot(WordpressMenusdujour);
+                // this.redirectToPage(payload);
 
-                if(this.mdj === false) {
-                  this.nav.setRoot(WordpressPosts);
-                }
-                else {
-                  this.nav.setRoot(WordpressMenusdujour);
-                }
               }
             }
           }
@@ -167,7 +164,24 @@ export class MyApp {
 
     this.oneSignal.endInit();
 
+
   }
 
-
+  // redirectToPage(data) {
+  //   let type;
+  //   try {
+  //     type = data.notification.payload.additionalData.type;
+  //   } catch (e) {
+  //     console.warn(e);
+  //   }
+  //   switch (type) {
+  //     case 'mdj': {
+  //       this.nav.setRoot(WordpressPosts, { userId: data.notification.payload.additionalData.uid });
+  //       break;
+  //     } case 'news': {
+  //     this.nav.setRoot(WordpressMenusdujour, { id: data.notification.payload.additionalData.pid });
+  //     break;
+  //   }
+  //   }
+  // }
 }

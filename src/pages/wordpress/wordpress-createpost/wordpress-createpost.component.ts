@@ -12,6 +12,7 @@ import {Config} from "../../../app/app.config";
 import {MyApp} from "../../../app/app.component";
 import {File} from "@ionic-native/file";
 import {FilePath} from "@ionic-native/file-path";
+import {OneSignal} from "@ionic-native/onesignal";
 
 
 declare var cordova: any;
@@ -54,7 +55,8 @@ export class WordpressCreatepost implements OnInit {
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
     private file: File,
-    private filePath: FilePath
+    private filePath: FilePath,
+    private oneSignal: OneSignal
              ) {
   }
 
@@ -251,7 +253,7 @@ export class WordpressCreatepost implements OnInit {
       this.photoUploaded = true;
       this.loading.dismissAll()
       this.presentToast('La Photo est bien enregistrée !');
-      // this.goToPosts();
+
     }, err => {
       this.loading.dismissAll()
       this.presentToast('Erreur pendant l\'upload, merci de réessayer !');
@@ -300,6 +302,12 @@ export class WordpressCreatepost implements OnInit {
     this.loadMdj(this.mdj);
 	  this.goTosuggestions();
   }
+
+  // setPush(){
+  //   this.oneSignal.
+  // }
+
+
 
   loadMdj(mdj) {
     this.navController.push(MyApp, {
