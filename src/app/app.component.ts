@@ -41,7 +41,6 @@ export class MyApp {
 	menuPage = WordpressMenus;
 	pages: Array<{title: string, component: any, icon: string}>;
 	wordpressMenusNavigation: boolean = false;
-	mdj: boolean = true;
 
 
 	constructor(
@@ -120,11 +119,11 @@ export class MyApp {
     this.oneSignal.startInit('559c8e8f-f244-44c8-a51f-6fc66d516b0d', '411044932758');
 
     this.oneSignal.handleNotificationReceived().subscribe(data =>{
-      console.log('recu un push: ', data );
+      // console.log('recu un push: ', data );
     });
 
     this.oneSignal.handleNotificationOpened().subscribe(data => {
-      console.log('ouvert un push: ', data );
+      // console.log('ouvert un push: ', data );
 
       let payload = data;
       let message = data.notification.payload.body;

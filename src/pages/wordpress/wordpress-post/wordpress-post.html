@@ -1,8 +1,8 @@
 <ion-header>
-	<ion-navbar color='dark'>
-		<button menuToggle>
-			<ion-icon name="menu"></ion-icon>
-		</button>
+	<ion-navbar color='dark' swipeBackEnabled="false">
+    <button ion-button menuToggle color="Rouge">
+      <ion-icon name="menu"></ion-icon>
+    </button>
 		<ion-title *ngIf="post">{{post.title.rendered}}</ion-title>
 		<ion-buttons end>
 	      <button (tap)="sharePost()" ion-button icon-only>

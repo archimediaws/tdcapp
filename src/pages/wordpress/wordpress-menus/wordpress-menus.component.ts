@@ -24,7 +24,7 @@ export class WordpressMenus {
 
 	getMenus() {
 		let loader = this.loadingController.create({
-			content: "Please wait"
+			content: "Chargement en cours..."
 		});
 
 		loader.present();
