@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Display a circle ring animation popup to your WordPress site page:  very easy to use
 
-== Description ==
+== Description ===
 
 THERING Plugin - The BEST WordpPress Circle Animated Popup Plugin
 
@@ -56,7 +56,7 @@ LIKE IT? [LEAVE A 5 STAR REVIEW ;)]
 == Frequently Asked Questions ==
 
 
-= Will the popup cause problems for SEO(Search Engine Optimization)? = 
+= Will the popup cause problems for SEO(Search Engine Optimization)? =
 No it is a simple div in your pages no meta tag no keywords, so it will not affect your search engine indexing.
 
 
