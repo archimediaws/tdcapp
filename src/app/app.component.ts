@@ -77,18 +77,18 @@ export class MyApp {
 
 
 		this.pages = [
-		  { title: 'PRESENTATION', component: TabsComponent, icon: 'home' },
+		  { title: 'HOME', component: TabsComponent, icon: 'home' },
       { title: 'VALEURS', component: RestaurantComponent, icon: 'flag'},
       { title: 'SUGGESTIONS', component: WordpressMenusdujour, icon: 'restaurant' },
       { title: 'POSTS', component: WordpressPosts, icon: 'cafe' },
       { title: 'FAVORITES', component: WordpressFavorites, icon: 'heart' },
-      { title: 'SATISFACTION', component: SatisfactionComponent, icon: 'thumbs-up'},
-      { title: 'SLIDE', component: SlidesComponent, icon: 'arrow-dropright-circle'},
-      { title: 'BARCODE-SCANNER', component: BarcodeScannerComponent, icon: 'qr-scanner' },
-      { title: 'ABOUT', component: AboutComponent, icon: 'information-circle'},
+      { title: 'INFO-PRODUIT', component: BarcodeScannerComponent, icon: 'qr-scanner' },
+      { title: 'PARTAGER-EXPE', component: SatisfactionComponent, icon: 'thumbs-up'},
       { title: 'CONTACT', component: ContactComponent, icon: 'contacts'},
       { title: 'SETTINGS', component: SettingsComponent, icon: 'options'},
-      { title: 'LOGIN', component: WordpressHome, icon: 'finger-print' }
+      { title: 'SLIDE', component: SlidesComponent, icon: 'arrow-dropright-circle'},
+      { title: 'ABOUT', component: AboutComponent, icon: 'information-circle'},
+      { title: 'MON-COMPTE', component: WordpressHome, icon: 'finger-print' }
 
 		];
 		this.wordpressMenusNavigation = config.wordpressMenusNavigation;

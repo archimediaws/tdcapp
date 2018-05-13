@@ -10,7 +10,6 @@ import {ImgcaptureComponent} from "../../imgcapture/imgcapture-component/imgcapt
 import {WordpressProduits} from "../wordpress-produits/wordpress-produits.component";
 import {WordpressMedias} from "../wordpress-medias/wordpress-medias-component";
 import {WordpressCategories} from "../wordpress-categories/wordpress-categories.component";
-import {WordpressMenus} from "../wordpress-menus/wordpress-menus.component";
 
 @Component({
   templateUrl: 'wordpress-home.html'
@@ -20,6 +19,7 @@ export class WordpressHome {
   logo = "assets/img/appicon.png";
 	user: any;
 	pages: Array<{title: string, component: any, icon: string, note: string}>;
+
 
 	constructor(
 		private navController: NavController,
@@ -31,9 +31,9 @@ export class WordpressHome {
 	ngOnInit() {
 		this.getUser();
 	  	this.pages = [
-        { title: 'PAGES', component: WordpressPages, icon: 'document', note: 'voir & Partager' },
+        { title: 'MENUS', component: WordpressPages, icon: 'document', note: 'voir & Partager' },
         { title: 'POSTS', component: WordpressPosts, icon: 'cafe', note: 'liste & Ajouter' },
-        { title: 'POSTS', component: WordpressCategories, icon: 'list', note: 'par Catégories' },
+        { title: 'CATEGORIES', component: WordpressCategories, icon: 'list', note: 'liste' },
         { title: 'SUGGESTIONS', component: WordpressMenusdujour, icon: 'restaurant', note: 'liste & Ajouter'},
         { title: 'PRODUCTS', component: WordpressProduits, icon: 'qr-scanner', note: 'liste & Créer QRcode'},
         { title: 'MEDIAS', component: WordpressMedias, icon: 'images', note:'voir & Supprimer' },
@@ -46,6 +46,7 @@ export class WordpressHome {
 	    .then(data => {
 	        if(data) {
 	        	this.user = data;
+	        	console.log(this.user);
 	        }
 	    });
 	}

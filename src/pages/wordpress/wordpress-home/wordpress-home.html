@@ -4,17 +4,24 @@
     <button ion-button menuToggle icon-only color="Rouge">
       <ion-icon name='menu'></ion-icon>
     </button>
-    <ion-title>{{ 'LOGIN' | translate }} </ion-title>
+    <ion-title *ngIf="!user">{{ 'MON-COMPTE' | translate }} </ion-title>
+    <ion-title *ngIf="user"> Bienvenue {{ user.user_nicename }} </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content scroll="false" class="page-welcome" >
   <div class="splash-bg" [ngStyle]="{'background-image': 'url(' + bgimg + ')' }"></div>
   <div class="splash-info">
+
+    <!--<div *ngIf="user" class="splash-logo">-->
+      <!--<ion-avatar item-left>-->
+        <!--&lt;!&ndash;<img [src]="user.avatar_urls[96]">&ndash;&gt;-->
+      <!--</ion-avatar>-->
+    <!--</div>-->
     <div class="splash-logo" [ngStyle]="{'background-image': 'url(' + logo + ')' }"></div>
     <div class="splash-intro">
       <span *ngIf="!user">{{ 'LOGININ' | translate }} </span>
-      <span *ngIf="user">Bienvenue {{ user.user_nicename }}</span>
+      <span *ngIf="user">{{ user.user_nicename }}</span>
     </div>
     <div class="splash-email" *ngIf="user">{{ user.user_email }}</div>
   </div>
