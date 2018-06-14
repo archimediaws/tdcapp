@@ -137,9 +137,9 @@ export class WordpressMenusdujour implements OnInit{
     },10);
    }
 
-  goToContact(): void {
-    this.navController.push(ContactComponent);
-  }
+  // goToContact(): void {
+  //   this.navController.push(ContactComponent);
+  // }
 
 
 }

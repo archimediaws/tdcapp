@@ -188,9 +188,9 @@ export class WordpressMenudujour {
     },10);
   }
 
-  goToContact(): void {
-    this.navController.push(ContactComponent);
-  }
+  // goToContact(): void {
+  //   this.navController.push(ContactComponent);
+  // }
 
 
 }

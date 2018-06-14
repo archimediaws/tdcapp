@@ -27,7 +27,7 @@ export class WordpressService {
    **/
 
 
-  /** GET All Posts whith Query filter ( page, authors, catégories ...**/
+  /** GET All Posts with Query filter ( page, authors, categories ...) **/
 
 	public getPosts(query) {
 		query = this.transformRequest(query);
